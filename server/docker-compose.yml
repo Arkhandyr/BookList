@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    environment:
+        MONGO_INITDB_DATABASE: Books
+        
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+    networks:
+      - booklist-network
+
+  booklist-api:
+    image: ${DOCKER_REGISTRY-}booklist
+    build:
+      context: .
+      dockerfile: BookList/Dockerfile
+
+  booklist-front:
+    image: booklist-frontend
+    container_name: booklist-front
+    restart: always
+    ports:
+      - "8080:80"
+    networks:
+      - booklist-network
+
+volumes:
+  mongo_data:
+  
+networks:
+  booklist-network:
+    driver: bridge

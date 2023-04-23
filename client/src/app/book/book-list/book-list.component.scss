@@ -1,0 +1,52 @@
+html{
+    font-family: 'Overpass', sans-serif;
+    color: #d9d9d9;
+}
+
+.container-superior {
+    display: flex;
+}
+
+.mat-form-field {
+    color: #d9d9d9;
+}
+
+h1{
+    text-align: right;
+    color: #d9d9d9;
+}
+
+.btn, h2 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color: whitesmoke
+}
+
+.container-page {
+    background-color:#1e1e1e
+}
+
+.card {
+    background-color:#1e1e1e;
+    border: #1e1e1e;
+    color: #d9d9d9;
+    font-family: 'Overpass', sans-serif;
+}
+
+.card-img {
+    border-radius: 1%;
+    max-width: 200px;
+    max-height: 280px;
+}
+
+.card-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+mat-form-field {
+    min-width: 200px;
+    max-width: 250px;
+}
