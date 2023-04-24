@@ -2,18 +2,16 @@
   <div class="container-page">
     <div class="container">
       
-      <div class="container-superior gap-2 d-md-block text-end my-4">
-        <h2 style="float: left;">Catálogo</h2>
-          <mat-form-field appearance="outline">
-            <mat-label>Search</mat-label>
-            <input matInput placeholder="Placeholder">
-            <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
-          </mat-form-field>
-        <button class="btn btn-primary mx-3" type="button" routerLink="/add">Adicionar</button>
+      <div class="container-superior d-md-block text-end">
+        <h2 style="float: left;">Catalog</h2>
+        <mat-form-field appearance="outline" class="mat-form-field-appearance-outline">
+          <input matInput placeholder="Search" [(ngModel)]='searchText'>
+        </mat-form-field>
+        <button class="btn btn-primary btn-rounded mx-3" type="button" routerLink="/add">Adicionar</button>
       </div>
 
       <div class="row row-cols-1 row-cols-md-5">
-        <div class="col" *ngFor="let book of books; index as i">
+        <div class="col" *ngFor="let book of books | filter : searchText">
           <div class="card">
             <img [src]="book.cover" class="card-img"/>
             <div class="card-body">

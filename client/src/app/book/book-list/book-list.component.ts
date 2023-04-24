@@ -20,6 +20,7 @@ export class BookListComponent implements OnInit {
   }
 
   public books:Book[];
+  searchText: string;
 
   remove(_id: string) {
     this.service.deleteBook(_id)

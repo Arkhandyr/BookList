@@ -1,9 +1,30 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'searchFilter' })
-export class SearchFilterPipe implements PipeTransform {
+@Pipe({
+  name: 'filter'
+})
+export class FilterPipe implements PipeTransform {
 
-  transform(list: any[], filterText: string): any {
-    return list ? list.filter(item => item.name.search(new RegExp(filterText, 'i')) > -1) : [];
-  }
+  transform(items: any[], searchText: string): any[] {
+
+    // return empty array if array is falsy
+    if (!items) { return []; }
+
+    // return the original array if search text is empty
+    if (!searchText) { return items; }
+
+    // convert the searchText to lower case
+    searchText = searchText.toLowerCase();
+
+    // retrun the filtered array
+    return items.filter(item => {
+      if (item && item["title"]) {
+        return item["title"].toLowerCase().includes(searchText);
+      }
+      else if (item && item["author"]) {
+        return item["author"].toLowerCase().includes(searchText);
+      }
+      return false;
+    });
+   }
 }
