@@ -14,8 +14,7 @@ export class BookListComponent implements OnInit {
 
   constructor(
     private service:BookService, 
-    private toastr: ToastrService,
-    private router: Router) { }
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.service.getBooks().subscribe(x => this.books = x);
@@ -35,9 +34,5 @@ export class BookListComponent implements OnInit {
         this.service.getBooks().subscribe(x => this.books = x);
         console.log(response)
       });
-  }
-
-  goTo(url: string): void{
-    this.router.navigate([url]);
   }
 }
