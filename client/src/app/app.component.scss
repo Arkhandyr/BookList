@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+body { //influencia TODAS as páginas que herdam da main, NÃO REMOVER
+  background-color: #1e1e1e;
+}
+
 .logo {
   display: inline-block;
   margin-left: 43%;
