@@ -12,7 +12,13 @@ export class BookService {
     constructor(private client:HttpClient) { }
     
     public getBooks(): Observable<Book[]> {
-        let url = `${environment.api}/books`
+        let url = `${environment.api}/catalog`
+
+        return this.client.get<Book[]>(url)
+    }
+
+    public filterBooks(filter: string): Observable<Book[]> {
+        let url = `${environment.api}/catalog/${filter}`
 
         return this.client.get<Book[]>(url)
     }

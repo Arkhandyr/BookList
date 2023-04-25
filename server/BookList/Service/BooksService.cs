@@ -17,9 +17,9 @@ namespace DesafioTecfy.Service
             return _bookRepo.GetAllBooks();
         }
 
-        public Task<IEnumerable<Book>> SearchBooks(string query)
+        public Task<IEnumerable<Book>> FilterBooks(string filter)
         {
-            return _bookRepo.SearchBooks(query);
+            return _bookRepo.FilterBooks(filter);
         }
 
         public Task<Book> GetBookById(Guid id)
