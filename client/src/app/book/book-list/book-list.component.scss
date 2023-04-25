@@ -3,23 +3,28 @@ html{
     color: #d9d9d9;
 }
 
-.container-superior {
-    display: flex;
-}
 
 .mat-form-field {
     color: #d9d9d9;
 }
 
-h1{
+h1 {
     text-align: right;
     color: #d9d9d9;
 }
 
-.btn, h2 {
+h2 {
     font-family: 'Overpass', sans-serif;
     font-weight: 800;
-    color: whitesmoke
+    color: #d9d9d9;
+    margin: auto
+}
+
+.btn {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 500;
+    color: #1e1e1e;
+    max-width: fit-content;
 }
 
 .container-page {
@@ -46,7 +51,17 @@ h1{
     max-width: 200px;
 }
 
-mat-form-field {
+.mat-form-field-appearance-outline {
     min-width: 200px;
     max-width: 250px;
+    height: 100px;
+    font-family: 'Overpass', sans-serif;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+color: #d9d9d9;
+}
+
+.mat-input-element {
+    height: 38px;
 }

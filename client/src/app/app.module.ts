@@ -13,7 +13,6 @@ import { FormsBookResolver } from './book/shared/forms-book.resolver';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SearchFilterPipe } from './search-filter.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import {

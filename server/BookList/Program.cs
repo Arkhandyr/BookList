@@ -24,9 +24,11 @@ if (app.Environment.IsDevelopment())
 #endregion
 
 #region Endpoints
-app.MapGet("/books", async ([FromServices] IBooksService service) => await service.GetAllBooks()).WithName("GetBooks");
+app.MapGet("/catalog", async ([FromServices] IBooksService service) => await service.GetAllBooks()).WithName("Catalog");
 
 app.MapGet("/book/{id}", async ([FromServices] IBooksService service, Guid id) => await service.GetBookById(id)).WithName("GetBookById");
+
+app.MapGet("/catalog/{filter}", async ([FromServices] IBooksService service, string filter) => await service.FilterBooks(filter)).WithName("FilterBooks");
 
 app.MapPost("/add", ([FromServices] IBooksService service, Book book) =>
 {

@@ -17,7 +17,7 @@ namespace DesafioTecfy
             return await context.Books.Find(x => true).ToListAsync();
         }
 
-        public async Task<IEnumerable<Book>> SearchBooks(string query)
+        public async Task<IEnumerable<Book>> FilterBooks(string query)
         {
             return await context.Books.Find(x => x.Title.Contains(query) || x.Author.Contains(query)).ToListAsync();
         }
