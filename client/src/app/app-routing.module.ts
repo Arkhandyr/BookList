@@ -8,10 +8,12 @@ import { BookEditComponent } from './pages/home/book-edit/book-edit.component';
 import { BookListComponent } from './pages/home/book-list/book-list.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { UnauthenticatedUserGuard } from './services/guards/unauthenticatedUser.guard';
+import { AuthenticatedUserGuard } from './services/guards/authenticatedUser.guard';
 
 const routes: Routes = [
-  {path:'login', component:LoginComponent},
-  {path:'', 
+  {path:'login', component:LoginComponent, canActivate: [UnauthenticatedUserGuard]},
+  {path:'', canActivate: [AuthenticatedUserGuard],
     children: [
       {path:'', component:BookListComponent},
       {path:'add', component:BookAddComponent},
