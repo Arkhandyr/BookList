@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './pages/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookAddComponent } from './pages/home/book-add/book-add.component';
 import { BookListComponent } from './pages/home/book-list/book-list.component';
@@ -13,7 +13,6 @@ import { FormsBookResolver } from './pages/shared/forms-book.resolver';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 import {
   MatAutocompleteModule,
@@ -56,7 +55,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    HomeComponent,
     BookAddComponent,
     BookEditComponent,
     BookListComponent,
@@ -108,6 +107,6 @@ import { LoginComponent } from './pages/login/login.component';
     MatTreeModule,
   ],
   providers: [FormsBookResolver],
-  bootstrap: [AppComponent]
+  bootstrap: [HomeComponent]
 })
 export class AppModule { }
