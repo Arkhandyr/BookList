@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../../interfaces/IBook';
-import { BookService } from '../../shared/books.service';
+import { BookService } from '../../../services/books.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 

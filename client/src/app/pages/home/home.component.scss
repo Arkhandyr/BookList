@@ -9,7 +9,9 @@
 
 .logo {
   display: flex;
-  max-width: 200px;
+  max-width: 250px;
+  gap: 10px;
+  padding-right: 5%;
 }
 
 .button-logout {
@@ -23,10 +25,6 @@ body { //influencia TODAS as páginas que herdam da main, NÃO REMOVER
 
 .navbar-footer {
   background-color: #262626;
-}
-
-.separador {
-  height: 1rem;
 }
 
 a,span,svg {
