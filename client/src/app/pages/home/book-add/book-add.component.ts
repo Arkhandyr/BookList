@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Book } from '../../shared/book';
+import { Book } from '../../../interfaces/IBook';
 import { BookService } from '../../shared/books.service';
 import { ToastrService } from 'ngx-toastr';
 
