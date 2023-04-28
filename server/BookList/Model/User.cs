@@ -10,6 +10,6 @@ namespace BookList.Model
         public string Username { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public string Picture { get; set; };
+        public string Picture { get; set; }
     }
 }

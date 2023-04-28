@@ -1,7 +1,7 @@
-﻿using MongoDB.Bson;
+﻿using BookList.Model;
 using MongoDB.Driver;
 
-namespace DesafioTecfy
+namespace BookList
 {
     public class BookRepository : IBookRepository
     {

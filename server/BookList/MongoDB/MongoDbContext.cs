@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using BookList.Model;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
-namespace DesafioTecfy
+namespace BookList
 {
     public class MongoDbContext
     {

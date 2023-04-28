@@ -1,4 +1,4 @@
-﻿namespace DesafioTecfy
+﻿namespace BookList
 {
     public class BookListDatabaseSettings
     {

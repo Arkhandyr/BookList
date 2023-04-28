@@ -1,4 +1,6 @@
-﻿namespace BookList.Service.BookService
+﻿using BookList.Model;
+
+namespace BookList.Service.BookService
 {
     public interface IBooksService
     {

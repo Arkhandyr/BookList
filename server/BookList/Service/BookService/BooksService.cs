@@ -1,6 +1,4 @@
-﻿using BookList.Repository.BookRepository;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
+﻿using BookList.Model;
 
 namespace BookList.Service.BookService
 {

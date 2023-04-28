@@ -1,6 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using BookList.Model;
 
-namespace DesafioTecfy
+namespace BookList
 {
     public interface IBookRepository
     {

@@ -1,10 +1,8 @@
 #region Configs
-using BookList.Repository.BookRepository;
+using BookList;
+using BookList.Model;
 using BookList.Service.BookService;
-using DesafioTecfy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
