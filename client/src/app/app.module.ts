@@ -6,9 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BookAddComponent } from './pages/home/book-add/book-add.component';
-import { BookListComponent } from './pages/home/book-list/book-list.component';
-import { BookEditComponent } from './pages/home/book-edit/book-edit.component';
+import { BookAddComponent } from './pages/catalog/book-add/book-add.component';
+import { BookListComponent } from './pages/catalog/book-list/book-list.component';
+import { BookEditComponent } from './pages/catalog/book-edit/book-edit.component';
 import { FormsBookResolver } from './pages/shared/forms-book.resolver';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -52,6 +52,7 @@ import {
   MatTreeModule,
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { LoginComponent } from './pages/login/login.component';
     BookAddComponent,
     BookEditComponent,
     BookListComponent,
-    LoginComponent
+    LoginComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
