@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FormsBookResolver } from './pages/shared/forms-book.resolver';
 
-import { BookAddComponent } from './pages/home/book-add/book-add.component';
-import { BookEditComponent } from './pages/home/book-edit/book-edit.component';
-import { BookListComponent } from './pages/home/book-list/book-list.component';
+import { BookAddComponent } from './pages/catalog/book-add/book-add.component';
+import { BookEditComponent } from './pages/catalog/book-edit/book-edit.component';
+import { BookListComponent } from './pages/catalog/book-list/book-list.component';
 import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { UnauthenticatedUserGuard } from './services/guards/unauthenticatedUser.guard';
 import { AuthenticatedUserGuard } from './services/guards/authenticatedUser.guard';
 
@@ -17,7 +17,8 @@ const routes: Routes = [
     children: [
       {path:'', component:BookListComponent},
       {path:'add', component:BookAddComponent},
-      {path:'update/:id', component:BookEditComponent, resolve: { book: FormsBookResolver } }
+      {path:'update/:id', component:BookEditComponent, resolve: { book: FormsBookResolver } },
+      {path:'profile/:id', component:UserProfileComponent}
     ],
   }
 ];
