@@ -8,14 +8,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class HomeComponent implements OnInit {
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   title = 'BookList';
 
   ngOnInit(): void {
-  }
-
-  logout(){
-    this.userService.logout();
   }
 }

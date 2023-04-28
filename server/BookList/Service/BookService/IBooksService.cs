@@ -1,4 +1,4 @@
-﻿namespace DesafioTecfy.Service
+﻿namespace BookList.Service.BookService
 {
     public interface IBooksService
     {

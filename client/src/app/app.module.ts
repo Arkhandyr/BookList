@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,6 +53,7 @@ import {
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { TokenInterceptor } from './services/interceptors/token.interceptor'
 
 @NgModule({
   declarations: [
@@ -108,7 +109,10 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     MatTooltipModule,
     MatTreeModule,
   ],
-  providers: [FormsBookResolver],
+  providers: [
+    FormsBookResolver,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [HomeComponent]
 })
 export class AppModule { }

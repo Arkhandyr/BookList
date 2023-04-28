@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Options;
+﻿using DesafioTecfy;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace DesafioTecfy.Service
+namespace BookList.Service.BookService
 {
     public class BooksService : IBooksService
     {

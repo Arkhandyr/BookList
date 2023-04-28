@@ -35,5 +35,13 @@ namespace DesafioTecfy
                 return _database.GetCollection<Book>("Books");
             }
         }
+
+        public IMongoCollection<User> Users
+        {
+            get
+            {
+                return _database.GetCollection<User>("Users");
+            }
+        }
     }
 }
