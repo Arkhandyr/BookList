@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { Observable } from "rxjs";
-import { Book } from "./book";
-import { BookService } from "./books.service";
+import { Book } from "../../interfaces/IBook";
+import { BookService } from "../../services/books.service";
 
 @Injectable()
 export class FormsBookResolver implements Resolve<Book> {
