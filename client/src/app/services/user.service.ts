@@ -5,16 +5,17 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/IUser';
+import { Book } from '../interfaces/IBook';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserService {
-constructor(private httpClient: HttpClient,
+constructor(private client: HttpClient,
             private router: Router) { }
   login(user: IUser) : Observable<any> {
-    return this.httpClient.post<any>(environment.api + "/login", user).pipe(
+    return this.client.post<any>(environment.api + "/login", user).pipe(
       tap((response) => {
         if(!response.success) return;
 
@@ -50,4 +51,10 @@ constructor(private httpClient: HttpClient,
   get logged(): boolean {
     return localStorage.getItem('token') ? true : false;
   }
+
+  public getBookByUser(id: string): Observable<Book> {
+    let url = `${environment.api}/user/${id}`
+
+    return this.client.get<Book>(url)
+}
 }

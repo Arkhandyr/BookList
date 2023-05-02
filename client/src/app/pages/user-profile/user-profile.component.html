@@ -1,7 +1,19 @@
 <body>
-    <div class="container-page">
-      <div class="container-superior d-md-block text-end">
-        <h2 style="float: left;">Catalog</h2>
+  <div class="container-superior d-md-block text-end">
+    <h2 style="float: left;">Catalog</h2>
+    <mat-form-field appearance="outline" class="mat-form-field-appearance-outline">
+      <input matInput placeholder="Search" [(ngModel)]='filter' (ngModelChange)="filterBooks()">
+    </mat-form-field>
+  </div>
+
+    <div class="row row-cols-1 row-cols-md-5">
+      <div class="col" *ngFor="let book of books">
+        <div class="card">
+          <img [src]="book.cover" class="card-img"/>
+          <div class="card-body">
+            <p class="card-title">{{book.title}}</p>
+          </div>
+        </div>
       </div>
     </div>
 </body>
