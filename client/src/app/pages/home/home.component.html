@@ -34,7 +34,7 @@
     </div>
 
     <div class="menu">
-      <button class="button-menu button-profile" mat-icon-button routerLink="/">
+      <button class="button-menu button-profile" mat-icon-button (click)="userService.getBooksByUser(userService.getLoggedUserId)" routerLink="/user/{{userService.getLoggedUserNickname}}">
         <mat-icon>person</mat-icon>
       </button>
       <button class="button-menu button-logout" mat-icon-button (click)="userService.logout()">

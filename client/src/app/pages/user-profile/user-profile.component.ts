@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.userService.getBooksByUser().subscribe(x => this.books = x);
+    //this.userService.getBooksByUser().subscribe(x => this.books = x);
   }
 
   public books:Book[];
