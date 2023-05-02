@@ -42,6 +42,12 @@ constructor(private client: HttpClient,
       : "";
   }
 
+  get getLoggedUserNickname(): string {
+    return localStorage.getItem('user')
+      ? (JSON.parse(Buffer.from(localStorage.getItem('user')!, 'base64').toString('binary')) as IUser).nickname
+      : "";
+  }
+
   get getUserToken(): string {  
     return localStorage.getItem('token')
       ? JSON.parse(Buffer.from(localStorage.getItem('token')!, 'base64').toString('binary'))
@@ -52,7 +58,7 @@ constructor(private client: HttpClient,
     return localStorage.getItem('token') ? true : false;
   }
 
-  public getBookByUser(id: string): Observable<Book> {
+  public getBooksByUser(id: string): Observable<Book> {
     let url = `${environment.api}/user/${id}`
 
     return this.client.get<Book>(url)
