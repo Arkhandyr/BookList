@@ -53,7 +53,8 @@ import {
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { TokenInterceptor } from './services/interceptors/token.interceptor'
+import { TokenInterceptor } from './services/interceptors/token.interceptor';
+import { BookComponent } from './pages/book/book.component'
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { TokenInterceptor } from './services/interceptors/token.interceptor'
     BookEditComponent,
     BookListComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+.wrapper {
+    width: 100%;
+    background: linear-gradient(180deg, #d98a24 60%, #1e1e1e 60%);
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.bookCover {
+    margin: 15%;
+    border-radius: 1%;
+    max-width: 400px;
+    max-height: 560px;
+}
+
+h1, h2, h4 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color: #d9d9d9;
+}
+
+.left
+{
+    width: 30%;
+    height: 700px;
+    display: inline-block;
+}
+
+.right
+{
+    width: 70%;
+    height: 250px;
+}
+
+.right-top {
+    height: 450px;
+}

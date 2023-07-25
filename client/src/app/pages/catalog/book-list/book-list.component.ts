@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class BookListComponent implements OnInit {
 
   constructor(
+    private router:Router,
     private service:BookService, 
     private toastr: ToastrService) { }
 
@@ -25,6 +26,10 @@ export class BookListComponent implements OnInit {
 
   filterBooks() {
       this.service.filterBooks(this.filter).subscribe(x => this.books = x);
+  }
+
+  goToBookPage(value: string) {
+    this.router.navigate(['/book', value]);
   }
 
   remove(_id: string) {

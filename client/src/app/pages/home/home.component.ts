@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class HomeComponent implements OnInit {
-  constructor(public userService: UserService) { }
+  constructor() { }
 
   title = 'BookList';
 

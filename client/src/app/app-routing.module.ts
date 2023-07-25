@@ -11,6 +11,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { UnauthenticatedUserGuard } from './services/guards/unauthenticatedUser.guard';
 import { AuthenticatedUserGuard } from './services/guards/authenticatedUser.guard';
 
+import { BookComponent } from './pages/book/book.component';
+
 const routes: Routes = [
   {path:'login', component:LoginComponent, canActivate: [UnauthenticatedUserGuard]},
   {path:'', canActivate: [AuthenticatedUserGuard],
@@ -18,6 +20,7 @@ const routes: Routes = [
       {path:'', component:BookListComponent},
       {path:'add', component:BookAddComponent},
       {path:'update/:id', component:BookEditComponent, resolve: { book: FormsBookResolver } },
+      {path:'book/:id', component:BookComponent},
       {path:'profile/:id', component:UserProfileComponent}
     ],
   }

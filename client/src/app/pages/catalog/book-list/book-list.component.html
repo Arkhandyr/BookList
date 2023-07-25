@@ -10,7 +10,7 @@
     <div class="row row-cols-1 row-cols-md-5">
       <div class="col" *ngFor="let book of books">
         <div class="card">
-          <img [src]="book.cover" class="card-img"/>
+          <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
           <div class="card-body">
             <p class="card-title">{{book.title}}</p>
           </div>
