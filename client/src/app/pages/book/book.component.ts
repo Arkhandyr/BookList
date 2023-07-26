@@ -16,7 +16,6 @@ export class BookComponent implements OnInit {
     private route: ActivatedRoute,
     private bookService:BookService) { }
 
-
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.bookId = params['id'];

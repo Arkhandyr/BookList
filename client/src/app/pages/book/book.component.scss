@@ -1,37 +1,43 @@
 .wrapper {
     width: 100%;
-    background: linear-gradient(180deg, #d98a24 60%, #1e1e1e 60%);
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    background: linear-gradient(180deg, #1e1e1e 40%, #2b2b2b 70%);
 }
 
 .bookCover {
-    margin: 15%;
+    overflow: hidden; 
+    display: block;
     border-radius: 1%;
-    max-width: 400px;
-    max-height: 560px;
+    width: 300px;
+    height: 445px;
 }
 
-h1, h2, h4 {
+h1, h2, h4, p, button {
     font-family: 'Overpass', sans-serif;
     font-weight: 800;
     color: #d9d9d9;
 }
 
-.left
-{
-    width: 30%;
-    height: 700px;
-    display: inline-block;
+.see-more {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color:#d98a24;
 }
 
-.right
-{
-    width: 70%;
-    height: 250px;
+.flex-container {
+    display: flex;
 }
 
-.right-top {
-    height: 450px;
+.details {
+    display: flex;
+    justify-content: space-between;
+    gap: 1%;
+}
+
+.details-frame {
+    text-align: center;
+    width: 220px;
+    padding: 10px; 
+    color: #3b2609;
+    background-color: #d98a24;
+    border-radius: 1%;
 }

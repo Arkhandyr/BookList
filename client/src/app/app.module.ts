@@ -54,7 +54,8 @@ import {
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { TokenInterceptor } from './services/interceptors/token.interceptor';
-import { BookComponent } from './pages/book/book.component'
+import { BookComponent } from './pages/book/book.component';
+import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component'
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { BookComponent } from './pages/book/book.component'
     BookListComponent,
     LoginComponent,
     UserProfileComponent,
-    BookComponent
+    BookComponent,
+    ExpandableParagraphComponent
   ],
   imports: [
     BrowserModule,
