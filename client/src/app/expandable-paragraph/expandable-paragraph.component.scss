@@ -1,27 +1,16 @@
-
 .see-more {
     font-family: 'Overpass', sans-serif;
     font-weight: 800;
     color:#d98a24;
-    display: block; /* Ensure the link takes the full width available */
-}
-
-.synopsis .content {
-    height: 70px; /* Set a maximum height for the content */
-    overflow: hidden;
-    transition: max-height 0.3s ease; /* Add a smooth transition effect */
-}
-
-.synopsis.expanded .content {
-    height: fit-content; /* When expanded, remove the max-height limit */
-}
-
-.synopsis.expanded .see-more {
-    display: none; /* Hide the "See more" link when the paragraph is expanded */
 }
 
 p {
     font-family: 'Overpass', sans-serif;
     font-weight: 800;
     color: #d9d9d9;
+    transition: max-height 0.3s ease;
+}
+
+.synopsis {
+    display: flex;
 }
