@@ -1,6 +1,5 @@
-.min-vh-100 { //preenche toda a página
-  background: linear-gradient(180deg, #1e1e1e 40%, #2b2b2b 30%);
-  min-height: 100%;
+html{
+  position:relative; 
 }
 
 .navbar-header {
@@ -42,16 +41,17 @@
   color: #d98a24;
 }
 
-body { //influencia TODAS as páginas que herdam da main, NÃO REMOVER
-  background-color: #1e1e1e;
-}
-
 .navbar-footer {
   display: flex;
   justify-content: center;
   background-color: #262626;
   font-family: 'Overpass', sans-serif;
   gap: 1%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height : 30px;
 }
 
 span,svg {

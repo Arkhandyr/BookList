@@ -69,6 +69,7 @@ import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-
     ExpandableParagraphComponent
   ],
   imports: [
+    //NgModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -112,6 +113,7 @@ import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    
   ],
   providers: [
     FormsBookResolver,

@@ -4,4 +4,8 @@ export interface Book {
 	title: string;
 	author: string;
 	pages: number;
+	synopsis: string;
+	genre: string;
+	publisher: string;
+	year: number
 }
