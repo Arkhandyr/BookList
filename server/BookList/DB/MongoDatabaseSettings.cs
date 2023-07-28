@@ -1,6 +1,6 @@
 ﻿namespace BookList
 {
-    public class BookListDatabaseSettings
+    public class MongoDatabaseSettings
     {
         public string ConnectionString { get; set; } = null!;
 

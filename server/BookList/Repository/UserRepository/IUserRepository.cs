@@ -1,8 +1,9 @@
-﻿namespace BookList.Repository.UserRepository
+﻿using BookList.Model;
+
+namespace BookList.Repository.UserRepository
 {
-    public class IUserRepository
+    public interface IUserRepository
     {
-        //Task<string> GetToken(string username, string password);
-        //void Register(Book book);
+        public User Register(User user);
     }
 }

@@ -2,16 +2,24 @@
 using BookList;
 using BookList.Model;
 using BookList.Service.BookService;
+using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+
 builder.Services.AddTransient<MongoDbContext>();
+builder.Services.AddDbContext<SqlServerDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")));
+
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IBooksService, BooksService>();
+
+builder.Services.AddTransient<IUserService, UserService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
