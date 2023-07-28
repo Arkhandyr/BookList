@@ -18,5 +18,10 @@ namespace BookList.Repository.UserRepository
 
             return user;
         }
+
+        public User GetByEmail(string email)
+        {
+            return context.Users.FirstOrDefault(u => u.Email == email);
+        }
     }
 }

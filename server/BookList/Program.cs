@@ -1,6 +1,7 @@
 #region Configs
 using BookList;
 using BookList.Model;
+using BookList.Repository.UserRepository;
 using BookList.Service.BookService;
 using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 builder.Services.AddTransient<MongoDbContext>();
-builder.Services.AddDbContext<SqlServerDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")));
+builder.Services.AddDbContext<SqlServerDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("UserDb")));
 
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IBooksService, BooksService>();
 
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
@@ -31,11 +33,14 @@ if (app.Environment.IsDevelopment())
 #endregion
 
 #region Endpoints
-app.MapGet("/catalog", async ([FromServices] IBooksService service) => await service.GetAllBooks()).WithName("Catalog");
+app.MapGet("/catalog", async ([FromServices] IBooksService service) => 
+    await service.GetAllBooks()).WithName("Catalog");
 
-app.MapGet("/book/{id}", async ([FromServices] IBooksService service, Guid id) => await service.GetBookById(id)).WithName("GetBookById");
+app.MapGet("/catalog/{filter}", async ([FromServices] IBooksService service, string filter) => 
+    await service.FilterBooks(filter)).WithName("FilterBooks");
 
-app.MapGet("/catalog/{filter}", async ([FromServices] IBooksService service, string filter) => await service.FilterBooks(filter)).WithName("FilterBooks");
+app.MapGet("/book/{id}", async ([FromServices] IBooksService service, Guid id) =>
+    await service.GetBookById(id)).WithName("GetBookById");
 
 app.MapPost("/add", ([FromServices] IBooksService service, Book book) =>
 {
@@ -54,6 +59,23 @@ app.MapDelete("/books/{id}", ([FromServices] IBooksService service, Guid id) =>
     service.DeleteBook(id);
 })
 .WithName("DeleteBook");
+
+app.MapPost("/user/register", ([FromServices] IUserService service, RegisterUser user) =>
+{
+    return service.Register(user);
+})
+.WithName("Register");
+
+app.MapPost("/user/login", ([FromServices] IUserService service, LoginUser user) =>
+{
+    ServiceResult<User> result = service.Login(user);
+
+    if (result.Item != null)
+        return Results.NotFound(user);
+
+    return Results.Ok(result.Item);
+})
+.WithName("Login");
 #endregion
 
 app.Run();
