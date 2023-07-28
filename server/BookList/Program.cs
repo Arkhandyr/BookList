@@ -70,8 +70,8 @@ app.MapPost("/user/login", ([FromServices] IUserService service, LoginUser user)
 {
     ServiceResult<User> result = service.Login(user);
 
-    if (result.Item != null)
-        return Results.NotFound(user);
+    if (result.Item == null)
+        return Results.BadRequest(user);
 
     return Results.Ok(result.Item);
 })
