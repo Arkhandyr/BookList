@@ -4,8 +4,8 @@ namespace BookList.Service.UserService
 {
     public interface IUserService
     {
-        public ServiceResult<User> Register(RegisterUser user);
+        public IResult Register(RegisterUser user);
 
-        public ServiceResult<User> Login(LoginUser user);
+        public IResult Login(LoginUser user);
     }
 }

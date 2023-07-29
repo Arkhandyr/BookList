@@ -1,5 +1,6 @@
 #region Configs
 using BookList;
+using BookList.Helpers;
 using BookList.Model;
 using BookList.Repository.UserRepository;
 using BookList.Service.BookService;
@@ -21,6 +22,8 @@ builder.Services.AddTransient<IBooksService, BooksService>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddTransient<IJwtService, JwtService>();
 
 var app = builder.Build();
 
@@ -68,12 +71,7 @@ app.MapPost("/user/register", ([FromServices] IUserService service, RegisterUser
 
 app.MapPost("/user/login", ([FromServices] IUserService service, LoginUser user) =>
 {
-    ServiceResult<User> result = service.Login(user);
-
-    if (result.Item == null)
-        return Results.BadRequest(user);
-
-    return Results.Ok(result.Item);
+    return service.Login(user);
 })
 .WithName("Login");
 #endregion
