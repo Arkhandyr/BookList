@@ -8,7 +8,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookAddComponent } from './pages/catalog/book-add/book-add.component';
 import { BookListComponent } from './pages/catalog/book-list/book-list.component';
-import { BookEditComponent } from './pages/catalog/book-edit/book-edit.component';
 import { FormsBookResolver } from './pages/shared/forms-book.resolver';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,23 +52,22 @@ import {
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { TokenInterceptor } from './services/interceptors/token.interceptor';
 import { BookComponent } from './pages/book/book.component';
-import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component'
+import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component';
+import { RegisterComponent } from './pages/register/register.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
     BookAddComponent,
-    BookEditComponent,
     BookListComponent,
     LoginComponent,
     UserProfileComponent,
     BookComponent,
-    ExpandableParagraphComponent
+    ExpandableParagraphComponent,
+    RegisterComponent
   ],
   imports: [
-    //NgModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -116,8 +114,7 @@ import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-
     
   ],
   providers: [
-    FormsBookResolver,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    FormsBookResolver
   ],
   bootstrap: [HomeComponent]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Book } from 'src/app/interfaces/IBook';
+import { Book } from 'src/app/interfaces/Book';
 import { BookService } from 'src/app/services/books.service';
 import { UserService } from 'src/app/services/user.service';
 

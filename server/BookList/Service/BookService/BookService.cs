@@ -2,11 +2,11 @@
 
 namespace BookList.Service.BookService
 {
-    public class BooksService : IBooksService
+    public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepo;
 
-        public BooksService(IBookRepository bookRepo)
+        public BookService(IBookRepository bookRepo)
         {
             _bookRepo = bookRepo;
         }

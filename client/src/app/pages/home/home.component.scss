@@ -54,7 +54,11 @@ html{
   height : 30px;
 }
 
-span,svg {
-  color: #d9d9d9;
-  font-weight: 700;
+h1, h2, h3, h4, p, span, svg {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+}
+
+button {
+  color: transparent;
 }

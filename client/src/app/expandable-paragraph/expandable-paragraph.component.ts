@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Book } from '../interfaces/IBook';
+import { Book } from '../interfaces/Book';
 
 @Component({
   selector: 'app-expandable-paragraph',

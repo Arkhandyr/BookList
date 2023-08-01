@@ -1,23 +1,41 @@
-.container{
-    color: #d9d9d9;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  }
+body {
+  min-height: calc(100vh - 89.14px);
+  background: linear-gradient(180deg, #1e1e1e 00%, #2b2b2b 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 
-  .conteudo-login{
-    color: #d9d9d9;
-    height: min-content;
-    display: flex;
-    flex-direction: column;
-  }
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
 
-  .card-login{
-    width: 300px;
-    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.4);
-  }
+.form-signin .checkbox {
+  font-weight: 400;
+}
 
-  .mat-input-element {
-    height: 38px;
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+h1, h2, h3, h4, p, button, span, svg, label, input {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 700;
 }

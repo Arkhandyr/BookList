@@ -7,5 +7,9 @@ namespace BookList.Service.UserService
         public IResult Register(RegisterUser user);
 
         public IResult Login(LoginUser user);
+
+        public IResult User();
+
+        public IResult Logout();
     }
 }

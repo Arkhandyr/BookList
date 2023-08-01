@@ -19,5 +19,21 @@ namespace BookList.Helpers
 
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }
+
+        public JwtSecurityToken Verify(string jwt)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secureKey);
+
+            tokenHandler.ValidateToken(jwt, new TokenValidationParameters()
+            {
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuerSigningKey = true,
+                ValidateAudience = false,
+                ValidateIssuer = false
+            }, out SecurityToken validationResult);
+
+            return (JwtSecurityToken)validationResult;
+        }
     }
 }

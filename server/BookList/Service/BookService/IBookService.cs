@@ -2,7 +2,7 @@
 
 namespace BookList.Service.BookService
 {
-    public interface IBooksService
+    public interface IBookService
     {
         public Task<IEnumerable<Book>> GetAllBooks();
         public Task<Book> GetBookById(Guid id);
