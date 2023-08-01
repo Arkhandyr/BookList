@@ -1,19 +1,28 @@
 <body>
-  <div class="container-superior d-md-block text-end">
-    <h2 style="float: left;">Catalog</h2>
-    <mat-form-field appearance="outline" class="mat-form-field-appearance-outline">
-      <input matInput placeholder="Search" [(ngModel)]='filter' (ngModelChange)="filterBooks()">
-    </mat-form-field>
-  </div>
-
-    <div class="row row-cols-1 row-cols-md-5">
-      <div class="col" *ngFor="let book of books">
-        <div class="card">
-          <img [src]="book.cover" class="card-img"/>
-          <div class="card-body">
-            <p class="card-title">{{book.title}}</p>
-          </div>
-        </div>
+  <div style="height: 30px;"></div>
+  <div class="flex-container" style="margin: 0px 10%">
+    <div class="rightSection" style="margin:0px 20px 20px 0px;">
+      <a class="profilePicture">
+        <img [src]="" class="profilePicture"/>
+      </a>
+      <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
+        <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
+          Seguir usuário
+        </button>
       </div>
     </div>
+
+    <div class="leftSection">
+      <div style="height: 220px;"></div>
+
+      <h2>Arkhandyr</h2>
+      <h4>Victor Henrique</h4>
+
+      <div style="height: 20px;"></div>
+
+      <h4>Bio</h4>
+
+      <app-expandable-paragraph class="synopsis" text="jfisdanfdisgisagn"></app-expandable-paragraph>
+    </div>
+  </div>
 </body>

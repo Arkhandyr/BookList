@@ -8,7 +8,7 @@ import { Book } from '../interfaces/IBook';
 })
 export class ExpandableParagraphComponent implements OnInit {
   @Input()
-  book : Book
+  text : string
   synopsis : string
   buttonText : string
   expanded : boolean = true
@@ -19,10 +19,10 @@ export class ExpandableParagraphComponent implements OnInit {
 
   toggleParagraph() {
     if(this.expanded) {
-      this.synopsis = this.book.synopsis.substring(0, 400)
+      this.synopsis = this.text.substring(0, 400)
       this.buttonText = "... ver mais"
     } else {
-      this.synopsis = this.book.synopsis
+      this.synopsis = this.text
       this.buttonText = "... ver menos"
     }
     this.expanded = !this.expanded

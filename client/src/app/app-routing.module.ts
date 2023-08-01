@@ -15,7 +15,7 @@ import { BookComponent } from './pages/book/book.component';
 
 const routes: Routes = [
   {path:'login', component:LoginComponent, canActivate: [UnauthenticatedUserGuard]},
-  {path:'', canActivate: [AuthenticatedUserGuard],
+  {path:'', //canActivate: [AuthenticatedUserGuard],
     children: [
       {path:'', component:BookListComponent},
       {path:'add', component:BookAddComponent},
