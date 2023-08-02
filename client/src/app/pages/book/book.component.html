@@ -1,0 +1,38 @@
+<body>
+  <div style="height: 30px;"></div>
+  <div class="flex-container" style="margin: 0px 10%">
+    <div class="rightSection" style="margin:0px 20px 20px 0px;">
+      <a class="bookCover">
+        <img [src]="book.cover" class="bookCover"/>
+      </a>
+      <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
+        <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
+          Adicionar à Lista
+        </button>
+      </div>
+    </div>
+
+    <div class="leftSection">
+      <div style="height: 220px;"></div>
+
+      <h2>{{book.title}}</h2>
+      <h4>{{book.author}}</h4>
+
+      <div style="height: 20px;"></div>
+
+      <div class="details">
+        <p class="details-frame">{{book.genre}}</p>
+        <p class="details-frame">{{book.publisher}}</p>
+        <p class="details-frame">{{book.pages}} páginas</p>
+        <p class="details-frame">{{book.year}}</p>
+        <p class="details-frame">4.9/5.0 ⭐</p>
+      </div>
+
+      <div style="height: 20px;"></div>
+
+      <h4>Synopsis</h4>
+
+      <app-expandable-paragraph class="synopsis" [text]="book.synopsis"></app-expandable-paragraph>
+    </div>
+  </div>
+</body>

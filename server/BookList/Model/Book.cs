@@ -1,13 +1,19 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-public class Book
+namespace BookList.Model
 {
-    [BsonId]
-    [BsonIgnoreIfDefault]
-    public Guid _id { get; set; }
-    public string Title { get; set; } = null!;
-    public string Author { get; set; } = null!;
-    public int Pages { get; set; }
-    public string Cover { get; set; } = null!;
+    public class Book
+    {
+        [BsonId]
+        [BsonIgnoreIfDefault]
+        public Guid _id { get; set; }
+        public string Title { get; set; } = null!;
+        public string Author { get; set; } = null!;
+        public int Pages { get; set; }
+        public string Cover { get; set; } = null!;
+        public string Genre { get; set; } = null!;
+        public string Synopsis { get; set; } = null!;
+        public int Year { get; set; }
+        public string Publisher { get; set; } = null!;
+    }
 }

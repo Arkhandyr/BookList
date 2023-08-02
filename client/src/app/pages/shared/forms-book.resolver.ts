@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { Observable } from "rxjs";
-import { Book } from "../../interfaces/IBook";
+import { Book } from "../../interfaces/Book";
 import { BookService } from "../../services/books.service";
 
 @Injectable()

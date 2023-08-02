@@ -1,0 +1,12 @@
+<body>
+    <form [formGroup]="form" (submit)="submit()">
+        <h1 class="h3 mb-3 fw-normal">Registro</h1>
+
+        <input formControlName="username" class="form-control" placeholder="Usuário" required>
+        <input formControlName="realName" class="form-control" placeholder="Nome" required>
+        <input formControlName="email" class="form-control" placeholder="E-mail" required>
+        <input formControlName="password" class="form-control" placeholder="Senha" required>
+        <input #profilePic formControlName="profilePic" class="form-control" type="file" accept="image/*" (change)="selectedPicture(profilePic)">
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Cadastrar</button>
+    </form>
+</body>

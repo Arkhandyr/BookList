@@ -1,0 +1,66 @@
+html{
+  position:relative; 
+}
+
+.navbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #262626;
+  font-family: 'Overpass', sans-serif;
+  font-weight: 700;
+}
+
+.gambiarra {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  visibility: hidden;
+}
+
+.logo {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  max-width: 250px;
+  gap: 10px;
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding-right: 20px;
+}
+
+.button-menu {
+  background-color: transparent;
+  color: #d98a24;
+}
+
+.navbar-footer {
+  display: flex;
+  justify-content: center;
+  background-color: #262626;
+  font-family: 'Overpass', sans-serif;
+  gap: 1%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height : 30px;
+}
+
+h1, h2, h3, h4, p, span, svg {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    color: #d9d9d9;
+}
+
+button {
+  color: transparent;
+}

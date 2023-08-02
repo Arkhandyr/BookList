@@ -1,10 +1,6 @@
-html {
-    font-family: 'Overpass', sans-serif;
-    color: #d9d9d9;
-}
-
 body {
-    background-color: #1e1e1e;
+  min-height: calc(100vh - 89.14px);
+  background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
 }
 
 .mat-form-field {
@@ -12,9 +8,9 @@ body {
     margin-right: 3%;
 }
 
-h1 {
-    text-align: right;
-    color: #d9d9d9;
+h1, h2, h3, h4, p, button, span, svg, label, input {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 700;
 }
 
 h2 {
@@ -31,14 +27,9 @@ h2 {
     max-width: fit-content;
 }
 
-.container-page {
-    background-color:#1e1e1e;
-    margin: 1% 10%;
-}
-
 .card {
-    background-color:#1e1e1e;
-    border: #1e1e1e;
+    background-color:transparent;
+    border: transparent;
     color: #d9d9d9;
     font-family: 'Overpass', sans-serif;
 }
@@ -68,7 +59,7 @@ color: #d9d9d9;
 }
 
 .mat-input-element {
-    height: 38px;
+    height: 36px;
 }
 
 //butao

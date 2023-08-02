@@ -1,26 +1,31 @@
-<div class="container my-4">
-    <h1 style="float: left;">Novo Livro</h1>
+<body>
     <div class="separador"></div>
-    <div class="container my-4">
-        <form [formGroup]="form">
-            <div class="form-group my-2">
-                <label for="inputTitle">Título</label>
-                <input type="title" class="form-control" id="inputTitle" formControlName="title" placeholder="Digite o título">
-            </div>
-            <div class="form-group my-2">
-                <label for="inputAuthor">Autor</label>
-                <input type="author" class="form-control" id="inputAuthor" formControlName="author" placeholder="Digite o autor">
-            </div>
-            <div class="form-group my-2">
-                <label for="inputPages">Páginas</label>
-                <input type="pages" class="form-control" id="inputPages" formControlName="pages" placeholder="Digite o número de páginas">
-            </div>
-            <div class="input-group mb-3 my-4">
-                <label class="input-group-text" for="inputCover" style="color: black">Capa</label>
-                <input #cover type="file" class="form-control" id="inputCover" accept="image/*" formControlName="cover" (change)="selectedCover(cover)">
-            </div>
-            <button type="submit" class="btn btn-success my-2" (click)="submitData()" routerLink="/">Cadastrar</button>
-            <button class="btn btn-primary mx-2" type="button" routerLink="/">Página inicial</button>
-        </form>
+    <div class="container">
+        <h1>Novo Livro</h1>
+        <div class="separador"></div>
+        <div class="container my-4">
+            <form [formGroup]="form">
+                <div class="form-group my-2">
+                    <label for="inputTitle">Título</label>
+                    <input type="title" class="form-control" id="inputTitle" formControlName="title" placeholder="Digite o título">
+                </div>
+                <div class="form-group my-2">
+                    <label for="inputAuthor">Autor</label>
+                    <input type="author" class="form-control" id="inputAuthor" formControlName="author" placeholder="Digite o autor">
+                </div>
+                <div class="form-group my-2">
+                    <label for="inputPages">Páginas</label>
+                    <input type="pages" class="form-control" id="inputPages" formControlName="pages" placeholder="Digite o número de páginas">
+                </div>
+                <div class="input-group mb-3 my-4">
+                    <label class="input-group-text" for="inputCover" style="color: black">Capa</label>
+                    <input #cover type="file" class="form-control" id="inputCover" accept="image/*" formControlName="cover" (change)="selectedCover(cover)">
+                </div>
+                <button type="submit" class="btn btn-success my-2" (click)="submitData()" routerLink="/">Cadastrar</button>
+                <button class="btn btn-primary mx-2" type="button" routerLink="/">Página inicial</button>
+            </form>
+        </div>
     </div>
-</div>
+</body>
+
+

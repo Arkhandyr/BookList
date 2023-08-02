@@ -1,0 +1,33 @@
+body {
+    min-height: calc(100vh - 89.14px);
+    background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
+}
+
+
+.bookCover {
+    overflow: hidden; 
+    display: block;
+    border-radius: 1%;
+    width: 300px;
+    height: 445px;
+}
+
+h1, h2, h4, p, button {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color: #d9d9d9;
+}
+
+.see-more {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color:#d98a24;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.leftSection {
+    max-width: 70%;
+}

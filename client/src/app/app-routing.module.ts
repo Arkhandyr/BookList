@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FormsBookResolver } from './pages/shared/forms-book.resolver';
-
 import { BookAddComponent } from './pages/catalog/book-add/book-add.component';
-import { BookEditComponent } from './pages/catalog/book-edit/book-edit.component';
 import { BookListComponent } from './pages/catalog/book-list/book-list.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { UnauthenticatedUserGuard } from './services/guards/unauthenticatedUser.guard';
-import { AuthenticatedUserGuard } from './services/guards/authenticatedUser.guard';
+
+import { BookComponent } from './pages/book/book.component';
 
 const routes: Routes = [
-  {path:'login', component:LoginComponent, canActivate: [UnauthenticatedUserGuard]},
-  {path:'', canActivate: [AuthenticatedUserGuard],
+  {path:'',
     children: [
-      {path:'', component:BookListComponent},
+      {path:'login', component:LoginComponent},
+      {path:'home', component:BookListComponent},
       {path:'add', component:BookAddComponent},
-      {path:'update/:id', component:BookEditComponent, resolve: { book: FormsBookResolver } },
-      {path:'profile/:id', component:UserProfileComponent}
+      {path:'book/:id', component:BookComponent},
+      {path:'profile/:id', component:UserProfileComponent},
+      {path:'register', component:RegisterComponent},
     ],
   }
 ];

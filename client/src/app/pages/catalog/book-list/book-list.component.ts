@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../../../interfaces/IBook';
+import { Book } from '../../../interfaces/Book';
 import { BookService } from '../../../services/books.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({
   selector: 'app-book-list',
@@ -13,26 +15,34 @@ import { Router } from '@angular/router';
 export class BookListComponent implements OnInit {
 
   constructor(
-    private service:BookService, 
+    private router:Router,
+    private bookService:BookService,
+    private userService:UserService, 
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.service.getBooks().subscribe(x => this.books = x);
+    this.userService.getUser().subscribe({
+      next: () => {
+        Emitters.authEmitter.emit(true);
+      },
+      error: (err) => {
+        console.log(err);
+        Emitters.authEmitter.emit(false);
+        this.router.navigate(['/login']);
+      }
+    });
+
+    this.bookService.getBooks().subscribe(x => this.books = x);
   }
 
   public books:Book[];
   filter: string;
 
   filterBooks() {
-      this.service.filterBooks(this.filter).subscribe(x => this.books = x);
+      this.bookService.filterBooks(this.filter).subscribe(x => this.books = x);
   }
 
-  remove(_id: string) {
-    this.service.deleteBook(_id)
-      .subscribe(response => {
-        this.toastr.success('Livro removido com sucesso', 'Sucesso');
-        this.service.getBooks().subscribe(x => this.books = x);
-        console.log(response)
-      });
+  goToBookPage(value: string) {
+    this.router.navigate(['/book', value]);
   }
 }
