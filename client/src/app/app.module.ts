@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './pages/home/home.component';
+import { NavComponent } from './pages/nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookAddComponent } from './pages/catalog/book-add/book-add.component';
 import { BookListComponent } from './pages/catalog/book-list/book-list.component';
@@ -58,7 +58,7 @@ import { RegisterComponent } from './pages/register/register.component'
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    NavComponent,
     BookAddComponent,
     BookListComponent,
     LoginComponent,
@@ -116,6 +116,6 @@ import { RegisterComponent } from './pages/register/register.component'
   providers: [
     FormsBookResolver
   ],
-  bootstrap: [HomeComponent]
+  bootstrap: [NavComponent]
 })
 export class AppModule { }

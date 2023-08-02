@@ -13,15 +13,31 @@ export class UserService {
   constructor(private client:HttpClient) { }
   
   public register(user: User): Observable<string> {
-      let url = `${environment.api}/user/register`
+      let url = `${environment.api}/register`
 
       return this.client.post<string>(url, user)
   }
 
   public login(user: any): Observable<string> {
-    let url = `${environment.api}/user/login`
+    let url = `${environment.api}/login`
 
     return this.client.post<string>(url, user, {
+      withCredentials: true
+    })
+  } 
+
+  public getUser(): Observable<string> {
+    let url = `${environment.api}/user`
+
+    return this.client.get<string>(url, {
+      withCredentials: true
+    })
+  }
+
+  public logout(): Observable<string> {
+    let url = `${environment.api}/logout`
+
+    return this.client.post<string>(url, {}, {
       withCredentials: true
     })
   } 

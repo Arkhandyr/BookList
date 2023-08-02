@@ -74,13 +74,13 @@ app.MapDelete("/books/{id}", ([FromServices] IBookService service, Guid id) =>
 })
 .WithName("DeleteBook");
 
-app.MapPost("/user/register", ([FromServices] IUserService service, RegisterUser user) =>
+app.MapPost("/register", ([FromServices] IUserService service, RegisterUser user) =>
 {
     return service.Register(user);
 })
 .WithName("Register");
 
-app.MapPost("/user/login", ([FromServices] IUserService service, LoginUser user) =>
+app.MapPost("/login", ([FromServices] IUserService service, LoginUser user) =>
 {
     return service.Login(user);
 })
@@ -90,8 +90,10 @@ app.MapGet("/user", ([FromServices] IUserService service) =>
     service.User())
 .WithName("User");
 
-app.MapGet("/logout", ([FromServices] IUserService service) =>
-    service.Logout())
+app.MapPost("/logout", ([FromServices] IUserService service) =>
+{
+    return service.Logout();
+})
 .WithName("Logout");
 #endregion
 

@@ -1,8 +1,13 @@
-h1, label {
-    font-family: 'Overpass', sans-serif;
-    color: #d9d9d9;
+body {
+    min-height: calc(100vh - 89.14px);
+    background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
 }
 
+h1, h2, h3, h4, p, span, svg {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    color: #d9d9d9;
+}
 .separador {
     height: 2rem;
     background-color: #1e1e1e;
