@@ -62,18 +62,6 @@ app.MapPost("/add", ([FromServices] IBookService service, Book book) =>
 })
 .WithName("AddBook");
 
-app.MapPut("/update", ([FromServices] IBookService service, Book book) =>
-{
-    service.UpdateBook(book);
-})
-.WithName("UpdateBook");
-
-app.MapDelete("/books/{id}", ([FromServices] IBookService service, Guid id) =>
-{
-    service.DeleteBook(id);
-})
-.WithName("DeleteBook");
-
 app.MapPost("/register", ([FromServices] IUserService service, RegisterUser user) =>
 {
     return service.Register(user);
@@ -89,6 +77,10 @@ app.MapPost("/login", ([FromServices] IUserService service, LoginUser user) =>
 app.MapGet("/user", ([FromServices] IUserService service) =>
     service.User())
 .WithName("User");
+
+app.MapGet("/profile/{username}", ([FromServices] IUserService service, string username) =>
+    service.GetByUsername(username))
+.WithName("GetByUsername");
 
 app.MapPost("/logout", ([FromServices] IUserService service) =>
 {

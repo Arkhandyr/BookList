@@ -28,5 +28,10 @@ namespace BookList.Repository.UserRepository
         {
             return context.Users.FirstOrDefault(u => u.Id == id);
         }
+
+        public User GetByUsername(string username)
+        {
+            return context.Users.FirstOrDefault(u => u.Username == username);
+        }
     }
 }

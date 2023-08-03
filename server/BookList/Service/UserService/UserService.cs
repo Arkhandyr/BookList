@@ -80,5 +80,15 @@ namespace BookList.Service.UserService
                 message = "success"
             });
         }
+
+        public IResult GetByUsername(string username)
+        {
+            User user = _userRepo.GetByUsername(username);
+
+            if (user == null)
+                return Results.BadRequest();
+
+            return Results.Ok(user);
+        }
     }
 }
