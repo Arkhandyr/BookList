@@ -4,4 +4,5 @@ export interface Profile {
     realName: string
     email: string
     picture: string
+    bio: string
   }
