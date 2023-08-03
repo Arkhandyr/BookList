@@ -15,6 +15,7 @@ namespace BookList
             var dbSettings = config.GetSection("MongoDatabase").Get<MongoDatabaseSettings>();
             try
             {
+                BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
                 var mongoClient = new MongoClient(dbSettings.ConnectionString);
                 _database = mongoClient.GetDatabase(dbSettings.DatabaseName);
             }

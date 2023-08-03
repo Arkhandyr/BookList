@@ -10,6 +10,7 @@ import { BookService } from 'src/app/services/books.service';
 })
 export class BookComponent implements OnInit {
   bookId: string
+  public book:Book;
   private sub: any;
 
   constructor(
@@ -23,6 +24,4 @@ export class BookComponent implements OnInit {
        this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
     });
   }
-
-  public book:Book;
 }

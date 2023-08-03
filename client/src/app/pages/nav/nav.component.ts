@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Emitters } from 'src/app/emitters/emitters';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,22 +10,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class NavComponent implements OnInit {
-  authenticated = false;
+  authenticatedUser: string = "";
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   title = 'BookList';
 
   ngOnInit(): void {
     Emitters.authEmitter.subscribe(
-      (auth: boolean) => {
-        this.authenticated = auth;
+      (username: string) => {
+        this.authenticatedUser = username;
       })
   }
 
   logout(): void {
-    this.userService.logout().subscribe(() => this.authenticated = false);
+    this.userService.logout().subscribe(() => this.authenticatedUser = "");
   }
 }
