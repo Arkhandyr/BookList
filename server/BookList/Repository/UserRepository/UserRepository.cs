@@ -1,37 +1,38 @@
 ﻿using BookList.Model;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace BookList.Repository.UserRepository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly SqlServerDbContext context;
+        private readonly MongoDbContext context;
 
-        public UserRepository(SqlServerDbContext context)
+        public UserRepository(MongoDbContext context)
         {
             this.context = context;
         }
 
         public User Register(User user)
         {
-            context.Users.Add(user);
-            user.Id = context.SaveChanges();
+            context.Users.InsertOne(user);
 
             return user;
         }
 
         public User GetByEmail(string email)
         {
-            return context.Users.FirstOrDefault(u => u.Email == email);
+            return context.Users.Find(u => u.Email == email).FirstOrDefault();
         }
 
-        public User GetById(int id)
+        public User GetById(ObjectId id)
         {
-            return context.Users.FirstOrDefault(u => u.Id == id);
+            return context.Users.Find(u => u._id == id).FirstOrDefault();
         }
 
         public User GetByUsername(string username)
         {
-            return context.Users.FirstOrDefault(u => u.Username == username);
+            return context.Users.Find(u => u.Username == username).FirstOrDefault();
         }
     }
 }

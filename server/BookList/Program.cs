@@ -6,8 +6,6 @@ using BookList.Repository.UserRepository;
 using BookList.Service.BookService;
 using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +15,6 @@ builder.Services.AddCors();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<MongoDbContext>();
-builder.Services.AddDbContext<SqlServerDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("UserDb")));
 
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IBookService, BookService>();
