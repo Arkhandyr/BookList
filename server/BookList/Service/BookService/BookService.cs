@@ -1,4 +1,5 @@
 ﻿using BookList.Model;
+using MongoDB.Bson;
 
 namespace BookList.Service.BookService
 {
@@ -21,7 +22,7 @@ namespace BookList.Service.BookService
             return _bookRepo.FilterBooks(filter);
         }
 
-        public Task<Book> GetBookById(Guid id)
+        public Task<Book> GetBookById(string id)
         {
             return _bookRepo.GetBookById(id);
         }
@@ -36,7 +37,7 @@ namespace BookList.Service.BookService
             _bookRepo.UpdateBook(book);
         }
 
-        public void DeleteBook(Guid id)
+        public void DeleteBook(string id)
         {
             _bookRepo.DeleteBook(id);
         }

@@ -32,6 +32,7 @@ export class BookListComponent implements OnInit {
     });
 
     this.bookService.getBooks().subscribe(x => this.books = x);
+    
   }
 
   public books:Book[];

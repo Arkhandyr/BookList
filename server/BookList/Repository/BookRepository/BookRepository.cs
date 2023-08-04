@@ -1,4 +1,5 @@
 ﻿using BookList.Model;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BookList
@@ -22,7 +23,7 @@ namespace BookList
             return await context.Books.Find(x => x.Title.ToLower().Contains(query) || x.Author.ToLower().Contains(query)).ToListAsync();
         }
 
-        public async Task<Book> GetBookById(Guid id)
+        public async Task<Book> GetBookById(string id)
         {
             return await context.Books.Find(x => x._id == id).FirstOrDefaultAsync();
         }
@@ -37,7 +38,7 @@ namespace BookList
             context.Books.ReplaceOne(x => x._id == book._id, book);
         }
 
-        public void DeleteBook(Guid id)
+        public void DeleteBook(string id)
         {
             context.Books.DeleteOne(x => x._id == id);
         }

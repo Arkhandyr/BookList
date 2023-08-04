@@ -7,6 +7,7 @@ namespace BookList.Model
     public class User
     {
         [BsonId]
+        [BsonIgnoreIfDefault]
         public ObjectId _id { get; set; }
         public string Username { get; set; } = null!;
         public string RealName { get; set; } = null!;

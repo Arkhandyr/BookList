@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Book } from 'src/app/interfaces/Book';
 import { BookService } from 'src/app/services/books.service';
 
@@ -10,7 +11,7 @@ import { BookService } from 'src/app/services/books.service';
 })
 export class BookComponent implements OnInit {
   bookId: string
-  public book:Book;
+  public book: Book;
   private sub: any;
 
   constructor(

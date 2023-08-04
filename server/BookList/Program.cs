@@ -6,6 +6,8 @@ using BookList.Repository.UserRepository;
 using BookList.Service.BookService;
 using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,9 @@ builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -41,15 +46,21 @@ var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpCo
 #endregion
 
 #region Endpoints
+
 app.MapGet("/catalog", async ([FromServices] IBookService service) => 
     await service.GetAllBooks())
-.WithName("Catalog");
+.WithOpenApi(operation => new(operation)
+    {
+        OperationId = "Catalog",
+        Summary = "Catálogo da página inicial",
+        Description = "Descrição de tudo que tem asdfhjnmiusoadhfniouasdhtgiodstjgmiaodstjgmas muita coisa texto longo lorem ipsum ligma sugma"
+    });
 
 app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, string filter) => 
     await service.FilterBooks(filter))
 .WithName("FilterBooks");
 
-app.MapGet("/book/{id}", async ([FromServices] IBookService service, Guid id) =>
+app.MapGet("/book/{id}", async ([FromServices] IBookService service, string id) =>
     await service.GetBookById(id))
 .WithName("GetBookById");
 

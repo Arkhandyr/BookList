@@ -15,7 +15,6 @@ namespace BookList
             var dbSettings = config.GetSection("MongoDatabase").Get<MongoDatabaseSettings>();
             try
             {
-                BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
                 var mongoClient = new MongoClient(dbSettings.ConnectionString);
                 _database = mongoClient.GetDatabase(dbSettings.DatabaseName);
             }
@@ -38,6 +37,14 @@ namespace BookList
             get
             {
                 return _database.GetCollection<User>("Users");
+            }
+        }
+
+        public IMongoCollection<Users_Books> Users_Books
+        {
+            get
+            {
+                return _database.GetCollection<Users_Books>("Users_Books");
             }
         }
     }

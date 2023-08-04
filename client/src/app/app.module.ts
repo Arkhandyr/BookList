@@ -54,7 +54,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { BookComponent } from './pages/book/book.component';
 import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component';
-import { RegisterComponent } from './pages/register/register.component'
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,5 @@
 ﻿using BookList.Model;
+using MongoDB.Bson;
 
 namespace BookList
 {
@@ -6,9 +7,9 @@ namespace BookList
     {
         Task<IEnumerable<Book>> GetAllBooks();
         Task<IEnumerable<Book>> FilterBooks(string query);
-        Task<Book> GetBookById(Guid id);
+        Task<Book> GetBookById(string id);
         void AddBook(Book book);
         void UpdateBook(Book book);
-        void DeleteBook(Guid id);
+        void DeleteBook(string id);
     }
 }
