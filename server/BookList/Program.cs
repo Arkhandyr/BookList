@@ -53,48 +53,88 @@ app.MapGet("/catalog", async ([FromServices] IBookService service) =>
     {
         OperationId = "Catalog",
         Summary = "Catálogo da página inicial",
-        Description = "Descrição de tudo que tem asdfhjnmiusoadhfniouasdhtgiodstjgmiaodstjgmas muita coisa texto longo lorem ipsum ligma sugma"
+        Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
     });
 
 app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, string filter) => 
     await service.FilterBooks(filter))
-.WithName("FilterBooks");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterBooks",
+    Summary = "Filtro da página inicial",
+    Description = "Endpoint responsável por filtrar os livros mostrados na página inicial"
+});
 
 app.MapGet("/book/{id}", async ([FromServices] IBookService service, string id) =>
     await service.GetBookById(id))
-.WithName("GetBookById");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetBookById",
+    Summary = "Seleciona livro",
+    Description = "Endpoint responsável por trazer as informações do livro selecionado para a página de obra"
+});
 
 app.MapPost("/add", ([FromServices] IBookService service, Book book) =>
 {
     service.AddBook(book);
 })
-.WithName("AddBook");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "AddBook",
+    Summary = "Adiciona livro",
+    Description = "Endpoint responsável por adicionar um novo livro no banco de dados"
+});
 
 app.MapPost("/register", ([FromServices] IUserService service, RegisterUser user) =>
 {
     return service.Register(user);
 })
-.WithName("Register");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "Register",
+    Summary = "Registro",
+    Description = "Endpoint responsável por adicionar um novo usuário no banco de dados"
+});
 
 app.MapPost("/login", ([FromServices] IUserService service, LoginUser user) =>
 {
     return service.Login(user);
 })
-.WithName("Login");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "Login",
+    Summary = "Login",
+    Description = "Endpoint responsável por gerar um token para o usuário realizando login"
+});
 
 app.MapGet("/user", ([FromServices] IUserService service) =>
     service.User())
-.WithName("User");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "User",
+    Summary = "Usuário",
+    Description = "Endpoint responsável por trazer as informações de um usuário logado"
+});
 
 app.MapGet("/profile/{username}", ([FromServices] IUserService service, string username) =>
     service.GetByUsername(username))
-.WithName("GetByUsername");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetByUsername",
+    Summary = "Seleciona usuário",
+    Description = "Endpoint responsável por trazer as informações do usuário selecionado para a página de perfil de usuário"
+});
 
 app.MapPost("/logout", ([FromServices] IUserService service) =>
 {
     return service.Logout();
 })
-.WithName("Logout");
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "Logout",
+    Summary = "Logout",
+    Description = "Endpoint responsável por deslogar o usuário da sessão"
+});
 #endregion
 
 app.Run();
