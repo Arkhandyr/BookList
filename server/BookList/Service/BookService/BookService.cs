@@ -29,7 +29,7 @@ namespace BookList.Service.BookService
 
         public void AddBook(Book book)
         {
-            _bookRepo.AddBook(book);
+            
         }
 
         public void UpdateBook(Book book)

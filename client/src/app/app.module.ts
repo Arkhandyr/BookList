@@ -114,7 +114,8 @@ import { RegisterComponent } from './pages/register/register.component';
     
   ],
   providers: [
-    FormsBookResolver
+    FormsBookResolver,
+    NavComponent
   ],
   bootstrap: [NavComponent]
 })

@@ -6,7 +6,7 @@
         <img [src]="book.cover" class="bookCover"/>
       </a>
       <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
-        <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
+        <button class="btn btn-primary" type="button" style="width: 100%; text-align: center; padding: 10px;" (click)="addToList()">
           Adicionar à Lista
         </button>
       </div>

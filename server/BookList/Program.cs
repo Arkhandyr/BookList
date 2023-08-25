@@ -2,8 +2,10 @@
 using BookList;
 using BookList.Helpers;
 using BookList.Model;
+using BookList.Repository.ListRepository;
 using BookList.Repository.UserRepository;
 using BookList.Service.BookService;
+using BookList.Service.ListService;
 using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -23,6 +25,9 @@ builder.Services.AddTransient<IBookService, BookService>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddTransient<IListRepository, ListRepository>();
+builder.Services.AddTransient<IListService, ListService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
@@ -50,11 +55,11 @@ var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpCo
 app.MapGet("/catalog", async ([FromServices] IBookService service) => 
     await service.GetAllBooks())
 .WithOpenApi(operation => new(operation)
-    {
-        OperationId = "Catalog",
-        Summary = "Catálogo da página inicial",
-        Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
-    });
+{
+    OperationId = "Catalog",
+    Summary = "Catálogo da página inicial",
+    Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
+});
 
 app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, string filter) =>
     await service.FilterBooks(filter))
@@ -138,6 +143,17 @@ app.MapPost("/logout", ([FromServices] IUserService service) =>
     OperationId = "Logout",
     Summary = "Logout",
     Description = "Endpoint responsável por deslogar o usuário da sessão"
+});
+
+app.MapPost("/addToList", ([FromServices] IListService service, [FromBody] ListEntry listEntry) =>
+{
+    return service.AddToList(listEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "AddToList",
+    Summary = "Adiciona livro à lista",
+    Description = "Endpoint responsável adicionar um livro à uma lista de leituras"
 });
 #endregion
 
