@@ -7,7 +7,7 @@ body {
 .profilePicture {
     overflow: hidden; 
     display: block;
-    border-radius: 1%;
+    border-radius: 50%;
     width: 300px;
     height: 300px;
 }
@@ -30,4 +30,24 @@ h1, h2, h4, p, button {
 
 .leftSection {
     max-width: 70%;
+}
+
+.card {
+    background-color:transparent;
+    border: transparent;
+    color: #d9d9d9;
+    font-family: 'Overpass', sans-serif;
+}
+
+.card-img {
+    border-radius: 1%;
+    max-width: 200px;
+    max-height: 280px;
+}
+
+.card-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }

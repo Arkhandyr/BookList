@@ -39,5 +39,12 @@ namespace BookList.Service.ListService
                 message = "success"
             });
         }
+
+        public IResult GetUserLists(string username)
+        {
+            List<Book> userLists = _listRepo.GetUserLists(username);
+
+            return Results.Ok(userLists);
+        }
     }
 }

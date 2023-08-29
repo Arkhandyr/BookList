@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/User';
 import { Profile } from '../interfaces/Profile';
+import { Book } from '../interfaces/Book';
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +25,12 @@ export class ListService {
         withCredentials: true
     })
   } 
+
+  public getUserLists(username: string): Observable<Book[]> {
+    let url = `${environment.api}/lists/${username}`
+    
+    return this.client.get<Book[]>(url, {
+        withCredentials: true
+    })
+  }
 }

@@ -37,10 +37,5 @@ namespace BookList
         {
             context.Books.ReplaceOne(x => x._id == book._id, book);
         }
-
-        public void DeleteBook(string id)
-        {
-            context.Books.DeleteOne(x => x._id == id);
-        }
     }
 }

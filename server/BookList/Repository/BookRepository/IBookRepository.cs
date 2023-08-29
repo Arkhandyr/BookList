@@ -10,6 +10,5 @@ namespace BookList
         Task<Book> GetBookById(string id);
         void AddBook(Book book);
         void UpdateBook(Book book);
-        void DeleteBook(string id);
     }
 }

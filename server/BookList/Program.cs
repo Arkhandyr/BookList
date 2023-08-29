@@ -155,6 +155,15 @@ app.MapPost("/addToList", ([FromServices] IListService service, [FromBody] ListE
     Summary = "Adiciona livro à lista",
     Description = "Endpoint responsável adicionar um livro à uma lista de leituras"
 });
+
+app.MapGet("/lists/{username}", ([FromServices] IListService service, string username) =>
+    service.GetUserLists(username))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetUserLists",
+    Summary = "Seleciona usuário",
+    Description = "Endpoint responsável por trazer as leituras do usuário selecionado para a página de perfil de usuário"
+});
 #endregion
 
 app.Run();

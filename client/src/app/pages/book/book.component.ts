@@ -38,7 +38,8 @@ export class BookComponent implements OnInit {
 
     this.listService.addToList(listEntry).subscribe({
       next: (res) => {
-        //alterar botão para "remover da lista"
+        //alterar botão para "remover da lista" + toast
+        
       },
       error: (err) => {
         console.log(err);

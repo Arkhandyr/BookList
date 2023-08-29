@@ -36,10 +36,5 @@ namespace BookList.Service.BookService
         {
             _bookRepo.UpdateBook(book);
         }
-
-        public void DeleteBook(string id)
-        {
-            _bookRepo.DeleteBook(id);
-        }
     }
 }

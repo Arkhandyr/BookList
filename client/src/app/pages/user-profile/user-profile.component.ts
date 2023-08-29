@@ -6,6 +6,7 @@ import { Book } from 'src/app/interfaces/Book';
 import { Profile } from 'src/app/interfaces/Profile';
 import { User } from 'src/app/interfaces/User';
 import { BookService } from 'src/app/services/books.service';
+import { ListService } from 'src/app/services/list.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,14 +15,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  user: Profile
-  username: string
+  user: Profile;
+  username: string;
+  books: Book[];
   private sub: any;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private bookService: BookService, 
+    private listService: ListService, 
     private router: Router,
     private toastr: ToastrService) { }
 
@@ -37,13 +39,15 @@ export class UserProfileComponent implements OnInit {
           console.log(err);
         }
       });
-   });
-  }
+    });
 
-  public books:Book[];
-  filter: string;
-
-  filterBooks() {
-      this.bookService.filterBooks(this.filter).subscribe(x => this.books = x);
+    this.listService.getUserLists(this.username).subscribe({
+      next: (res) => {
+        this.books = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }
