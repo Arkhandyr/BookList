@@ -29,12 +29,12 @@ namespace BookList.Service.ListService
                 Date = DateTime.Now
             };
 
-            var response = _listRepo.UpsertEntry(userBook);
+            _listRepo.UpsertEntry(userBook);
 
             //if (user == null)
             //    return Results.BadRequest();
 
-            return Results.Ok(response);
+            return Results.Ok(new { message = "success" });
         }
 
         public IResult RemoveFromList(ListEntry entry)

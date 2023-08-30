@@ -13,13 +13,13 @@ namespace BookList.Repository.ListRepository
             this.context = context;
         }
 
-        public ReplaceOneResult UpsertEntry(Users_Books users_Books)
+        public void UpsertEntry(Users_Books users_Books)
         {
             var filter = Builders<Users_Books>.Filter.And(
                 Builders<Users_Books>.Filter.Where(u => u.User_id == users_Books.User_id),
                 Builders<Users_Books>.Filter.Where(u => u.Book_id == users_Books.Book_id));
 
-            return context.Users_Books.ReplaceOne(filter, users_Books, new ReplaceOptions { IsUpsert = true });
+            context.Users_Books.ReplaceOne(filter, users_Books, new ReplaceOptions { IsUpsert = true });
         }
 
         public DeleteResult RemoveEntry(Users_Books users_Books)
