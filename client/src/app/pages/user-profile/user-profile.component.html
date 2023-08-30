@@ -24,10 +24,33 @@
 
       <app-expandable-paragraph class="synopsis" [text]="user.bio"></app-expandable-paragraph>
 
-      <h4>Estante</h4>
-      
+      <h4 *ngIf="books[0].length > 0">Lendo</h4>
       <div class="row row-cols-1 row-cols-md-5">
-        <div class="col" *ngFor="let book of books">
+        <div class="col" *ngFor="let book of books[0]">
+          <div class="card">
+            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
+            <div class="card-body">
+              <p class="card-title">{{book.title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 *ngIf="books[1].length > 0">Quero ler</h4>
+      <div class="row row-cols-1 row-cols-md-5">
+        <div class="col" *ngFor="let book of books[1]">
+          <div class="card">
+            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
+            <div class="card-body">
+              <p class="card-title">{{book.title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 *ngIf="books[2].length > 0">Finalizado</h4>
+      <div class="row row-cols-1 row-cols-md-5">
+        <div class="col" *ngFor="let book of books[2]">
           <div class="card">
             <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
             <div class="card-body">

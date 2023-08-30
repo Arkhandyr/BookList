@@ -23,28 +23,51 @@ namespace BookList.Service.ListService
 
             Users_Books userBook = new()
             {
-                _id = ObjectId.GenerateNewId(),
-                Book_id = ObjectId.Parse(entry.book),
-                User_id = _userRepo.GetByUsername(entry.user)._id,
+                Book_id = ObjectId.Parse(entry.BookId),
+                User_id = _userRepo.GetByUsername(entry.Username)._id,
+                List = entry.ListName,
                 Date = DateTime.Now
             };
 
-            _listRepo.AddToList(userBook);
+            var response = _listRepo.UpsertEntry(userBook);
 
             //if (user == null)
             //    return Results.BadRequest();
 
-            return Results.Ok(new
+            return Results.Ok(response);
+        }
+
+        public IResult RemoveFromList(ListEntry entry)
+        {
+            Users_Books userBook = new()
             {
-                message = "success"
-            });
+                Book_id = ObjectId.Parse(entry.BookId),
+                User_id = _userRepo.GetByUsername(entry.Username)._id
+            };
+
+            var response = _listRepo.RemoveEntry(userBook);
+
+            return Results.Ok(response);
         }
 
         public IResult GetUserLists(string username)
         {
-            List<Book> userLists = _listRepo.GetUserLists(username);
+            List<List<Book>> userLists = _listRepo.GetUserLists(username);
 
             return Results.Ok(userLists);
+        }
+
+        public IResult GetBookStatus(string bookId, string username)
+        {
+            Users_Books userBook = new()
+            {
+                Book_id = ObjectId.Parse(bookId),
+                User_id = _userRepo.GetByUsername(username)._id
+            };
+
+            var bookStatus = _listRepo.GetBookStatus(userBook);
+
+            return Results.Ok(bookStatus);
         }
     }
 }

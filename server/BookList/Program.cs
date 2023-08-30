@@ -153,7 +153,7 @@ app.MapPost("/addToList", ([FromServices] IListService service, [FromBody] ListE
 {
     OperationId = "AddToList",
     Summary = "Adiciona livro à lista",
-    Description = "Endpoint responsável adicionar um livro à uma lista de leituras"
+    Description = "Endpoint responsável por adicionar um livro à uma lista de leituras"
 });
 
 app.MapGet("/lists/{username}", ([FromServices] IListService service, string username) =>
@@ -161,8 +161,28 @@ app.MapGet("/lists/{username}", ([FromServices] IListService service, string use
 .WithOpenApi(operation => new(operation)
 {
     OperationId = "GetUserLists",
-    Summary = "Seleciona usuário",
+    Summary = "Estante virtual do usuário",
     Description = "Endpoint responsável por trazer as leituras do usuário selecionado para a página de perfil de usuário"
+});
+
+app.MapGet("/books/{bookId}/{username}", ([FromServices] IListService service, string bookId, string username) =>
+    service.GetBookStatus(bookId, username))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetBookStatus",
+    Summary = "Status de leitura do livro",
+    Description = "Endpoint responsável por informar se o usuário já possui o livro em sua estante"
+});
+
+app.MapPost("/removeFromList", ([FromServices] IListService service, [FromBody] ListEntry listEntry) =>
+{
+    return service.RemoveFromList(listEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "RemoveFromList",
+    Summary = "Remove livro da lista",
+    Description = "Endpoint responsável por remover um livro da lista de leituras"
 });
 #endregion
 

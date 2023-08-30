@@ -48,3 +48,13 @@ button {
 .leftSection {
     max-width: 70%;
 }
+
+.dropdown-menu {
+    width: 100%; 
+    background-color:#d98a24;
+}
+
+.dropdown-menu :hover {
+    background-color:#e29d42;
+    color: #1e1e1e;
+}

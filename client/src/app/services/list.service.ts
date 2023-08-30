@@ -26,10 +26,30 @@ export class ListService {
     })
   } 
 
-  public getUserLists(username: string): Observable<Book[]> {
+  public removeFromList(listEntry: string): Observable<string> {
+    let url = `${environment.api}/removeFromList`
+    
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+    }); 
+    return this.client.post<string>(url, listEntry, {
+        headers: headers,
+        withCredentials: true
+    })
+  } 
+
+  public getUserLists(username: string): Observable<Book[][]> {
     let url = `${environment.api}/lists/${username}`
     
-    return this.client.get<Book[]>(url, {
+    return this.client.get<Book[][]>(url, {
+        withCredentials: true
+    })
+  }
+
+  public getBookStatus(bookId: string, username: string): Observable<string> {
+    let url = `${environment.api}/books/${bookId}/${username}`
+    
+    return this.client.get<string>(url, {
         withCredentials: true
     })
   }

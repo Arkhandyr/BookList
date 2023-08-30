@@ -17,7 +17,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserProfileComponent implements OnInit {
   user: Profile;
   username: string;
-  books: Book[];
+  books: Book[][] = [[], [], []];
   private sub: any;
 
   constructor(
@@ -43,7 +43,7 @@ export class UserProfileComponent implements OnInit {
 
     this.listService.getUserLists(this.username).subscribe({
       next: (res) => {
-        this.books = res;
+        [this.books[0],this.books[1],this.books[2]] = res.slice(0,3);
       },
       error: (err) => {
         console.log(err);
