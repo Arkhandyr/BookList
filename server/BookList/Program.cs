@@ -1,11 +1,13 @@
-#region Configs
+#region Config
 using BookList;
 using BookList.Helpers;
 using BookList.Model;
 using BookList.Repository.ListRepository;
+using BookList.Repository.ReviewRepository;
 using BookList.Repository.UserRepository;
 using BookList.Service.BookService;
 using BookList.Service.ListService;
+using BookList.Service.ReviewService;
 using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -29,6 +31,9 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IListRepository, ListRepository>();
 builder.Services.AddTransient<IListService, ListService>();
 
+builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
+builder.Services.AddTransient<IReviewService, ReviewService>();
+
 builder.Services.AddTransient<IJwtService, JwtService>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -51,6 +56,7 @@ var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpCo
 #endregion
 
 #region Endpoints
+#region Main page
 
 app.MapGet("/catalog", async ([FromServices] IBookService service) => 
     await service.GetAllBooks())
@@ -74,6 +80,9 @@ app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, stri
     }
 });
 
+#endregion
+
+#region Book
 app.MapGet("/book/{id}", async ([FromServices] IBookService service, string id) =>
     await service.GetBookById(id))
 .WithOpenApi(operation => new(operation)
@@ -94,6 +103,70 @@ app.MapPost("/add", ([FromServices] IBookService service, Book book) =>
     Description = "Endpoint responsável por adicionar um novo livro no banco de dados"
 });
 
+app.MapPost("/addToList", ([FromServices] IListService service, [FromBody] ListEntry listEntry) =>
+{
+    return service.AddToList(listEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "AddToList",
+    Summary = "Adiciona livro à lista",
+    Description = "Endpoint responsável por adicionar um livro à uma lista de leituras"
+});
+
+app.MapPost("/removeFromList", ([FromServices] IListService service, [FromBody] ListEntry listEntry) =>
+{
+    return service.RemoveFromList(listEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "RemoveFromList",
+    Summary = "Remove livro da lista",
+    Description = "Endpoint responsável por remover um livro da lista de leituras"
+});
+
+app.MapGet("/books/{bookId}/{username}", ([FromServices] IListService service, string bookId, string username) =>
+    service.GetBookStatus(bookId, username))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetBookStatus",
+    Summary = "Status de leitura do livro",
+    Description = "Endpoint responsável por informar se o usuário já possui o livro em sua estante"
+});
+
+app.MapPost("/books/addReview", ([FromServices] IReviewService service, [FromBody] ReviewEntry reviewEntry) =>
+{
+    return service.AddReview(reviewEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "AddReview",
+    Summary = "Adiciona resenha a um livro",
+    Description = "Endpoint responsável por adicionar uma resenha a um livro"
+});
+
+app.MapPost("/books/deleteReview", ([FromServices] IReviewService service, [FromBody] ReviewEntry reviewEntry) =>
+{
+    return service.DeleteReview(reviewEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "DeleteReview",
+    Summary = "Remove resenha de um livro",
+    Description = "Endpoint responsável por remover uma resenha de um livro"
+});
+
+app.MapGet("/books/{bookId}/reviews", ([FromServices] IReviewService service, string bookId) =>
+    service.GetBookReviews(bookId))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetBookReviews",
+    Summary = "Resenhas da obra",
+    Description = "Endpoint responsável por trazer todas as resenhas da obra na página da obra"
+});
+#endregion
+
+#region Login
 app.MapPost("/register", ([FromServices] IUserService service, RegisterUser user) =>
 {
     return service.Register(user);
@@ -125,15 +198,6 @@ app.MapGet("/user", ([FromServices] IUserService service) =>
     Description = "Endpoint responsável por trazer as informações de um usuário logado"
 });
 
-app.MapGet("/profile/{username}", ([FromServices] IUserService service, string username) =>
-    service.GetByUsername(username))
-.WithOpenApi(operation => new(operation)
-{
-    OperationId = "GetByUsername",
-    Summary = "Seleciona usuário",
-    Description = "Endpoint responsável por trazer as informações do usuário selecionado para a página de perfil de usuário"
-});
-
 app.MapPost("/logout", ([FromServices] IUserService service) =>
 {
     return service.Logout();
@@ -144,16 +208,16 @@ app.MapPost("/logout", ([FromServices] IUserService service) =>
     Summary = "Logout",
     Description = "Endpoint responsável por deslogar o usuário da sessão"
 });
+#endregion
 
-app.MapPost("/addToList", ([FromServices] IListService service, [FromBody] ListEntry listEntry) =>
-{
-    return service.AddToList(listEntry);
-})
+#region Profile
+app.MapGet("/profile/{username}", ([FromServices] IUserService service, string username) =>
+    service.GetByUsername(username))
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "AddToList",
-    Summary = "Adiciona livro à lista",
-    Description = "Endpoint responsável por adicionar um livro à uma lista de leituras"
+    OperationId = "GetByUsername",
+    Summary = "Seleciona usuário",
+    Description = "Endpoint responsável por trazer as informações do usuário selecionado para a página de perfil de usuário"
 });
 
 app.MapGet("/lists/{username}", ([FromServices] IListService service, string username) =>
@@ -164,26 +228,7 @@ app.MapGet("/lists/{username}", ([FromServices] IListService service, string use
     Summary = "Estante virtual do usuário",
     Description = "Endpoint responsável por trazer as leituras do usuário selecionado para a página de perfil de usuário"
 });
-
-app.MapGet("/books/{bookId}/{username}", ([FromServices] IListService service, string bookId, string username) =>
-    service.GetBookStatus(bookId, username))
-.WithOpenApi(operation => new(operation)
-{
-    OperationId = "GetBookStatus",
-    Summary = "Status de leitura do livro",
-    Description = "Endpoint responsável por informar se o usuário já possui o livro em sua estante"
-});
-
-app.MapPost("/removeFromList", ([FromServices] IListService service, [FromBody] ListEntry listEntry) =>
-{
-    return service.RemoveFromList(listEntry);
-})
-.WithOpenApi(operation => new(operation)
-{
-    OperationId = "RemoveFromList",
-    Summary = "Remove livro da lista",
-    Description = "Endpoint responsável por remover um livro da lista de leituras"
-});
+#endregion
 #endregion
 
 app.Run();
