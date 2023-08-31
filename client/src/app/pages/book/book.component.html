@@ -51,6 +51,11 @@
       <h4>Sinopse</h4>
 
       <app-expandable-paragraph class="synopsis" [text]="book.synopsis"></app-expandable-paragraph>
+
+      <div class="reviews" *ngIf="reviews">
+        <h4>Resenhas</h4>
+        <div *ngFor="let review of reviews"></div>
+      </div>
     </div>
   </div>
 </body>

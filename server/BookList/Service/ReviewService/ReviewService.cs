@@ -52,9 +52,16 @@ namespace BookList.Service.ReviewService
 
         public IResult GetBookReviews(string bookId)
         {
-            List<Review> userLists = _reviewRepo.GetBookReviews(ObjectId.Parse(bookId));
+            List<Review> reviews = _reviewRepo.GetBookReviews(ObjectId.Parse(bookId));
 
-            return Results.Ok(userLists);
+            foreach (Review review in reviews)
+            {
+                //outra hora eu penso nisso mas basicamente já trazer a review bonitinha com todas as informações
+                //p n precisar fazer outra chamada pra isso
+                //protótipo de como eu quero tá na área de trabalho
+            }
+
+            return Results.Ok(reviews);
         }
     }
 }

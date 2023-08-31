@@ -33,7 +33,9 @@ namespace BookList.Repository.ReviewRepository
 
         public List<Review> GetBookReviews(ObjectId bookId)
         {
-            return context.Reviews.Find(u => u.Book_id == bookId).ToList();
+            var biuyceta = context.Reviews.Find(r => r.Book_id == bookId).ToList();
+
+            return biuyceta;
         }
     }
 }

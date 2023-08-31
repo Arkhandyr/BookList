@@ -8,6 +8,8 @@ import { ListService } from 'src/app/services/list.service';
 import { NavComponent } from '../nav/nav.component';
 import { HttpParams } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Review } from 'src/app/interfaces/Review';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-book',
@@ -19,6 +21,7 @@ export class BookComponent implements OnInit {
   bookId: string
   bookStatus: string;
   public book: Book;
+  reviews: Review[];
   private sub: any;
 
   constructor(
@@ -26,6 +29,7 @@ export class BookComponent implements OnInit {
     private navComponent: NavComponent,
     private bookService: BookService,
     private listService: ListService,
+    private reviewService: ReviewService,
     private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -35,6 +39,8 @@ export class BookComponent implements OnInit {
        this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
 
        this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
+
+       this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x)
     });
   }
 
