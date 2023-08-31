@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Emitters } from 'src/app/emitters/emitters';
 import { Book } from 'src/app/interfaces/Book';
+import { Profile } from 'src/app/interfaces/Profile';
+import { User } from 'src/app/interfaces/User';
 import { BookService } from 'src/app/services/books.service';
+import { ListService } from 'src/app/services/list.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,20 +15,39 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  user: Profile;
+  username: string;
+  books: Book[][] = [[], [], []];
+  private sub: any;
 
   constructor(
-    private userService:UserService,
-    private bookService:BookService, 
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private listService: ListService, 
+    private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    //this.userService.getBooksByUser().subscribe(x => this.books = x);
-  }
+    this.sub = this.route.params.subscribe(params => {
+      this.username = params['username'];
 
-  public books:Book[];
-  filter: string;
+      this.userService.getByUsername(this.username).subscribe({
+        next: (res) => {
+          this.user = res;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    });
 
-  filterBooks() {
-      this.bookService.filterBooks(this.filter).subscribe(x => this.books = x);
+    this.listService.getUserLists(this.username).subscribe({
+      next: (res) => {
+        [this.books[0],this.books[1],this.books[2]] = res.slice(0,3);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }

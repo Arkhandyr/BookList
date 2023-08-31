@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/User';
+import { Profile } from '../interfaces/Profile';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,18 @@ export class UserService {
     })
   } 
 
-  public getUser(): Observable<string> {
+  public getUser(): Observable<Profile> {
     let url = `${environment.api}/user`
 
-    return this.client.get<string>(url, {
+    return this.client.get<Profile>(url, {
       withCredentials: true
     })
+  }
+
+  public getByUsername(username: string): Observable<Profile> {
+    let url = `${environment.api}/profile/${username}`
+
+    return this.client.get<Profile>(url)
   }
 
   public logout(): Observable<string> {

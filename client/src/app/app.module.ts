@@ -54,7 +54,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { BookComponent } from './pages/book/book.component';
 import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component';
-import { RegisterComponent } from './pages/register/register.component'
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +75,10 @@ import { RegisterComponent } from './pages/register/register.component'
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -114,7 +117,8 @@ import { RegisterComponent } from './pages/register/register.component'
     
   ],
   providers: [
-    FormsBookResolver
+    FormsBookResolver,
+    NavComponent
   ],
   bootstrap: [NavComponent]
 })

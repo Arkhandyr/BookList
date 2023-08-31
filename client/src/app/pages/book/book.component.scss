@@ -17,6 +17,10 @@ h1, h2, h4, p, button {
     color: #d9d9d9;
 }
 
+button {
+    color: #1e1e1e;
+}
+
 .see-more {
     font-family: 'Overpass', sans-serif;
     font-weight: 800;
@@ -36,11 +40,21 @@ h1, h2, h4, p, button {
     text-align: center;
     width: 220px;
     padding: 10px; 
-    color: #3b2609;
+    color: #1e1e1e;
     background-color: #d98a24;
     border-radius: 1%;
 }
 
 .leftSection {
     max-width: 70%;
+}
+
+.dropdown-menu {
+    width: 100%; 
+    background-color:#d98a24;
+}
+
+.dropdown-menu :hover {
+    background-color:#e29d42;
+    color: #1e1e1e;
 }

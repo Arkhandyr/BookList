@@ -1,4 +1,5 @@
 ﻿using BookList.Model;
+using MongoDB.Bson;
 
 namespace BookList.Repository.UserRepository
 {
@@ -8,6 +9,8 @@ namespace BookList.Repository.UserRepository
 
         public User GetByEmail(string email);
 
-        public User GetById(int id);
+        public User GetById(ObjectId id);
+
+        public User GetByUsername(string username);
     }
 }

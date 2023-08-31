@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace BookList.Helpers
     {
         private string secureKey = "tabun uc tabos jomi dabun tospei";
 
-        public string Generate(int id)
+        public string Generate(ObjectId id)
         {
             var symmKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secureKey));
             var credentials = new SigningCredentials(symmKey, SecurityAlgorithms.HmacSha256Signature);

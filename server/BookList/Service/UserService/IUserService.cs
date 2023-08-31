@@ -11,5 +11,7 @@ namespace BookList.Service.UserService
         public IResult User();
 
         public IResult Logout();
+
+        public IResult GetByUsername(string username);
     }
 }

@@ -3,6 +3,7 @@ using BookList.Model;
 using BookList.Repository.UserRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.Features;
+using MongoDB.Bson;
 
 namespace BookList.Service.UserService
 {
@@ -39,7 +40,7 @@ namespace BookList.Service.UserService
             if (user == null || !BCrypt.Net.BCrypt.Verify(loginUser.Password, user.Password))
                 return Results.BadRequest();
 
-            var jwt = _jwtService.Generate(user.Id);
+            var jwt = _jwtService.Generate(user._id);
 
             _contextAccessor.HttpContext.Response.Cookies.Append("jwt", jwt, new CookieOptions
             {
@@ -60,7 +61,7 @@ namespace BookList.Service.UserService
                 var jwt = _contextAccessor.HttpContext.Request.Cookies["jwt"];
                 var token = _jwtService.Verify(jwt);
 
-                int userId = int.Parse(token.Issuer);
+                ObjectId userId = ObjectId.Parse(token.Issuer);
                 var user = _userRepo.GetById(userId);
 
                 return Results.Ok(user);
@@ -79,6 +80,16 @@ namespace BookList.Service.UserService
             {
                 message = "success"
             });
+        }
+
+        public IResult GetByUsername(string username)
+        {
+            User user = _userRepo.GetByUsername(username);
+
+            if (user == null)
+                return Results.BadRequest();
+
+            return Results.Ok(user);
         }
     }
 }

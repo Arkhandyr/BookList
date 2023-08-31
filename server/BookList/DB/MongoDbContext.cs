@@ -31,5 +31,21 @@ namespace BookList
                 return _database.GetCollection<Book>("Books");
             }
         }
+
+        public IMongoCollection<User> Users
+        {
+            get
+            {
+                return _database.GetCollection<User>("Users");
+            }
+        }
+
+        public IMongoCollection<Users_Books> Users_Books
+        {
+            get
+            {
+                return _database.GetCollection<Users_Books>("Users_Books");
+            }
+        }
     }
 }

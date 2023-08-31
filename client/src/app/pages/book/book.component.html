@@ -6,9 +6,27 @@
         <img [src]="book.cover" class="bookCover"/>
       </a>
       <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
-        <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
-          Adicionar à Lista
-        </button>
+        <div ngbDropdown class="dropdown-addToList" style="width: 100%;" *ngIf="!bookStatus">
+          <button type="button" class="btn btn-primary w-100" id="dropdownBasic1" ngbDropdownToggle>
+            Adicionar à lista
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu">
+            <button ngbDropdownItem (click)="addToList('planning')">Quero ler</button>
+            <button ngbDropdownItem (click)="addToList('reading')">Lendo</button>
+            <button ngbDropdownItem (click)="addToList('done')">Finalizado</button>
+          </div>
+        </div>
+        <div ngbDropdown class="dropdown-addToList" style="width: 100%;" *ngIf="bookStatus">
+          <button type="button" class="btn btn-primary w-100" id="dropdownBasic1" ngbDropdownToggle>
+            Alterar status
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu">
+            <button ngbDropdownItem (click)="addToList('planning')">Planejado</button>
+            <button ngbDropdownItem (click)="addToList('reading')">Lendo</button>
+            <button ngbDropdownItem (click)="addToList('done')">Finalizado</button>
+            <button ngbDropdownItem (click)="removeFromList()" style="color: rgb(161, 0, 0);">Remover da lista</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -30,7 +48,7 @@
 
       <div style="height: 20px;"></div>
 
-      <h4>Synopsis</h4>
+      <h4>Sinopse</h4>
 
       <app-expandable-paragraph class="synopsis" [text]="book.synopsis"></app-expandable-paragraph>
     </div>

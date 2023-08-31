@@ -16,7 +16,7 @@ const routes: Routes = [
       {path:'home', component:BookListComponent},
       {path:'add', component:BookAddComponent},
       {path:'book/:id', component:BookComponent},
-      {path:'profile/:id', component:UserProfileComponent},
+      {path:'profile/:username', component:UserProfileComponent},
       {path:'register', component:RegisterComponent},
     ],
   }

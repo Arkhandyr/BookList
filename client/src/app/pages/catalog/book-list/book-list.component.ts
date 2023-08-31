@@ -22,17 +22,17 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUser().subscribe({
-      next: () => {
-        Emitters.authEmitter.emit(true);
+      next: (res) => {
+        Emitters.authEmitter.emit(res.username);
       },
       error: (err) => {
         console.log(err);
-        Emitters.authEmitter.emit(false);
         this.router.navigate(['/login']);
       }
     });
 
     this.bookService.getBooks().subscribe(x => this.books = x);
+    
   }
 
   public books:Book[];

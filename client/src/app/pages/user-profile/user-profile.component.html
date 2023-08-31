@@ -3,7 +3,7 @@
   <div class="flex-container" style="margin: 0px 10%">
     <div class="rightSection" style="margin:0px 20px 20px 0px;">
       <a class="profilePicture">
-        <img [src]="" class="profilePicture"/>
+        <img [src]="user.picture" class="profilePicture"/>
       </a>
       <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
         <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
@@ -15,14 +15,50 @@
     <div class="leftSection">
       <div style="height: 220px;"></div>
 
-      <h2>Arkhandyr</h2>
-      <h4>Victor Henrique</h4>
+      <h2>{{user.username}}</h2>
+      <h4>{{user.realName}}</h4>
 
       <div style="height: 20px;"></div>
 
       <h4>Bio</h4>
 
-      <app-expandable-paragraph class="synopsis" text="jfisdanfdisgisagn"></app-expandable-paragraph>
+      <app-expandable-paragraph class="synopsis" [text]="user.bio"></app-expandable-paragraph>
+
+      <h4 *ngIf="books[0].length > 0">Lendo</h4>
+      <div class="row row-cols-1 row-cols-md-5">
+        <div class="col" *ngFor="let book of books[0]">
+          <div class="card">
+            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
+            <div class="card-body">
+              <p class="card-title">{{book.title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 *ngIf="books[1].length > 0">Quero ler</h4>
+      <div class="row row-cols-1 row-cols-md-5">
+        <div class="col" *ngFor="let book of books[1]">
+          <div class="card">
+            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
+            <div class="card-body">
+              <p class="card-title">{{book.title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 *ngIf="books[2].length > 0">Finalizado</h4>
+      <div class="row row-cols-1 row-cols-md-5">
+        <div class="col" *ngFor="let book of books[2]">
+          <div class="card">
+            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
+            <div class="card-body">
+              <p class="card-title">{{book.title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
