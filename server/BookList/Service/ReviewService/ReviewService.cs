@@ -56,9 +56,7 @@ namespace BookList.Service.ReviewService
 
             foreach (Review review in reviews)
             {
-                //outra hora eu penso nisso mas basicamente já trazer a review bonitinha com todas as informações
-                //p n precisar fazer outra chamada pra isso
-                //protótipo de como eu quero tá na área de trabalho
+                review.User = _userRepo.GetById(review.User_id);
             }
 
             return Results.Ok(reviews);

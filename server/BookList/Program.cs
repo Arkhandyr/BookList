@@ -156,7 +156,7 @@ app.MapPost("/books/deleteReview", ([FromServices] IReviewService service, [From
     Description = "Endpoint responsável por remover uma resenha de um livro"
 });
 
-app.MapGet("/books/{bookId}/reviews", ([FromServices] IReviewService service, string bookId) =>
+app.MapGet("/reviews/{bookId}", ([FromServices] IReviewService service, string bookId) =>
     service.GetBookReviews(bookId))
 .WithOpenApi(operation => new(operation)
 {

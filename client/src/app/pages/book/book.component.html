@@ -54,8 +54,23 @@
 
       <div class="reviews" *ngIf="reviews">
         <h4>Resenhas</h4>
-        <div *ngFor="let review of reviews"></div>
-      </div>
+        <div *ngFor="let review of reviews">
+          <div class="card mb-3 border-primary" style="max-width: 540px; background-color: transparent; ">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src={{review.user.picture}} class="img-fluid rounded-circle">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{review.user.username}} ({{review.user.realName}})</h5>
+                  <p class="card-text">{{review.text}}</p>
+                  <p class="card-text"><small class="text-muted position-absolute bottom-0 end-0 me-1">{{review.date | date:'dd/MM/yyyy HH:mm'}}</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>                         
     </div>
   </div>
 </body>

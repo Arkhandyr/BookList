@@ -36,7 +36,7 @@ export class ReviewService {
   } 
 
   public getBookReviews(bookId: string): Observable<Review[]> {
-    let url = `${environment.api}/${bookId}/reviews`
+    let url = `${environment.api}/reviews/${bookId}`
     
     return this.client.get<Review[]>(url, {
         withCredentials: true

@@ -21,7 +21,7 @@ export class BookComponent implements OnInit {
   bookId: string
   bookStatus: string;
   public book: Book;
-  reviews: Review[];
+  public reviews: Review[];
   private sub: any;
 
   constructor(
@@ -38,9 +38,11 @@ export class BookComponent implements OnInit {
 
        this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
 
-       this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
+       //this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
 
-       this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x)
+       this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+
+       console.log(this.reviews)
     });
   }
 
