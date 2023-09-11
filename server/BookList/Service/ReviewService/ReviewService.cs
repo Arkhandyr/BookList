@@ -26,7 +26,8 @@ namespace BookList.Service.ReviewService
                 Book_id = ObjectId.Parse(entry.BookId),
                 User_id = _userRepo.GetByUsername(entry.Username)._id,
                 Text = entry.Text,
-                Date = DateTime.Now
+                Date = DateTime.Now,
+                Likes = new List<string>()
             };
 
             _reviewRepo.UpsertReview(review);
@@ -60,6 +61,20 @@ namespace BookList.Service.ReviewService
             }
 
             return Results.Ok(reviews);
+        }
+
+        public IResult LikeReview(LikeEntry entry)
+        {
+            _reviewRepo.LikeReview(entry);
+
+            return Results.Ok(new { message = "success" });
+        }
+
+        public IResult DislikeReview(LikeEntry entry)
+        {
+            _reviewRepo.DislikeReview(entry);
+
+            return Results.Ok(new { message = "success" });
         }
     }
 }

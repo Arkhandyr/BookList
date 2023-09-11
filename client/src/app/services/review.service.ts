@@ -42,4 +42,28 @@ export class ReviewService {
         withCredentials: true
     })
   }
+
+  public likeReview(likeEntry: string): Observable<string> {
+    let url = `${environment.api}/reviews/likeReview`
+    
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+    }); 
+    return this.client.post<string>(url, likeEntry, {
+        headers: headers,
+        withCredentials: true
+    })
+  } 
+
+  public dislikeReview(likeEntry: string): Observable<string> {
+    let url = `${environment.api}/reviews/dislikeReview`
+    
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+    }); 
+    return this.client.post<string>(url, likeEntry, {
+        headers: headers,
+        withCredentials: true
+    })
+  } 
 }

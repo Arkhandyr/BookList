@@ -58,3 +58,18 @@ button {
     background-color:#e29d42;
     color: #1e1e1e;
 }
+
+.rounded-circle, .username {
+    cursor: pointer;
+    color: #d98a24;
+}
+
+.username :hover {
+    text-decoration: underline;
+}
+
+.mat-icon-button.mat-primary {
+    color:#d98a24;
+    background-color: transparent;
+  }
+  

@@ -18,7 +18,7 @@ import { ReviewService } from 'src/app/services/review.service';
 })
 export class BookComponent implements OnInit {
   username: string = this.navComponent.authenticatedUser;
-  bookId: string
+  bookId: string;
   bookStatus: string;
   public book: Book;
   public reviews: Review[];
@@ -38,11 +38,9 @@ export class BookComponent implements OnInit {
 
        this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
 
-       //this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
+       this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
 
        this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
-
-       console.log(this.reviews)
     });
   }
 
@@ -72,5 +70,30 @@ export class BookComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+
+  likeReview(review: Review): void {
+    let likeEntry : string = JSON.stringify({ Username: this.username, ReviewId: review._id})
+
+    if(!review.likes.includes(this.username)) {
+      this.reviewService.likeReview(likeEntry).subscribe({
+        next: () => {
+          this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
+    else {
+      this.reviewService.dislikeReview(likeEntry).subscribe({
+        next: () => {
+          this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
   }
 }

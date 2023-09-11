@@ -164,6 +164,28 @@ app.MapGet("/reviews/{bookId}", ([FromServices] IReviewService service, string b
     Summary = "Resenhas da obra",
     Description = "Endpoint responsável por trazer todas as resenhas da obra na página da obra"
 });
+
+app.MapPost("/reviews/likeReview", ([FromServices] IReviewService service, [FromBody] LikeEntry likeEntry) =>
+{
+    return service.LikeReview(likeEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "LikeReview",
+    Summary = "Curte uma resenha de livro",
+    Description = "Endpoint responsável por marcar uma resenha como 'curtida'"
+});
+
+app.MapPost("/reviews/dislikeReview", ([FromServices] IReviewService service, [FromBody] LikeEntry likeEntry) =>
+{
+    return service.DislikeReview(likeEntry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "DislikeReview",
+    Summary = "Remove curtida de uma resenha de livro",
+    Description = "Endpoint responsável por desmarcar uma resenha como 'curtida'"
+});
 #endregion
 
 #region Login

@@ -9,5 +9,9 @@ namespace BookList.Service.ReviewService
         public IResult DeleteReview(ReviewEntry entry);
 
         public IResult GetBookReviews(string bookId);
+
+        public IResult LikeReview(LikeEntry entry);
+
+        public IResult DislikeReview(LikeEntry entry);
     }
 }

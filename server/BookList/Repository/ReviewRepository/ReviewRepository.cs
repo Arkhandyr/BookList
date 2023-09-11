@@ -35,5 +35,23 @@ namespace BookList.Repository.ReviewRepository
         {
             return context.Reviews.Find(r => r.Book_id == bookId).ToList();
         }
+
+        public UpdateResult LikeReview(LikeEntry entry)
+        {
+            var filter = Builders<Review>.Filter.Where(r => r._id == entry.ReviewId);
+
+            var update = Builders<Review>.Update.Push("Likes", entry.Username);
+
+            return context.Reviews.UpdateOne(filter, update);
+        }
+
+        public UpdateResult DislikeReview(LikeEntry entry)
+        {
+            var filter = Builders<Review>.Filter.Where(r => r._id == entry.ReviewId);
+
+            var update = Builders<Review>.Update.Pull("Likes", entry.Username);
+
+            return context.Reviews.UpdateOne(filter, update);
+        }
     }
 }
