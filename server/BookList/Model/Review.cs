@@ -14,5 +14,10 @@ namespace BookList.Model
         public DateTime Date { get; set; }
         public User User { get; set; }
         public List<string> Likes { get; set; }
+
+        public Review()
+        {
+            _id = ObjectId.GenerateNewId().ToString();
+        }
     }
 }

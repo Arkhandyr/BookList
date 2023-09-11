@@ -23,6 +23,8 @@ export class BookComponent implements OnInit {
   public book: Book;
   public reviews: Review[];
   private sub: any;
+  public userReview: Review[];
+  public reviewText: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +43,8 @@ export class BookComponent implements OnInit {
        this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
 
        this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+
+       this.userReview = this.reviews.filter((review) => review.user.username === this.username)
     });
   }
 
@@ -65,6 +69,32 @@ export class BookComponent implements OnInit {
       next: () => {
         this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
         this.toastr.success('Livro removido com sucesso da lista', 'Sucesso');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  addReview(): void {
+    let reviewEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId, Text: this.reviewText })
+
+    this.reviewService.addReview(reviewEntry).subscribe({
+      next: () => {
+        this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+        this.toastr.success('Resenha publicada com sucesso!', 'Sucesso');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  deleteReview(review: Review): void {
+    this.reviewService.deleteReview(review._id).subscribe({
+      next: () => {
+        this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+        this.toastr.success('Resenha publicada com sucesso!', 'Sucesso');
       },
       error: (err) => {
         console.log(err);

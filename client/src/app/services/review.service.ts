@@ -23,7 +23,7 @@ export class ReviewService {
     })
   } 
 
-  public removeFromList(reviewEntry: string): Observable<string> {
+  public deleteReview(reviewEntry: string): Observable<string> {
     let url = `${environment.api}/books/deleteReview`
     
     const headers = new HttpHeaders({
