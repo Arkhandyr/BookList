@@ -5,7 +5,7 @@
       <a class="bookCover">
         <img [src]="book.cover" class="bookCover"/>
       </a>
-      <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
+      <div class="actions py-3" style="clear: both; display: flex; width: 300px;">
         <div ngbDropdown class="dropdown-addToList" style="width: 100%;" *ngIf="!bookStatus">
           <button type="button" class="btn btn-primary w-100" id="dropdownBasic1" ngbDropdownToggle>
             Adicionar à lista
@@ -28,6 +28,10 @@
           </div>
         </div>
       </div>
+
+      <p>Querem ler <span class="readingData">3</span></p>
+      <p>Lendo <span class="readingData">12</span></p>
+      <p>Já leram <span class="readingData">192</span></p>
     </div>
 
     <div class="leftSection">
@@ -88,6 +92,7 @@
               </div>
               <div class="card-footer px-0 py-0 border-0" style="background-color: transparent;">
                 <h5>Publicar resenha</h5>
+                <p class="noReviewMessage" *ngIf="!(reviews.length > 0)">Ainda não existem resenhas para esta obra. Seja o primeiro a opinar!</p>
                 <div class="d-flex flex-start">
                   <img class="rounded-circle shadow-1-strong me-3"
                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"

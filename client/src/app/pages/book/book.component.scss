@@ -59,6 +59,10 @@ button {
     color: #1e1e1e;
 }
 
+.readingData {
+    color: #d98a24 !important
+}
+
 .rounded-circle, .username {
     cursor: pointer;
     color: #d98a24;
@@ -76,4 +80,9 @@ button {
 .mat-icon-button.mat-warn {
     color: rgb(161, 0, 0);
     background-color: transparent;
+}
+
+.noReviewMessage {
+    color: #d98a24;
+    font-weight: 500;
 }
