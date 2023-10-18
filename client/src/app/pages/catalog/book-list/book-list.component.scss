@@ -28,16 +28,19 @@ h2 {
 }
 
 .card {
-    background-color:transparent;
+    background-color:#262626;
     border: transparent;
     color: #d9d9d9;
     font-family: 'Overpass', sans-serif;
+    max-width: 220px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-img {
     border-radius: 1%;
-    max-width: 200px;
-    max-height: 280px;
+    width: 200px;
+    height: 280px;
+    margin: 10px;
 }
 
 .card-title {
@@ -214,4 +217,17 @@ button.fab-btn:hover>div.label-container{ // mostra o tooltip
 
 .mat-icon {
     vertical-align: middle;
+}
+
+.book-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.paginator {
+  background-color: transparent;
+  color:#d98a24;
+  max-height: 64px;
 }

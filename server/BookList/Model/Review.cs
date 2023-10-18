@@ -11,6 +11,7 @@ namespace BookList.Model
         public ObjectId User_id { get; set; }
         public ObjectId Book_id { get; set; }
         public string Text { get; set; }
+        public double Rating { get; set; }
         public DateTime Date { get; set; }
         public User User { get; set; }
         public List<string> Likes { get; set; }

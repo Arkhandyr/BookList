@@ -10,6 +10,8 @@ import { HttpParams } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Review } from 'src/app/interfaces/Review';
 import { ReviewService } from 'src/app/services/review.service';
+import { UserService } from 'src/app/services/user.service';
+import { Profile } from 'src/app/interfaces/Profile';
 
 @Component({
   selector: 'app-book',
@@ -23,14 +25,17 @@ export class BookComponent implements OnInit {
   public book: Book;
   public reviews: Review[];
   private sub: any;
+  public user: Profile;
   public userReview: Review[];
   public reviewText: string;
+  selectedRating: number;
 
   constructor(
     private route: ActivatedRoute,
     private navComponent: NavComponent,
     private bookService: BookService,
     private listService: ListService,
+    private userService: UserService,
     private reviewService: ReviewService,
     private toastr: ToastrService) { }
 
@@ -43,6 +48,8 @@ export class BookComponent implements OnInit {
        this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
 
        this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+
+       this.userService.getByUsername(this.username).subscribe(x => this.user = x)
 
        this.userReview = this.reviews.filter((review) => review.user.username === this.username)
     });
@@ -77,7 +84,7 @@ export class BookComponent implements OnInit {
   }
 
   addReview(): void {
-    let reviewEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId, Text: this.reviewText })
+    let reviewEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId, Text: this.reviewText, Rating: Number(this.selectedRating) })
 
     this.reviewService.addReview(reviewEntry).subscribe({
       next: () => {
@@ -90,11 +97,13 @@ export class BookComponent implements OnInit {
     });
   }
 
-  deleteReview(review: Review): void {
-    this.reviewService.deleteReview(review._id).subscribe({
+  deleteReview(): void {
+    let reviewEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId })
+
+    this.reviewService.deleteReview(reviewEntry).subscribe({
       next: () => {
         this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
-        this.toastr.success('Resenha publicada com sucesso!', 'Sucesso');
+        this.toastr.success('Resenha removida com sucesso!', 'Sucesso');
       },
       error: (err) => {
         console.log(err);
@@ -125,5 +134,9 @@ export class BookComponent implements OnInit {
         }
       });
     }
+  }
+
+  onRatingSelected(rating: number) {
+    this.selectedRating = rating;
   }
 }

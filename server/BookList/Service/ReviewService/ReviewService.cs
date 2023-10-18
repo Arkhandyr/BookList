@@ -26,6 +26,7 @@ namespace BookList.Service.ReviewService
                 Book_id = ObjectId.Parse(entry.BookId),
                 User_id = _userRepo.GetByUsername(entry.Username)._id,
                 Text = entry.Text,
+                Rating = entry.Rating,
                 Date = DateTime.Now,
                 Likes = new List<string>()
             };

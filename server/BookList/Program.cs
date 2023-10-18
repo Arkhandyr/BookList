@@ -49,7 +49,7 @@ if (app.Environment.IsDevelopment())
         .AllowAnyHeader()
         .AllowCredentials()
         .WithOrigins("http://localhost:4200")
-        .WithMethods("GET", "POST", "PUT", "DELETE"));
+        .AllowAnyMethod());
 }
 
 var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpContext;
@@ -58,8 +58,8 @@ var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpCo
 #region Endpoints
 #region Main page
 
-app.MapGet("/catalog", async ([FromServices] IBookService service) => 
-    await service.GetAllBooks())
+app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int page) => 
+    await service.GetAllBooks(page))
 .WithOpenApi(operation => new(operation)
 {
     OperationId = "Catalog",
@@ -67,18 +67,18 @@ app.MapGet("/catalog", async ([FromServices] IBookService service) =>
     Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
 });
 
-app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, string filter) =>
-    await service.FilterBooks(filter))
-.WithOpenApi(operation => new(operation)
-{
-    OperationId = "FilterBooks",
-    Summary = "Filtro da página inicial",
-    Description = "Endpoint responsável por filtrar os livros mostrados na página inicial",
-    Parameters = new List<OpenApiParameter>()
-    {
-        new OpenApiParameter() { Name = "Filter", Description = "Nome de um livro ou autor" }
-    }
-});
+//app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, string filter) =>
+//    await service.FilterBooks(filter))
+//.WithOpenApi(operation => new(operation)
+//{
+//    OperationId = "FilterBooks",
+//    Summary = "Filtro da página inicial",
+//    Description = "Endpoint responsável por filtrar os livros mostrados na página inicial",
+//    Parameters = new List<OpenApiParameter>()
+//    {
+//        new OpenApiParameter() { Name = "Filter", Description = "Nome de um livro ou autor" }
+//    }
+//});
 
 #endregion
 

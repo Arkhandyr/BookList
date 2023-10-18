@@ -5,7 +5,7 @@ namespace BookList.Service.BookService
 {
     public interface IBookService
     {
-        public Task<IEnumerable<Book>> GetAllBooks();
+        public Task<IEnumerable<Book>> GetAllBooks(int page);
         public Task<Book> GetBookById(string id);
         public Task<IEnumerable<Book>> FilterBooks(string filter);
         public void AddBook(Book book);
