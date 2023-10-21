@@ -2,9 +2,11 @@
 using BookList;
 using BookList.Helpers;
 using BookList.Model;
+using BookList.Repository.BadgeRepository;
 using BookList.Repository.ListRepository;
 using BookList.Repository.ReviewRepository;
 using BookList.Repository.UserRepository;
+using BookList.Service.BadgeService;
 using BookList.Service.BookService;
 using BookList.Service.ListService;
 using BookList.Service.ReviewService;
@@ -33,6 +35,9 @@ builder.Services.AddTransient<IListService, ListService>();
 
 builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
 builder.Services.AddTransient<IReviewService, ReviewService>();
+
+builder.Services.AddTransient<IBadgeRepository, BadgeRepository>();
+builder.Services.AddTransient<IBadgeService, BadgeService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
@@ -249,6 +254,15 @@ app.MapGet("/lists/{username}", ([FromServices] IListService service, string use
     OperationId = "GetUserLists",
     Summary = "Estante virtual do usuário",
     Description = "Endpoint responsável por trazer as leituras do usuário selecionado para a página de perfil de usuário"
+});
+
+app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string username) =>
+    service.GetUserBadges(username))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetUserBadges",
+    Summary = "Conquistas do usuário",
+    Description = "Endpoint responsável por trazer as conquistas do usuário selecionado para a página de perfil de usuário"
 });
 #endregion
 #endregion

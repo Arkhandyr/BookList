@@ -1,7 +1,12 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-fieldset, label { margin: 0; padding: 0; }
+label { margin: 0; padding: 0; }
 h1 { font-size: 1.5em; margin: 10px; }
+
+fieldset {
+  display: inline-block; /* Display the fieldset inline with spans */
+  vertical-align: top; /* Align the top edges of the fieldset and spans */
+}
 
 /****** Style Star Rating Widget *****/
 
@@ -11,7 +16,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 } 
 
 .rating > label:before { 
-  margin: 5px;
+  margin-left: 5px;
   font-size: 1em;
   font-family: FontAwesome;
   display: inline-block;
@@ -25,7 +30,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .rating > label { 
   color: #ddd; 
- float: right; 
+  float: right; 
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
@@ -38,4 +43,3 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > [id^="star"]:checked ~ label:hover,
 .rating > label:hover ~ [id^="star"]:checked ~ label, /* lighten current selection */
 .rating > [id^="star"]:checked ~ label:hover ~ label { color: #FFED85;  }
-

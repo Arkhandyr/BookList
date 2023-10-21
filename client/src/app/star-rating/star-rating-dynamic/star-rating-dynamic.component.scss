@@ -1,0 +1,45 @@
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+label { margin: 0; padding: 0; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+fieldset {
+  display: inline-block; /* Display the fieldset inline with spans */
+  vertical-align: top; /* Align the top edges of the fieldset and spans */
+}
+
+/****** Style Star Rating Widget *****/
+
+
+.reviewRating > [id^="dstar"] { 
+  display: none; 
+} 
+
+.reviewRating > label:before { 
+  margin-left: 5px;
+  font-size: 1em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.reviewRating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.reviewRating > label { 
+  color: #ddd; 
+  float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.reviewRating > [id^="dstar"]:checked ~ label, /* show gold dstar when clicked */
+.reviewRating:not(:checked) > label:hover, /* hover current dstar */
+.reviewRating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous dstars in list */
+
+.reviewRating > [id^="dstar"]:checked + label:hover, /* hover current dstar when changing reviewRating */
+.reviewRating > [id^="dstar"]:checked ~ label:hover,
+.reviewRating > label:hover ~ [id^="dstar"]:checked ~ label, /* lighten current selection */
+.reviewRating > [id^="dstar"]:checked ~ label:hover ~ label { color: #FFED85;  }

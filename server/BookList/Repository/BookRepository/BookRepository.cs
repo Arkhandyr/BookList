@@ -7,6 +7,7 @@ namespace BookList
     public class BookRepository : IBookRepository
     {
         private readonly MongoDbContext context;
+        private readonly int paginationSize = 5;
 
         public BookRepository(MongoDbContext context)
         {
@@ -15,7 +16,12 @@ namespace BookList
 
         public async Task<IEnumerable<Book>> GetAllBooks(int page)
         {
-            return await context.Books.Find(x => true).Skip((page - 1) * 3).Limit(3).ToListAsync();
+            return await context.Books.Find(x => true).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
+        }
+
+        public long GetBookCount()
+        {
+            return context.Users_Books.EstimatedDocumentCount(); //usar futuramente para paginamento
         }
 
         public async Task<IEnumerable<Book>> FilterBooks(string query)
@@ -25,7 +31,16 @@ namespace BookList
 
         public async Task<Book> GetBookById(string id)
         {
-            return await context.Books.Find(x => x._id == id).FirstOrDefaultAsync();
+            Book book = context.Books.Find(x => x._id == id).FirstOrDefault();
+
+            book.InteractionData = new InteractionData()
+            {
+                Planning = context.Users_Books.CountDocuments(u => u.Book_id.ToString() == id && u.List == "planning"),
+                Reading = context.Users_Books.CountDocuments(u => u.Book_id.ToString() == id && u.List == "reading"),
+                Done = context.Users_Books.CountDocuments(u => u.Book_id.ToString() == id && u.List == "done")
+            };
+
+            return book;
         }
 
         public void AddBook(Book book)

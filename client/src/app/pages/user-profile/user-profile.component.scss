@@ -39,6 +39,10 @@ h1, h2, h4, p, button {
     font-family: 'Overpass', sans-serif;
 }
 
+.card:hover {
+    cursor: pointer; /* Change cursor to a pointer on hover */
+}
+
 .card-img {
     border-radius: 1%;
     max-width: 160px;
@@ -50,4 +54,22 @@ h1, h2, h4, p, button {
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 160px;
+}
+
+.image-container {
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    flex: 0 0 calc(25% - 10px); /* 33.33% to fit 3 items per row, minus margin */
+    margin: 5px; /* Add margin to separate images */
+    box-sizing: border-box;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
 }

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Book } from '../interfaces/Book';
 
 @Component({
-  selector: 'app-expandable-paragraph',
+  selector: 'expandable-paragraph',
   templateUrl: './expandable-paragraph.component.html',
   styleUrls: ['./expandable-paragraph.component.scss']
 })

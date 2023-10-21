@@ -55,5 +55,21 @@ namespace BookList
                 return _database.GetCollection<Review>("Reviews");
             }
         }
+
+        public IMongoCollection<Badge> Badges
+        {
+            get
+            {
+                return _database.GetCollection<Badge>("Badges");
+            }
+        }
+
+        public IMongoCollection<Users_Badges> Users_Badges
+        {
+            get
+            {
+                return _database.GetCollection<Users_Badges>("Users_Badges");
+            }
+        }
     }
 }

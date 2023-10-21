@@ -16,5 +16,13 @@ namespace BookList.Model
         public string Synopsis { get; set; } = null!;
         public int Year { get; set; }
         public string Publisher { get; set; } = null!;
+        public InteractionData InteractionData { get; set; }
+    }
+
+    public class InteractionData
+    {
+        public long Planning { get; set; }
+        public long Reading { get; set; }
+        public long Done { get; set; }
     }
 }

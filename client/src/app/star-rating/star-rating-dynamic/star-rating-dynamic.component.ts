@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-star-rating',
-  templateUrl: './star-rating.component.html',
-  styleUrls: ['./star-rating.component.scss']
+  selector: 'star-rating-dynamic',
+  templateUrl: './star-rating-dynamic.component.html',
+  styleUrls: ['./star-rating-dynamic.component.scss']
 })
-export class StarRatingComponent implements OnInit {
+export class StarRatingDynamicComponent implements OnInit {
   @Output() ratingSelected = new EventEmitter<number>();
-  @Input() reviewRating: number;
 
   constructor() { }
 
