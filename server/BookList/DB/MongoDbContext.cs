@@ -47,5 +47,13 @@ namespace BookList
                 return _database.GetCollection<Users_Books>("Users_Books");
             }
         }
+
+        public IMongoCollection<Review> Reviews
+        {
+            get
+            {
+                return _database.GetCollection<Review>("Reviews");
+            }
+        }
     }
 }

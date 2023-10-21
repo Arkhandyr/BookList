@@ -12,9 +12,9 @@ namespace BookList.Service.BookService
             _bookRepo = bookRepo;
         }
 
-        public Task<IEnumerable<Book>> GetAllBooks()
+        public Task<IEnumerable<Book>> GetAllBooks(int page)
         {
-            return _bookRepo.GetAllBooks();
+            return _bookRepo.GetAllBooks(page);
         }
 
         public Task<IEnumerable<Book>> FilterBooks(string filter)

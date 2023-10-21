@@ -5,7 +5,7 @@
       <a class="bookCover">
         <img [src]="book.cover" class="bookCover"/>
       </a>
-      <div class="actions" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
+      <div class="actions py-3" style="clear: both; display: flex; width: 300px;">
         <div ngbDropdown class="dropdown-addToList" style="width: 100%;" *ngIf="!bookStatus">
           <button type="button" class="btn btn-primary w-100" id="dropdownBasic1" ngbDropdownToggle>
             Adicionar à lista
@@ -28,6 +28,10 @@
           </div>
         </div>
       </div>
+
+      <p>Querem ler <span class="readingData">3</span></p>
+      <p>Lendo <span class="readingData">12</span></p>
+      <p>Já leram <span class="readingData">192</span></p>
     </div>
 
     <div class="leftSection">
@@ -51,6 +55,62 @@
       <h4>Sinopse</h4>
 
       <app-expandable-paragraph class="synopsis" [text]="book.synopsis"></app-expandable-paragraph>
+
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card" style="background-color: transparent; border: none;">
+            <h4 class="mb-4 pb-2">Resenhas</h4>
+
+            <div class="row pb-4" *ngFor="let review of reviews">
+              <div class="col">
+                <div class="d-flex flex-start">
+                  <img class="rounded-circle shadow-1-strong me-3" src={{review.user.picture}} width="65" height="65" routerLink="/profile/{{review.user.username}}"/>
+                  <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">
+                          <span class="username">{{review.user.username}} ({{review.user.realName}})</span>
+                          <span class="date small"> - {{review.date | date:'dd/MM/yyyy HH:mm'}}</span>
+                          <app-star-rating [reviewRating]="review.rating"></app-star-rating>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-right me-1">
+                          <button mat-icon-button color="warn" class="mb-1" *ngIf="review.user.username == username" (click)="deleteReview()">
+                            <mat-icon>delete_outline</mat-icon>
+                          </button>
+                          <button mat-icon-button color="primary" class="mb-1" (click)="likeReview(review)">
+                            <mat-icon *ngIf="!review.likes.includes(username)">favorite_border</mat-icon>
+                            <mat-icon *ngIf="review.likes.includes(username)">favorite</mat-icon>
+                            <span> {{review.likes.length}}</span>
+                          </button>
+                        </div>
+                      </div>
+                      <p class="small mb-0">
+                        {{review.text}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer px-0 py-0 border-0" style="background-color: transparent;">
+              <h5>Publicar resenha</h5>
+              <p class="noReviewMessage" *ngIf="!(reviews.length > 0)">Ainda não existem resenhas para esta obra. Seja o primeiro a opinar!</p>
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="{{user.picture}}" alt="avatar" width="40"
+                  height="40" />
+                <div class="form-outline w-100">
+                  <textarea class="form-control" id="textAreaExample" [(ngModel)]="reviewText" rows="4" placeholder="Escreva sua resenha aqui" style="background: transparent; border-color: #d98a24;"></textarea>
+                </div>
+              </div>
+              <app-star-rating (ratingSelected)="onRatingSelected($event)"></app-star-rating>
+              <div class="float-end mt-2 pt-1">
+                <button type="button" class="btn btn-primary btn-sm me-1" (click)="addReview()">Enviar resenha</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" style="color: #d9d9d9;">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+
 </body>

@@ -13,9 +13,9 @@ namespace BookList
             this.context = context;
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public async Task<IEnumerable<Book>> GetAllBooks(int page)
         {
-            return await context.Books.Find(x => true).ToListAsync();
+            return await context.Books.Find(x => true).Skip((page - 1) * 3).Limit(3).ToListAsync();
         }
 
         public async Task<IEnumerable<Book>> FilterBooks(string query)

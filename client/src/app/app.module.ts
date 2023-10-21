@@ -55,6 +55,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { BookComponent } from './pages/book/book.component';
 import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { RegisterComponent } from './pages/register/register.component';
     UserProfileComponent,
     BookComponent,
     ExpandableParagraphComponent,
-    RegisterComponent
+    RegisterComponent,
+    StarRatingComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +118,6 @@ import { RegisterComponent } from './pages/register/register.component';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    
   ],
   providers: [
     FormsBookResolver,

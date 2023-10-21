@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { environment } from "src/environments/environment";
 import { Book } from "../interfaces/Book";
-import ObjectID from "bson-objectid";
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +11,8 @@ import ObjectID from "bson-objectid";
 export class BookService { 
     constructor(private client:HttpClient) { }
     
-    public getBooks(): Observable<Book[]> {
-        let url = `${environment.api}/catalog`
+    public getBooks(page: number): Observable<Book[]> {
+        let url = `${environment.api}/catalog/${page}`
 
         return this.client.get<Book[]>(url)
     }

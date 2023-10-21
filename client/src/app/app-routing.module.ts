@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 import { BookComponent } from './pages/book/book.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path:'',
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path:'book/:id', component:BookComponent},
       {path:'profile/:username', component:UserProfileComponent},
       {path:'register', component:RegisterComponent},
+      {path:'search', component: SearchComponent },
     ],
   }
 ];

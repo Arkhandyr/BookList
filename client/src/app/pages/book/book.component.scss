@@ -58,3 +58,31 @@ button {
     background-color:#e29d42;
     color: #1e1e1e;
 }
+
+.readingData {
+    color: #d98a24 !important
+}
+
+.rounded-circle, .username {
+    cursor: pointer;
+    color: #d98a24;
+}
+
+.username :hover {
+    text-decoration: underline;
+}
+
+.mat-icon-button.mat-primary {
+    color:#d98a24;
+    background-color: transparent;
+}
+  
+.mat-icon-button.mat-warn {
+    color: rgb(161, 0, 0);
+    background-color: transparent;
+}
+
+.noReviewMessage {
+    color: #d98a24;
+    font-weight: 500;
+}

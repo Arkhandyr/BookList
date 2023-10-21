@@ -1,22 +1,27 @@
 <body>
   <div class="container">
     <div style="height: 30px;"></div>
-    <div class="container-superior d-md-block text-end">
-      <h2 style="float: left;">Catalog</h2>
-      <mat-form-field appearance="outline" class="mat-form-field-appearance-outline">
-        <input matInput placeholder="Search" [(ngModel)]='filter' (ngModelChange)="filterBooks()">
-      </mat-form-field>
+    <div class="container-superior">
+      <h2 style="float: left;">Mais lidos</h2>
     </div>
+    <div style="height: 50px;"></div>
+    <div class="book-row">
+      <button mat-button class="paginator" (click)="loadPage(-1)">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
 
-    <div class="row row-cols-1 row-cols-md-5">
-      <div class="col" *ngFor="let book of books">
-        <div class="card">
+      <div class="book-column" *ngFor="let book of books">
+        <div class="card mx-auto" [@fadeInOut]> 
           <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
           <div class="card-body">
             <p class="card-title">{{book.title}}</p>
           </div>
         </div>
       </div>
+      
+      <button mat-button class="paginator" (click)="loadPage(1)">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
     </div>
 
     <button class="float fab-btn" id="menu-share" routerLink="/add">
