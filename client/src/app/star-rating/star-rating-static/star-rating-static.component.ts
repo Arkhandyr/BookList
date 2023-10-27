@@ -9,6 +9,7 @@ export class StarRatingStaticComponent implements OnInit {
   @Input() name: string;
   @Input() initialRating: number;
   rating: number;
+  options: number[] = [5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 0.5];
 
   constructor() { }
 
@@ -16,4 +17,9 @@ export class StarRatingStaticComponent implements OnInit {
     this.rating = this.initialRating;
   }
 
+  getRadioStyle(option: number) {
+    return {
+      color: this.initialRating >= option ? 'yellow' : 'white'
+    };
+  }
 }
