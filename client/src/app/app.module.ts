@@ -59,6 +59,7 @@ import { StarRatingDynamicComponent } from './star-rating/star-rating-dynamic/st
 import { SearchComponent } from './search/search.component';
 import { BookGroupComponent } from './book-group/book-group.component';
 import { StarRatingStaticComponent } from './star-rating/star-rating-static/star-rating-static.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { StarRatingStaticComponent } from './star-rating/star-rating-static/star
     StarRatingDynamicComponent,
     SearchComponent,
     BookGroupComponent,
-    StarRatingStaticComponent
+    StarRatingStaticComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

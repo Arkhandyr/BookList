@@ -1,0 +1,26 @@
+<body>
+    <div class="main-flex">
+        <div class="leftSection"> 
+            <div class="welcome">
+                <h1>bem-vindo ao</h1>
+                <img src="..\..\assets\logotext.png" class="logotext" alt="booklist logo text" title="booklist logo text">
+            </div>
+
+            <div class="message">
+                <span class="short-text" style="font-size: 32px; color: #d98a24">
+                    Simplifique sua vida literária com o BookList!
+                </span>
+                <span class="short-text" style="font-size: 24px;">
+                    Tenha todos os seus livros ao alcance dos dedos, estabeleça metas e compartilhe suas descobertas com outros amantes da leitura.
+                </span>
+            </div>
+                
+            <img src="..\..\assets\peoplereading.png" class="landing-page-art" alt="four people reading books" title="landing page art">
+        </div>
+
+        <div class="rightSection">
+            <app-login class="login" (login)="flipScreen($event)" *ngIf="login"></app-login>
+            <app-register class="login" (login)="flipScreen($event)" *ngIf="!login"></app-register>
+        </div>
+    </div>
+</body>
