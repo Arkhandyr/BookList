@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 
 export class NavComponent implements OnInit {
   authenticatedUser: string = "";
-  searchQuery: string;
+  searchQuery: string = "";
 
   constructor(
     private userService: UserService,
@@ -28,7 +28,8 @@ export class NavComponent implements OnInit {
   }
 
   onSearch() {
-    this.router.navigate(['/search'], { queryParams: { q: this.searchQuery } });
+    const queryParams = { q: this.searchQuery };
+    this.router.navigate(['/search'], { queryParams: queryParams });
   }
 
   logout(): void {

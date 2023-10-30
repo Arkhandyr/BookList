@@ -18,7 +18,7 @@ export class BookService {
     }
 
     public filterBooks(filter: string): Observable<Book[]> {
-        let url = `${environment.api}/catalog/${filter}`
+        let url = `${environment.api}/search/${filter}`
 
         return this.client.get<Book[]>(url)
     }

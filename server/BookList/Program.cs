@@ -72,18 +72,14 @@ app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int pa
     Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
 });
 
-//app.MapGet("/catalog/{filter}", async ([FromServices] IBookService service, string filter) =>
-//    await service.FilterBooks(filter))
-//.WithOpenApi(operation => new(operation)
-//{
-//    OperationId = "FilterBooks",
-//    Summary = "Filtro da página inicial",
-//    Description = "Endpoint responsável por filtrar os livros mostrados na página inicial",
-//    Parameters = new List<OpenApiParameter>()
-//    {
-//        new OpenApiParameter() { Name = "Filter", Description = "Nome de um livro ou autor" }
-//    }
-//});
+app.MapGet("/search/{filter}", async ([FromServices] IBookService service, string filter) =>
+    await service.FilterBooks(filter))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterBooks",
+    Summary = "Filtro da página inicial",
+    Description = "Endpoint responsável por filtrar os livros mostrados na página inicial"
+});
 
 #endregion
 

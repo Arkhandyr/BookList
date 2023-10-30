@@ -47,7 +47,8 @@
         <p class="details-frame">{{book.publisher}}</p>
         <p class="details-frame">{{book.pages}} páginas</p>
         <p class="details-frame">{{book.year}}</p>
-        <p class="details-frame">4.9/5.0 ⭐</p>
+        <p class="details-frame" *ngIf="averageRating(reviews) !== 0">{{averageRating(reviews)}} ⭐</p>
+        <p class="details-frame" *ngIf="averageRating(reviews) == 0">Sem avaliações</p>
       </div>
 
       <div style="height: 20px;"></div>

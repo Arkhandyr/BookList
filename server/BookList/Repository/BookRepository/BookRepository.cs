@@ -17,6 +17,7 @@ namespace BookList
         public async Task<IEnumerable<Book>> GetAllBooks(int page)
         {
             return await context.Books.Find(x => true).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
+            //return await context.Books.Find(x => true).SortBy(x => x.ReadingNow).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
         }
 
         public long GetBookCount()
