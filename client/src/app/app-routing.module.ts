@@ -8,6 +8,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { BookComponent } from './pages/book/book.component';
 import { SearchComponent } from './search/search.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { AuthorComponent } from './pages/author/author.component';
 
 const routes: Routes = [
   {path:'',
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path:'add', component:BookAddComponent},
       {path:'book/:id', component:BookComponent},
       {path:'profile/:username', component:UserProfileComponent},
+      {path:'author/:id', component:AuthorComponent},
       {path:'search', component: SearchComponent },
     ],
   }

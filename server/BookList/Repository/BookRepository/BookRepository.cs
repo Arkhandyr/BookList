@@ -25,9 +25,9 @@ namespace BookList
             return context.Users_Books.EstimatedDocumentCount(); //usar futuramente para paginamento
         }
 
-        public async Task<IEnumerable<Book>> FilterBooks(string query)
+        public async Task<IEnumerable<Book>> FilterByName(string query)
         {
-            return await context.Books.Find(x => x.Title.ToLower().Contains(query) || x.Author.ToLower().Contains(query)).ToListAsync();
+            return await context.Books.Find(x => x.Title.ToLower().Contains(query)).ToListAsync();
         }
 
         public async Task<Book> GetBookById(string id)
@@ -52,6 +52,13 @@ namespace BookList
         public void UpdateBook(Book book)
         {
             context.Books.ReplaceOne(x => x._id == book._id, book);
+        }
+
+        public async Task<IEnumerable<Book>> FilterByAuthor(string id)
+        {
+            var name = context.Authors.Find(a => a._id == id).FirstOrDefault().Name;
+
+            return await context.Books.Find(b => b.Author == name).ToListAsync();
         }
     }
 }

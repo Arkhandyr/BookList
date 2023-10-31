@@ -1,0 +1,75 @@
+body {
+    min-height: calc(100vh - 89.14px);
+    background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
+}
+
+
+.profilePicture {
+    overflow: hidden; 
+    display: block;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+}
+
+h1, h2, h4, p, button {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color: #d9d9d9;
+}
+
+.see-more {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 800;
+    color:#d98a24;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.leftSection {
+    max-width: 70%;
+}
+
+.card {
+    background-color:transparent;
+    border: transparent;
+    color: #d9d9d9;
+    font-family: 'Overpass', sans-serif;
+}
+
+.card:hover {
+    cursor: pointer; /* Change cursor to a pointer on hover */
+}
+
+.card-img {
+    border-radius: 1%;
+    max-width: 160px;
+    max-height: 230px;
+}
+
+.card-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 160px;
+}
+
+.image-container {
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    flex: 0 0 calc(25% - 10px); /* 33.33% to fit 3 items per row, minus margin */
+    margin: 5px; /* Add margin to separate images */
+    box-sizing: border-box;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}

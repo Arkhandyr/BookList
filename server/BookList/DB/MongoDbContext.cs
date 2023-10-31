@@ -71,5 +71,13 @@ namespace BookList
                 return _database.GetCollection<Users_Badges>("Users_Badges");
             }
         }
+
+        public IMongoCollection<Author> Authors
+        {
+            get
+            {
+                return _database.GetCollection<Author>("Authors");
+            }
+        }
     }
 }

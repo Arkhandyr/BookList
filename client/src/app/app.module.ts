@@ -60,6 +60,7 @@ import { SearchComponent } from './search/search.component';
 import { BookGroupComponent } from './book-group/book-group.component';
 import { StarRatingStaticComponent } from './star-rating/star-rating-static/star-rating-static.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { AuthorComponent } from './pages/author/author.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
     SearchComponent,
     BookGroupComponent,
     StarRatingStaticComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,

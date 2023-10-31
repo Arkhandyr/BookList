@@ -6,9 +6,10 @@ namespace BookList
     public interface IBookRepository
     {
         Task<IEnumerable<Book>> GetAllBooks(int page);
-        Task<IEnumerable<Book>> FilterBooks(string query);
+        Task<IEnumerable<Book>> FilterByName(string query);
         Task<Book> GetBookById(string id);
         void AddBook(Book book);
         void UpdateBook(Book book);
+        Task<IEnumerable<Book>> FilterByAuthor(string id);
     }
 }

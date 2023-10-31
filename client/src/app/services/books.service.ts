@@ -46,4 +46,10 @@ export class BookService {
 
         return this.client.delete(url)
     }
+
+    public getBookByAuthor(id: string): Observable<Book[]> {
+        let url = `${environment.api}/booksByAuthor/${id}`
+
+        return this.client.get<Book[]>(url)
+    }
 }

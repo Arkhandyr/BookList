@@ -17,9 +17,9 @@ namespace BookList.Service.BookService
             return _bookRepo.GetAllBooks(page);
         }
 
-        public Task<IEnumerable<Book>> FilterBooks(string filter)
+        public Task<IEnumerable<Book>> FilterByName(string filter)
         {
-            return _bookRepo.FilterBooks(filter);
+            return _bookRepo.FilterByName(filter);
         }
 
         public Task<Book> GetBookById(string id)
@@ -35,6 +35,12 @@ namespace BookList.Service.BookService
         public void UpdateBook(Book book)
         {
             _bookRepo.UpdateBook(book);
+        }
+
+
+        public Task<IEnumerable<Book>> FilterByAuthor(string id)
+        {
+            return _bookRepo.FilterByAuthor(id);
         }
     }
 }

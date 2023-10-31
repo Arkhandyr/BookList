@@ -2,10 +2,12 @@
 using BookList;
 using BookList.Helpers;
 using BookList.Model;
+using BookList.Repository.AuthorRepository;
 using BookList.Repository.BadgeRepository;
 using BookList.Repository.ListRepository;
 using BookList.Repository.ReviewRepository;
 using BookList.Repository.UserRepository;
+using BookList.Service.AuthorService;
 using BookList.Service.BadgeService;
 using BookList.Service.BookService;
 using BookList.Service.ListService;
@@ -38,6 +40,9 @@ builder.Services.AddTransient<IReviewService, ReviewService>();
 
 builder.Services.AddTransient<IBadgeRepository, BadgeRepository>();
 builder.Services.AddTransient<IBadgeService, BadgeService>();
+
+builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
+builder.Services.AddTransient<IAuthorService, AuthorService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
@@ -73,14 +78,22 @@ app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int pa
 });
 
 app.MapGet("/search/{filter}", async ([FromServices] IBookService service, string filter) =>
-    await service.FilterBooks(filter))
+    await service.FilterByName(filter))
 .WithOpenApi(operation => new(operation)
 {
     OperationId = "FilterBooks",
     Summary = "Filtro da página inicial",
-    Description = "Endpoint responsável por filtrar os livros mostrados na página inicial"
+    Description = "Endpoint responsável por filtrar os livros pelo nome"
 });
 
+app.MapGet("/booksByAuthor/{filter}", async ([FromServices] IBookService service, string filter) =>
+    await service.FilterByAuthor(filter))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterBooks",
+    Summary = "Filtro da página inicial",
+    Description = "Endpoint responsável por filtrar os livros pelo autor"
+});
 #endregion
 
 #region Book
@@ -259,6 +272,18 @@ app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string u
     OperationId = "GetUserBadges",
     Summary = "Conquistas do usuário",
     Description = "Endpoint responsável por trazer as conquistas do usuário selecionado para a página de perfil de usuário"
+});
+#endregion
+
+
+#region Author
+app.MapGet("/author/{id}", ([FromServices] IAuthorService service, string id) =>
+    service.GetById(id))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetAuthorById",
+    Summary = "Seleciona autor",
+    Description = "Endpoint responsável por trazer as informações do autor selecionado para a página de autor"
 });
 #endregion
 #endregion

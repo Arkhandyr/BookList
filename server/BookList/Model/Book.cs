@@ -9,7 +9,7 @@ namespace BookList.Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { get; set; }
         public string Title { get; set; } = null!;
-        public string Author { get; set; } = null!;
+        public string Author { get; set; }
         public int Pages { get; set; }
         public string Cover { get; set; } = null!;
         public string Genre { get; set; } = null!;
