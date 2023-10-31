@@ -275,7 +275,6 @@ app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string u
 });
 #endregion
 
-
 #region Author
 app.MapGet("/author/{id}", ([FromServices] IAuthorService service, string id) =>
     service.GetById(id))
