@@ -61,6 +61,14 @@ if (app.Environment.IsDevelopment())
         .WithOrigins("http://localhost:4200")
         .AllowAnyMethod());
 }
+else
+{
+    app.UseCors(x => x
+        .AllowAnyHeader()
+        .AllowCredentials()
+        .WithOrigins("https://booklist.fly.dev/")
+        .AllowAnyMethod());
+}
 
 var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpContext;
 #endregion
