@@ -1,10 +1,10 @@
 FROM node:20-alpine AS build
 WORKDIR /booklist
 
-COPY ./client/src ./src/
-COPY ./client/package*.json .
-COPY ./client/angular.json .
-COPY ./client/tsconfig*.json .
+COPY src ./src/
+COPY package*.json .
+COPY angular.json .
+COPY tsconfig*.json .
 
 RUN npm cache clean --force
 RUN npm install
@@ -14,6 +14,6 @@ FROM nginx:alpine
 
 COPY --from=build /booklist/dist/booklist /usr/share/nginx/html
 
-COPY ./client/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 4200
