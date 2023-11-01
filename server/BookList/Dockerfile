@@ -7,7 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["./server/BookList/BookList.csproj", "BookList"]
-RUN dotnet restore "./server/BookList/BookList.csproj"
+RUN dotnet restore "./BookList/BookList.csproj"
 COPY . .
 WORKDIR "./src/BookList"
 RUN dotnet build "BookList.csproj" -c Release -o /app/build
