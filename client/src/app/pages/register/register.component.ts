@@ -54,8 +54,9 @@ export class RegisterComponent implements OnInit {
     this.service.register(user)
       .subscribe(() => {
         this.toastr.success('Usuário cadastrado!', 'Sucesso');
-        this.router.navigate(['/'])
       })
+
+    this.flipScreen();
   }
 
   flipScreen() {
