@@ -9,11 +9,11 @@ WORKDIR /src
 COPY ["server/BookList/BookList.csproj", "BookList/"]
 RUN dotnet restore "server/BookList/BookList.csproj"
 COPY . .
-WORKDIR "server/src/BookList"
-RUN dotnet build "server/BookList.csproj" -c Release -o /app/build
+WORKDIR "./src/BookList"
+RUN dotnet build "BookList.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "server/BookList.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "BookList.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
