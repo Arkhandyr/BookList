@@ -27,4 +27,4 @@ jobs:
   
       - uses: superfly/flyctl-actions/setup-flyctl@master
   
-      - run: flyctl deploy -c server/BookList/fly.toml --remote-only
+      - run: flyctl deploy -c server/BookList/fly.toml ./server --remote-only
