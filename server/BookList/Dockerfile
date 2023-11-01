@@ -1,6 +1,6 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-RUN echo "$PWD"
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+RUN echo "$PWD"
 WORKDIR /app
 EXPOSE 80
 
