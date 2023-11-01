@@ -17,7 +17,7 @@ jobs:
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - run: flyctl deploy -c client/fly.toml --remote-only
+      - run: flyctl deploy ./client --remote-only
 
   deploy-back:
     name: Deploy booklist-back
