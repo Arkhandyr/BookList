@@ -14,8 +14,6 @@ using BookList.Service.ListService;
 using BookList.Service.ReviewService;
 using BookList.Service.UserService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
-using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 

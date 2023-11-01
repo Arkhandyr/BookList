@@ -7,15 +7,19 @@ namespace BookList
     public class BookRepository : IBookRepository
     {
         private readonly MongoDbContext context;
+        private readonly ILogger<BookRepository> logger;
         private readonly int paginationSize = 5;
 
-        public BookRepository(MongoDbContext context)
+
+        public BookRepository(MongoDbContext context, ILogger<BookRepository> logger)
         {
             this.context = context;
+            this.logger = logger;
         }
 
         public async Task<IEnumerable<Book>> GetAllBooks(int page)
         {
+            logger.LogError("erro erro erro erro erro");
             return await context.Books.Find(x => true).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
             //return await context.Books.Find(x => true).SortBy(x => x.ReadingNow).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
         }
