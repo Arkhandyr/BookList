@@ -8,4 +8,11 @@ export interface Book {
 	genre: string;
 	publisher: string;
 	year: number
+	interactionData: InteractionData
+}
+
+export interface InteractionData {
+	planning: number,
+	reading: number,
+	done: number
 }

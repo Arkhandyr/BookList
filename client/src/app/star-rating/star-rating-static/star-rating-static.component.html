@@ -1,0 +1,4 @@
+<fieldset class="rating">
+    <input type="radio" id="star_{{option}}_{{name}}" [name]="name" value="{{option}}" *ngFor="let option of options"/>
+    <label [ngClass]="{'full': option % 1 == 0, 'half': option % 1 != 0}" for="star_{{option}}_{{name}}" title="{{option}} estrelas" *ngFor="let option of options" [ngStyle]="getRadioStyle(option)"></label>
+</fieldset>

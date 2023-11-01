@@ -1,9 +1,55 @@
-body {
-    min-height: calc(100vh - 89.14px);
-    background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;  
-    padding-top: 40px;
-    padding-bottom: 40px;
+h1, h2, h3, h4, p, button, span, svg, label, input {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-control {
+  background-color: transparent;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-control:focus + label {
+  background-color: #ff0000; /* Cor de fundo quando o input está em foco */
+  border-radius: 5px; /* Borda arredondada quando o input está em foco */
+  cursor: pointer; /* Muda o cursor quando o input está em foco */
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.custom-bg {
+  background-color: #ff0000; /* Substitua #ff0000 pela cor de fundo desejada em formato hexadecimal ou nome da cor */
+  color: initial; /* Mantém a cor do texto padrão */
+}
+
+.registerText {
+  color: #d98a24;
+}
+
+.underline-hover {
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+
+  &:hover {
+      text-decoration: underline;
+      cursor: pointer;
   }
+}

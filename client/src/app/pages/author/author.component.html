@@ -1,0 +1,39 @@
+<body>
+    <div style="height: 30px;"></div>
+    <div class="flex-container" style="margin: 0px 10%">
+      <div class="rightSection" style="margin:0px 20px 20px 0px;">
+        <a class="profilePicture mb-2">
+          <img [src]="author.picture" class="profilePicture"/>
+        </a>
+        <div class="actions mb-2" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
+          <!-- <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
+            Seguir usuário
+          </button> -->
+        </div>
+      </div>
+  
+      <div class="leftSection">
+        <div style="height: 220px;"></div>
+  
+        <h2>{{author.name}}</h2>
+  
+        <div style="height: 20px;"></div>
+  
+        <h4>Bio</h4>
+  
+        <expandable-paragraph class="synopsis" [text]="author.bio"></expandable-paragraph>
+  
+        <h4>Obras</h4>
+        <div class="row row-cols-1 row-cols-md-5">
+          <div class="col" *ngFor="let book of books">
+            <div class="card">
+              <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
+              <div class="card-body">
+                <p class="card-title">{{book.title}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>

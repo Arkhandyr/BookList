@@ -18,7 +18,7 @@ export class BookService {
     }
 
     public filterBooks(filter: string): Observable<Book[]> {
-        let url = `${environment.api}/catalog/${filter}`
+        let url = `${environment.api}/search/${filter}`
 
         return this.client.get<Book[]>(url)
     }
@@ -45,5 +45,11 @@ export class BookService {
         let url = `${environment.api}/books/${id}`
 
         return this.client.delete(url)
+    }
+
+    public getBookByAuthor(id: string): Observable<Book[]> {
+        let url = `${environment.api}/booksByAuthor/${id}`
+
+        return this.client.get<Book[]>(url)
     }
 }

@@ -7,8 +7,9 @@ namespace BookList.Service.BookService
     {
         public Task<IEnumerable<Book>> GetAllBooks(int page);
         public Task<Book> GetBookById(string id);
-        public Task<IEnumerable<Book>> FilterBooks(string filter);
+        public Task<IEnumerable<Book>> FilterByName(string filter);
         public void AddBook(Book book);
         public void UpdateBook(Book book);
+        public Task<IEnumerable<Book>> FilterByAuthor(string id);
     }
 }

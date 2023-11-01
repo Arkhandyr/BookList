@@ -139,4 +139,13 @@ export class BookComponent implements OnInit {
   onRatingSelected(rating: number) {
     this.selectedRating = rating;
   }
+
+  averageRating(reviewRatings: Review[]): number {
+    if (reviewRatings.length === 0) {
+      return 0;
+    }
+  
+    const sum = reviewRatings.reduce((acc, current) => acc + current.rating, 0);
+    return Math.round(sum / reviewRatings.length * 10) / 10;
+  }
 }

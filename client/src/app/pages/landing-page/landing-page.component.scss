@@ -1,0 +1,70 @@
+body {
+  min-height: calc(100vh - 89.14px);
+  background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
+}
+
+.main-flex {
+  height: calc(100vh - 89.14px);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;  
+}
+
+h1 {
+  font-size: 84px;
+  font-family: 'Overpass', sans-serif;
+  font-weight: 900;
+  color: #d98a24
+}
+
+h2, h3, h4, p, button, span, svg, label, input {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 700;
+}
+
+.logotext {
+  width: 50%; /* Resize the image to 50% of its container's width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.landing-page-art {
+  height: auto; /* Maintain aspect ratio */
+}
+
+.leftSection {
+  display: flex;
+  flex-basis: 70%;
+  flex-wrap: wrap; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+}
+
+.rightSection {
+  display: flex;
+  flex-basis: 30%;
+  flex-wrap: wrap; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcf3e9;
+}
+
+.short-text {
+  max-width: 680px;
+  text-align: center;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

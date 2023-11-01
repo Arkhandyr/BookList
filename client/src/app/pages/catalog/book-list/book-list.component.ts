@@ -16,10 +16,10 @@ import { FadeInOut } from 'src/animation';
   animations: [FadeInOut(300, 300, false)]
 })
 export class BookListComponent implements OnInit {
-  public books:Book[];
-  searchQuery: string;
-  page: number = 1
-  maxPages: number = 0;
+  public topBooks:Book[];
+  currentTopPage: number = 1
+  public trendingBooks:Book[];
+  currentTrendingPage: number = 1
 
   constructor(
     private router:Router,
@@ -38,12 +38,18 @@ export class BookListComponent implements OnInit {
       }
     });
 
-    this.bookService.getBooks(this.page).subscribe(x => this.books = x);
+    this.bookService.getBooks(this.currentTopPage).subscribe(x => this.topBooks = x);
+    this.bookService.getBooks(this.currentTrendingPage).subscribe(x => this.trendingBooks = x);
   }
 
-  loadPage(page: number) {
-    this.page += page;
-    this.bookService.getBooks(this.page).subscribe(x => this.books = x);
+  loadTopPage(page: number) {
+    this.currentTopPage += page;
+    this.bookService.getBooks(this.currentTopPage).subscribe(x => this.topBooks = x);
+  }
+
+  loadTrendingPage(page: number) {
+    this.currentTrendingPage += page;
+    this.bookService.getBooks(this.currentTrendingPage).subscribe(x => this.trendingBooks = x);
   }
 
   goToBookPage(value: string) {

@@ -1,12 +1,32 @@
-<body>
-    <form [formGroup]="form" (submit)="submit()">
-        <h1 class="h3 mb-3 fw-normal">Registro</h1>
+<form [formGroup]="form" (submit)="submit()">
+    <h1 class="h3 mb-3">Registro</h1>
 
+    <p (click)="flipScreen()">Já possui uma conta? <span class="registerText underline-hover">Acessar</span></p>
+    
+    <div class="form-floating mb-2">
         <input formControlName="username" class="form-control" placeholder="Usuário" required>
-        <input formControlName="realName" class="form-control" placeholder="Nome" required>
+        <label for="floatingInput">Usuário</label>
+    </div>
+
+    <div class="form-floating mb-2">
+        <input class="mb-2" formControlName="realName" class="form-control" placeholder="Nome" required>
+        <label for="floatingInput">Nome</label>
+    </div>
+
+    <div class="form-floating mb-2">
         <input formControlName="email" class="form-control" placeholder="E-mail" required>
+        <label for="floatingInput">E-mail</label>
+    </div>
+
+    <div class="form-floating mb-2">
         <input formControlName="password" class="form-control" placeholder="Senha" required>
-        <input #profilePic formControlName="profilePic" class="form-control" type="file" accept="image/*" (change)="selectedPicture(profilePic)">
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Cadastrar</button>
-    </form>
-</body>
+        <label for="floatingInput">Senha</label>
+    </div>
+
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+        </div>
+    
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Cadastrar</button>
+</form>

@@ -1,5 +1,78 @@
 <body>
     <div class="container">
+        <div class="main-flex">
         
+            <div class="books">
+                <h2 class="mt-4" style="float: left;">Livros</h2>
+                <div class="book-row">
+                    <button mat-button class="paginator" (click)="loadBookPage(-1)" [disabled]="currentBookPage == 1" [ngStyle]="{'color': currentBookPage == 1 ? 'grey' : '#d98a24'}">
+                      <mat-icon>chevron_left</mat-icon>
+                    </button>
+              
+                    <div class="carousel">
+                        <div class="book-column mb-4" *ngFor="let book of books">
+                          <div class="card mx-auto" [@fadeInOut]> 
+                            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                            <div class="card-body px-2 pb-2">
+                              <p class="card-text">{{book.title}}</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="currentBookPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                      <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="authors">
+                <h2 class="mt-4" style="float: left;">Autores</h2>
+    
+                <div class="book-row">
+                    <button mat-button class="paginator" (click)="loadBookPage(-1)" [disabled]="currentBookPage == 1" [ngStyle]="{'color': currentBookPage == 1 ? 'grey' : '#d98a24'}">
+                      <mat-icon>chevron_left</mat-icon>
+                    </button>
+              
+                    <div class="carousel">
+                        <div class="book-column mb-4" *ngFor="let book of books">
+                          <div class="card mx-auto" [@fadeInOut]> 
+                            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                            <div class="card-body px-2 pb-2">
+                              <p class="card-text">{{book.title}}</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="currentBookPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                      <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="users">
+                <h2 class="mt-4" style="float: left;">Usuários</h2>
+    
+                <div class="book-row">
+                    <button mat-button class="paginator" (click)="loadBookPage(-1)" [disabled]="currentBookPage == 1" [ngStyle]="{'color': currentBookPage == 1 ? 'grey' : '#d98a24'}">
+                      <mat-icon>chevron_left</mat-icon>
+                    </button>
+              
+                    <div class="carousel">
+                        <div class="book-column mb-4" *ngFor="let book of books">
+                          <div class="card mx-auto" [@fadeInOut]> 
+                            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                            <div class="card-body px-2 pb-2">
+                              <p class="card-text">{{book.title}}</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="currentBookPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                      <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>

@@ -55,8 +55,12 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { BookComponent } from './pages/book/book.component';
 import { ExpandableParagraphComponent } from './expandable-paragraph/expandable-paragraph.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { StarRatingComponent } from './star-rating/star-rating.component';
+import { StarRatingDynamicComponent } from './star-rating/star-rating-dynamic/star-rating-dynamic.component';
 import { SearchComponent } from './search/search.component';
+import { BookGroupComponent } from './book-group/book-group.component';
+import { StarRatingStaticComponent } from './star-rating/star-rating-static/star-rating-static.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { AuthorComponent } from './pages/author/author.component';
 
 @NgModule({
   declarations: [
@@ -68,8 +72,12 @@ import { SearchComponent } from './search/search.component';
     BookComponent,
     ExpandableParagraphComponent,
     RegisterComponent,
-    StarRatingComponent,
-    SearchComponent
+    StarRatingDynamicComponent,
+    SearchComponent,
+    BookGroupComponent,
+    StarRatingStaticComponent,
+    LandingPageComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,
