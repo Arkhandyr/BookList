@@ -7,6 +7,7 @@ app = "booklist"
 primary_region = "gru"
 
 [build]
+  dockerfile = "client/Dockerfile"
 
 [http_service]
   internal_port = 3000
