@@ -1,15 +1,15 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-RUN echo "$PWD"
 WORKDIR /app
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["./server/BookList/BookList.csproj", "BookList"]
-RUN dotnet restore "./BookList/BookList.csproj"
+COPY ["BookList/BookList.csproj", "BookList/"]
+RUN dotnet restore "BookList/BookList.csproj"
 COPY . .
-WORKDIR "./src/BookList"
+WORKDIR "/src/BookList"
 RUN dotnet build "BookList.csproj" -c Release -o /app/build
 
 FROM build AS publish
