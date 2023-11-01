@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'http://localhost:7838',
+  api: 'https://booklist-api.fly.dev',
   production: true
 };
