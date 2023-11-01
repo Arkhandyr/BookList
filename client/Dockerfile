@@ -1,10 +1,10 @@
 FROM node:20-alpine AS build
 WORKDIR /booklist
 
-COPY src ./src/
-COPY package*.json .
-COPY angular.json .
-COPY tsconfig*.json .
+COPY ./client/src ./src/
+COPY ./client/package*.json .
+COPY ./client/angular.json .
+COPY ./client/tsconfig*.json .
 
 RUN npm cache clean --force
 RUN npm install
