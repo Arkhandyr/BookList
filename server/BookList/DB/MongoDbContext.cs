@@ -10,13 +10,12 @@ namespace BookList
         public static string? DatabaseName { get; set; }
         private IMongoDatabase _database { get; }
 
-        public MongoDbContext(IConfiguration config)
+        public MongoDbContext()
         {
-            var dbSettings = config.GetSection("MongoDatabase").Get<MongoDatabaseSettings>();
             try
             {
-                var mongoClient = new MongoClient(dbSettings.ConnectionString);
-                _database = mongoClient.GetDatabase(dbSettings.DatabaseName);
+                var mongoClient = new MongoClient(Environment.GetEnvironmentVariable("MongoConnectionString") ?? "mongodb://localhost:27017");
+                _database = mongoClient.GetDatabase("BookList");
             }
             catch (Exception ex)
             {
