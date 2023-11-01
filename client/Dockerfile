@@ -14,6 +14,6 @@ FROM nginx:alpine
 
 COPY --from=build /booklist/dist/booklist /usr/share/nginx/html
 
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./client/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 4200
