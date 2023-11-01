@@ -5,6 +5,7 @@ COPY src ./src/
 COPY package*.json .
 COPY angular.json .
 COPY tsconfig*.json .
+COPY nginx.conf .
 
 RUN npm cache clean --force
 RUN npm install
