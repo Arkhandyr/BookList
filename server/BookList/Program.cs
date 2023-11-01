@@ -64,7 +64,7 @@ else
     app.UseCors(x => x
         .AllowAnyHeader()
         .AllowCredentials()
-        .WithOrigins("https://booklist.fly.dev/")
+        .WithOrigins("https://booklist.fly.dev")
         .AllowAnyMethod());
 }
 
