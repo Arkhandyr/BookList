@@ -38,9 +38,11 @@ namespace BookList.Service.BookService
         }
 
 
-        public Task<IEnumerable<Book>> FilterByAuthor(string id)
+        public Task<IEnumerable<Book>> FilterByAuthor(string name)
         {
-            return _bookRepo.FilterByAuthor(id);
+            name = name.Replace('-', '.').Replace('_', ' ');
+
+            return _bookRepo.FilterByAuthor(name);
         }
     }
 }

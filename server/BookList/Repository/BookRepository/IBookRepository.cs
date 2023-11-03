@@ -10,6 +10,6 @@ namespace BookList
         Task<Book> GetBookById(string id);
         void AddBook(Book book);
         void UpdateBook(Book book);
-        Task<IEnumerable<Book>> FilterByAuthor(string id);
+        Task<IEnumerable<Book>> FilterByAuthor(string name);
     }
 }

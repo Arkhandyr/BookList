@@ -13,14 +13,12 @@ namespace BookList.Repository.AuthorRepository
             this.context = context;
         }
 
-        public Author GetById(string id)
-        {
-            return context.Authors.Find(u => u._id.ToString() == id).FirstOrDefault();
-        }
 
         public Author GetByName(string name)
         {
-            return context.Authors.Find(a => a.Name == name).FirstOrDefault();
+            var filter = Builders<Author>.Filter.Eq("Name", name);
+            var options = new FindOptions { Collation = new Collation("en", strength: CollationStrength.Primary) };
+            return context.Authors.Find(filter, options).FirstOrDefault();
         }
     }
 }

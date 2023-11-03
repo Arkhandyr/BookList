@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Emitters } from 'src/app/emitters/emitters';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class NavComponent implements OnInit {
   searchQuery: string = "";
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -25,6 +26,10 @@ export class NavComponent implements OnInit {
       (username: string) => {
         this.authenticatedUser = username;
       })
+
+    if(!this.authenticatedUser) {
+      this.router.navigate(['/']);
+    }
   }
 
   onSearch() {
@@ -32,7 +37,13 @@ export class NavComponent implements OnInit {
     this.router.navigate(['/search'], { queryParams: queryParams });
   }
 
+  goToHomePage() {
+    if(this.authenticatedUser) {
+      this.router.navigate(['/home']);
+    }
+  }
+
   logout(): void {
-    this.userService.logout().subscribe(() => this.authenticatedUser = "");
+    this.authService.logout().subscribe(() => this.authenticatedUser = "");
   }
 }

@@ -13,7 +13,7 @@
 <nav class="navbar navbar-header">
   <a class="gambiarra">👀</a>
 
-  <a routerLink="/home" class="logo">
+  <a (click)="goToHomePage()" class="logo">
     <svg width="60%"
       viewBox="3.5762786865234375e-7 0 97.427001953125 46.7130012512207">
       <g fill="url(#SvgjsLinearGradient1166)">
@@ -48,7 +48,7 @@
     <a class="gambiarra">👀</a>
   </div>
 
-  <div class="menu" *ngIf="authenticatedUser">
+  <div class="menu">
     <form class="d-flex" (ngSubmit)="onSearch()">
       <input class="form-control search-form me-2" [(ngModel)]="searchQuery" placeholder="Pesquisar" aria-label="Pesquisar" name="search">
       <button class="button-menu button-search" mat-icon-button>

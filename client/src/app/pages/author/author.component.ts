@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AuthorComponent implements OnInit {
   author: Author;
-  id: string;
+  name: string;
   books: Book[];
   private sub: any;
 
@@ -28,9 +28,9 @@ export class AuthorComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.name = params['name'];
 
-      this.authorService.getById(this.id).subscribe({
+      this.authorService.getByName(this.name).subscribe({
         next: (res) => {
           this.author = res;
         },
@@ -40,7 +40,7 @@ export class AuthorComponent implements OnInit {
       });
     });
 
-    this.bookService.getBookByAuthor(this.id).subscribe({
+    this.bookService.getBookByAuthor(this.name).subscribe({
       next: (res) => {
         this.books = res;
       },

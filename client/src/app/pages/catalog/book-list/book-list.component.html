@@ -1,14 +1,11 @@
 <body>
-  <div class="container">
-    <div style="height: 20px;"></div>
+  <div class="container-main">
+    <div style="height: 10px;"></div>
 
     <div class="top">
-
-      <h2 style="float: left;">Mais lidos</h2>
-  
-      <div style="height: 50px;"></div>
+      <h2>Mais lidos</h2>
       
-      <div class="book-row">
+      <div class="book-row mt-1">
         <button mat-button class="paginator" (click)="loadTopPage(-1)" [disabled]="currentTopPage == 1" [ngStyle]="{'color': currentTopPage == 1 ? 'grey' : '#d98a24'}">
           <mat-icon>chevron_left</mat-icon>
         </button>
@@ -17,7 +14,8 @@
           <div class="card mx-auto" [@fadeInOut]> 
             <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
             <div class="card-body px-2 pb-2">
-              <p class="card-text">{{book.title}}</p>
+              <p class="card-text" [routerLink]="['/book', book._id]">{{book.title}}</p>
+              <p class="card-subtext" [routerLink]="['/author', adjustTextToURL(book.author)]">{{book.author}}</p>
             </div>
           </div>
         </div>
@@ -30,11 +28,9 @@
     </div>
     
     <div class="trending">
-      <h2 style="float: left;">Em alta</h2>
-
-      <div style="height: 50px;"></div>
+      <h2>Em alta</h2>
   
-      <div class="book-row">
+      <div class="book-row mt-1">
         <button mat-button class="paginator" (click)="loadTrendingPage(-1)" [disabled]="currentTrendingPage == 1" [ngStyle]="{'color': currentTrendingPage == 1 ? 'grey' : '#d98a24'}">
           <mat-icon>chevron_left</mat-icon>
         </button>
@@ -44,6 +40,7 @@
             <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
             <div class="card-body px-2 pb-2">
               <p class="card-text">{{book.title}}</p>
+              <p class="card-subtext">{{book.author}}</p>
             </div>
           </div>
         </div>

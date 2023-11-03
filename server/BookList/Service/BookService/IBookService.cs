@@ -10,6 +10,6 @@ namespace BookList.Service.BookService
         public Task<IEnumerable<Book>> FilterByName(string filter);
         public void AddBook(Book book);
         public void UpdateBook(Book book);
-        public Task<IEnumerable<Book>> FilterByAuthor(string id);
+        public Task<IEnumerable<Book>> FilterByAuthor(string name);
     }
 }

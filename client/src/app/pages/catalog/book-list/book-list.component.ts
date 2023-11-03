@@ -55,4 +55,8 @@ export class BookListComponent implements OnInit {
   goToBookPage(value: string) {
     this.router.navigate(['/book', value]);
   }
+
+  adjustTextToURL(text: string) {
+    return text.replace(/\./g, '-').replace(/ /g, '_');
+  }
 }

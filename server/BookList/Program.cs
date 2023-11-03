@@ -282,11 +282,11 @@ app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string u
 #endregion
 
 #region Author
-app.MapGet("/author/{id}", ([FromServices] IAuthorService service, string id) =>
-    service.GetById(id))
+app.MapGet("/author/{name}", ([FromServices] IAuthorService service, string name) =>
+    service.GetByName(name))
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "GetAuthorById",
+    OperationId = "GetAuthorByName",
     Summary = "Seleciona autor",
     Description = "Endpoint responsável por trazer as informações do autor selecionado para a página de autor"
 });

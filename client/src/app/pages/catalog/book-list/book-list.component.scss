@@ -3,6 +3,11 @@ body {
   background: linear-gradient(180deg, rgba(30,30,30,1) 60%, rgb(44, 24, 0) 100%);
 }
 
+.container-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .mat-form-field {
     color: #d9d9d9;
     margin-right: 3%;
@@ -52,12 +57,31 @@ h2 {
 }
 
 .card-text {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 200px;
-    font-weight: 700;
-    padding-left: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-weight: 700;
+  padding-left: 1px;
+  margin: 0px;
+}
+
+.card-body:hover .card-text{
+  text-decoration: underline;/* Change cursor to a pointer on hover */
+}
+
+.card-body:hover .card-subtext{
+  text-decoration: underline;/* Change cursor to a pointer on hover */
+}
+
+.card-subtext {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-weight: 300;
+  padding-left: 1px;
+  margin: 0px;
 }
 
 .mat-form-field-appearance-outline {

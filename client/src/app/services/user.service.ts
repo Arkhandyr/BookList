@@ -19,14 +19,6 @@ export class UserService {
       return this.client.post<string>(url, user)
   }
 
-  public login(user: any): Observable<string> {
-    let url = `${environment.api}/login`
-
-    return this.client.post<string>(url, user, {
-      withCredentials: true
-    })
-  } 
-
   public getUser(): Observable<Profile> {
     let url = `${environment.api}/user`
 
@@ -40,12 +32,4 @@ export class UserService {
 
     return this.client.get<Profile>(url)
   }
-
-  public logout(): Observable<string> {
-    let url = `${environment.api}/logout`
-
-    return this.client.post<string>(url, {}, {
-      withCredentials: true
-    })
-  } 
 }
