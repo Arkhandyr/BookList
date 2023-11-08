@@ -97,7 +97,7 @@ namespace BookList.Service.UserService
         {
             string jwtToken = _contextAccessor.HttpContext.Request.Cookies["jwt"];
 
-            if (!string.IsNullOrEmpty(jwtToken))
+            if (string.IsNullOrEmpty(jwtToken))
             {
                 return Results.NotFound();
             }
