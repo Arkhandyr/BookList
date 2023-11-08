@@ -74,12 +74,12 @@
                           <star-rating-static [name]="review._id" [initialRating]="review.rating"></star-rating-static>
                         </p>
                         <div class="d-flex justify-content-between align-items-right me-1">
-                          <button mat-icon-button color="warn" class="mb-1" *ngIf="review.user.username == username" (click)="deleteReview()">
+                          <button mat-icon-button color="warn" class="mb-1" *ngIf="review.user.username == user.username" (click)="deleteReview()">
                             <mat-icon>delete_outline</mat-icon>
                           </button>
                           <button mat-icon-button color="primary" class="mb-1" (click)="likeReview(review)">
-                            <mat-icon *ngIf="!review.likes.includes(username)">favorite_border</mat-icon>
-                            <mat-icon *ngIf="review.likes.includes(username)">favorite</mat-icon>
+                            <mat-icon *ngIf="!review.likes.includes(user.username)">favorite_border</mat-icon>
+                            <mat-icon *ngIf="review.likes.includes(user.username)">favorite</mat-icon>
                             <span> {{review.likes.length}}</span>
                           </button>
                         </div>

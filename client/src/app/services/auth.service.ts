@@ -15,7 +15,11 @@ export class AuthService {
   constructor(private client:HttpClient) { }
   
   public isAuthenticated(): boolean {
-    const token = this.getCookie("jwt");
+    let url = `${environment.api}/token`
+
+    let token = this.client.post<string>(url, {}, {
+      withCredentials: true
+    })
 
     return token ? true : false;
   }
@@ -35,18 +39,4 @@ export class AuthService {
       withCredentials: true
     })
   } 
-
-  private getCookie(cookieName: string): string | undefined {
-    const cookies = document.cookie.split(';'); // Split the cookie string into an array of individual cookies
-
-    console.log(cookies);
-
-    for (const cookie of cookies) {
-      const [name, value] = cookie.trim().split('=');
-      if (cookieName === name) {
-        return decodeURIComponent(value); // Decode the cookie value
-      }
-    }
-    return '';
-  }
 }

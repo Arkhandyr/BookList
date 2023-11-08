@@ -30,7 +30,7 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser().subscribe({
       next: (res) => {
-        Emitters.authEmitter.emit(res.username);
+        Emitters.authEmitter.emit(res);
       },
       error: (err) => {
         console.log(err);

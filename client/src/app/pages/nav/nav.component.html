@@ -44,7 +44,7 @@
       </svg>
   </a>
 
-  <div class="menu" *ngIf="!authenticatedUser">
+  <div class="menu" *ngIf="!user">
     <a class="gambiarra">👀</a>
   </div>
 
@@ -55,7 +55,7 @@
         <mat-icon>search</mat-icon>
       </button>
     </form>
-    <button class="button-menu button-profile" mat-icon-button routerLink="/profile/{{authenticatedUser}}">
+    <button class="button-menu button-profile" mat-icon-button [routerLink]="'/profile/' + 'Arkhandyr'">
       <mat-icon>person</mat-icon>
     </button>
     <button class="button-menu button-logout" mat-icon-button routerLink="/" (click)="logout()">

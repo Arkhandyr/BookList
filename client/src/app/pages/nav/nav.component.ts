@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Emitters } from 'src/app/emitters/emitters';
+import { Profile } from 'src/app/interfaces/Profile';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,11 +12,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class NavComponent implements OnInit {
-  authenticatedUser: string = "";
+  user: Profile | null = null;
   searchQuery: string = "";
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) { }
 
@@ -23,11 +25,11 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     Emitters.authEmitter.subscribe(
-      (username: string) => {
-        this.authenticatedUser = username;
+      (user: Profile) => {
+        this.userService.getUser().subscribe(() => this.user = user);
       })
 
-    if(!this.authenticatedUser) {
+    if(!this.authService.isAuthenticated()) {
       this.router.navigate(['/']);
     }
   }
@@ -38,12 +40,12 @@ export class NavComponent implements OnInit {
   }
 
   goToHomePage() {
-    if(this.authenticatedUser) {
+    if(this.user) {
       this.router.navigate(['/home']);
     }
   }
 
   logout(): void {
-    this.authService.logout().subscribe(() => this.authenticatedUser = "");
+    this.authService.logout().subscribe(() => this.user = null);
   }
 }

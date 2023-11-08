@@ -19,7 +19,8 @@ import { Profile } from 'src/app/interfaces/Profile';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-  username: string = this.navComponent.authenticatedUser;
+  userr: string | undefined = this.navComponent.user?.username;
+  username: string = 'Arkhandyr';
   bookId: string;
   bookStatus: string;
   public book: Book;

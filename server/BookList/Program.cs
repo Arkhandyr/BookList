@@ -250,6 +250,17 @@ app.MapPost("/logout", ([FromServices] IUserService service) =>
     Summary = "Logout",
     Description = "Endpoint responsável por deslogar o usuário da sessão"
 });
+
+app.MapPost("/token", ([FromServices] IUserService service) =>
+{
+    return service.GetToken();
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetToken",
+    Summary = "GetToken",
+    Description = "Endpoint responsável por retornar o token de autenticação"
+});
 #endregion
 
 #region Profile
