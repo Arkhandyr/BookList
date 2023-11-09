@@ -40,9 +40,7 @@ export class NavComponent implements OnInit {
   }
 
   goToHomePage() {
-    if(this.user) {
-      this.router.navigate(['/home']);
-    }
+    this.router.navigate(['/home']);
   }
 
   logout(): void {

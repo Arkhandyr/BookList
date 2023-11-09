@@ -26,5 +26,10 @@ namespace BookList.Service.UserService
 
             return Results.Ok(author);
         }
+
+        public Task<IEnumerable<Author>> FilterByName(string filter, int page)
+        {
+            return _authorRepo.FilterByName(filter, page);
+        }
     }
 }

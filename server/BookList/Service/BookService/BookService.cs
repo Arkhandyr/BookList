@@ -17,9 +17,9 @@ namespace BookList.Service.BookService
             return _bookRepo.GetAllBooks(page);
         }
 
-        public Task<IEnumerable<Book>> FilterByName(string filter)
+        public Task<IEnumerable<Book>> FilterByName(string filter, int page)
         {
-            return _bookRepo.FilterByName(filter);
+            return _bookRepo.FilterByName(filter, page);
         }
 
         public Task<Book> GetBookById(string id)

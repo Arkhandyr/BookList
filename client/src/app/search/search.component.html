@@ -3,8 +3,8 @@
         <div class="main-flex">
         
             <div class="books">
-                <h2 class="mt-4" style="float: left;">Livros</h2>
-                <div class="book-row">
+                <h2 class="mt-4">Livros</h2>
+                <div class="book-row" *ngIf="books">
                     <button mat-button class="paginator" (click)="loadBookPage(-1)" [disabled]="currentBookPage == 1" [ngStyle]="{'color': currentBookPage == 1 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_left</mat-icon>
                     </button>
@@ -15,60 +15,89 @@
                             <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
                             <div class="card-body px-2 pb-2">
                               <p class="card-text">{{book.title}}</p>
+                              <p class="card-subtext" [routerLink]="['/author', adjustTextToURL(book.author)]">{{book.author}}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="book-column mb-4" *ngFor="let _ of placeholderBookCards">
+                          <div class="card placeholder mx-auto" >
+                            <div class="card-body px-2 pb-2">
+                              <p class="card-text"></p>
                             </div>
                           </div>
                         </div>
                     </div>
                     
-                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="currentBookPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="placeholderBookCards.length > 0" [ngStyle]="{'color': placeholderBookCards.length > 0 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_right</mat-icon>
                     </button>
                 </div>
             </div>
             <div class="authors">
-                <h2 class="mt-4" style="float: left;">Autores</h2>
+                <h2 class="mt-4">Autores</h2>
     
-                <div class="book-row">
-                    <button mat-button class="paginator" (click)="loadBookPage(-1)" [disabled]="currentBookPage == 1" [ngStyle]="{'color': currentBookPage == 1 ? 'grey' : '#d98a24'}">
+                <h4 class="my-4" *ngIf="!authors">Não foram encontrados resultados correspondentes à pesquisa realizada</h4>
+
+                <div class="book-row"  *ngIf="authors">
+                    <button mat-button class="paginator" (click)="loadAuthorPage(-1)" [disabled]="currentAuthorPage == 1" [ngStyle]="{'color': currentAuthorPage == 1 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_left</mat-icon>
                     </button>
               
                     <div class="carousel">
-                        <div class="book-column mb-4" *ngFor="let book of books">
-                          <div class="card mx-auto" [@fadeInOut]> 
-                            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                        <div class="book-column mb-4" *ngFor="let author of authors">
+                          <div class="card person mx-auto" [@fadeInOut]> 
+                            <img [src]="author.picture" class="card-img-person" [routerLink]="['/author', author.id]"/>
                             <div class="card-body px-2 pb-2">
-                              <p class="card-text">{{book.title}}</p>
+                              <p class="card-text">{{author.name}}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="book-column mb-4" *ngFor="let _ of placeholderAuthorCards">
+                          <div class="card placeholder person mx-auto" >
+                            <div class="card-body px-2 pb-2">
+                              <p class="card-text"></p>
                             </div>
                           </div>
                         </div>
                     </div>
                     
-                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="currentBookPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                    <button mat-button class="paginator" (click)="loadAuthorPage(1)" [disabled]="placeholderAuthorCards.length > 0" [ngStyle]="{'color': placeholderAuthorCards.length > 0 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_right</mat-icon>
                     </button>
                 </div>
             </div>
             <div class="users">
-                <h2 class="mt-4" style="float: left;">Usuários</h2>
+                <h2 class="mt-4">Usuários</h2>
     
-                <div class="book-row">
-                    <button mat-button class="paginator" (click)="loadBookPage(-1)" [disabled]="currentBookPage == 1" [ngStyle]="{'color': currentBookPage == 1 ? 'grey' : '#d98a24'}">
+                <h4 class="my-4" *ngIf="!users">Não foram encontrados resultados correspondentes à pesquisa realizada</h4>
+
+                <div class="book-row"  *ngIf="users">
+                    <button mat-button class="paginator" (click)="loadUserPage(-1)" [disabled]="currentUserPage == 1" [ngStyle]="{'color': currentUserPage == 1 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_left</mat-icon>
                     </button>
               
                     <div class="carousel">
-                        <div class="book-column mb-4" *ngFor="let book of books">
-                          <div class="card mx-auto" [@fadeInOut]> 
-                            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                        <div class="book-column mb-4" *ngFor="let user of users">
+                          <div class="card person mx-auto" [@fadeInOut]> 
+                            <img [src]="user.picture" class="card-img-person" [routerLink]="['/user', user.username]"/>
                             <div class="card-body px-2 pb-2">
-                              <p class="card-text">{{book.title}}</p>
+                              <p class="card-text">{{user.realName}}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="book-column mb-4" *ngFor="let _ of placeholderUserCards">
+                          <div class="card placeholder person mx-auto" >
+                            <div class="card-body px-2 pb-2">
+                              <p class="card-text"></p>
                             </div>
                           </div>
                         </div>
                     </div>
                     
-                    <button mat-button class="paginator" (click)="loadBookPage(1)" [disabled]="currentBookPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                    <button mat-button class="paginator" (click)="loadUserPage(1)" [disabled]="currentUserPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_right</mat-icon>
                     </button>
                 </div>

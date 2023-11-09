@@ -83,15 +83,6 @@ app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int pa
     Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
 });
 
-app.MapGet("/search/{filter}", async ([FromServices] IBookService service, string filter) =>
-    await service.FilterByName(filter))
-.WithOpenApi(operation => new(operation)
-{
-    OperationId = "FilterBooks",
-    Summary = "Filtro da página inicial",
-    Description = "Endpoint responsável por filtrar os livros pelo nome"
-});
-
 app.MapGet("/booksByAuthor/{filter}", async ([FromServices] IBookService service, string filter) =>
     await service.FilterByAuthor(filter))
 .WithOpenApi(operation => new(operation)
@@ -301,7 +292,36 @@ app.MapGet("/author/{name}", ([FromServices] IAuthorService service, string name
     Summary = "Seleciona autor",
     Description = "Endpoint responsável por trazer as informações do autor selecionado para a página de autor"
 });
-#endregion
+
 #endregion
 
+#region Search
+app.MapGet("/searchBooks/{filter}/{page}", async ([FromServices] IBookService service, string filter, int page) =>
+    await service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterBooks",
+    Summary = "Filtra livros",
+    Description = "Endpoint responsável por filtrar os livros pelo nome"
+});
+
+app.MapGet("/searchAuthors/{filter}/{page}", ([FromServices] IAuthorService service, string filter, int page) =>
+    service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterAuthor",
+    Summary = "Filtra autores",
+    Description = "Endpoint responsável por por filtrar os autores pelo nome"
+});
+
+app.MapGet("/searchUsers/{filter}/{page}", ([FromServices] IUserService service, string filter, int page) =>
+    service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterUsers",
+    Summary = "Filtra usuários",
+    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+});
+#endregion
+#endregion
 app.Run();

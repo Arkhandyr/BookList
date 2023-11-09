@@ -28,9 +28,9 @@ namespace BookList
             return context.Users_Books.EstimatedDocumentCount(); //usar futuramente para paginamento
         }
 
-        public async Task<IEnumerable<Book>> FilterByName(string query)
+        public async Task<IEnumerable<Book>> FilterByName(string query, int page)
         {
-            return await context.Books.Find(x => x.Title.ToLower().Contains(query)).ToListAsync();
+            return await context.Books.Find(x => x.Title.ToLower().Contains(query)).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
         }
 
         public async Task<Book> GetBookById(string id)

@@ -7,6 +7,7 @@ namespace BookList.Repository.UserRepository
     public class UserRepository : IUserRepository
     {
         private readonly MongoDbContext context;
+        private readonly int paginationSize = 5;
 
         public UserRepository(MongoDbContext context)
         {
@@ -33,6 +34,11 @@ namespace BookList.Repository.UserRepository
         public User GetByUsername(string username)
         {
             return context.Users.Find(u => u.Username == username).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<User>> FilterByName(string query, int page)
+        {
+            return await context.Users.Find(x => x.RealName.ToLower().Contains(query) || x.Username.ToLower().Contains(query)).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
         }
     }
 }

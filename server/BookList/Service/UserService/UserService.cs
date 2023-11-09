@@ -104,5 +104,10 @@ namespace BookList.Service.UserService
 
             return Results.Ok(jwtToken);
         }
+
+        public Task<IEnumerable<User>> FilterByName(string filter, int page)
+        {
+            return _userRepo.FilterByName(filter, page);
+        }
     }
 }

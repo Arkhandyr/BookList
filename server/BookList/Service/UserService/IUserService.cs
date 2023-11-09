@@ -15,5 +15,8 @@ namespace BookList.Service.UserService
         public IResult GetByUsername(string username);
 
         public IResult GetToken();
+
+        public Task<IEnumerable<User>> FilterByName(string filter, int page);
+
     }
 }
