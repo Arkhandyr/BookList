@@ -4,12 +4,14 @@ using BookList.Helpers;
 using BookList.Model;
 using BookList.Repository.AuthorRepository;
 using BookList.Repository.BadgeRepository;
+using BookList.Repository.InteractionRepository;
 using BookList.Repository.ListRepository;
 using BookList.Repository.ReviewRepository;
 using BookList.Repository.UserRepository;
 using BookList.Service.AuthorService;
 using BookList.Service.BadgeService;
 using BookList.Service.BookService;
+using BookList.Service.InteractionService;
 using BookList.Service.ListService;
 using BookList.Service.ReviewService;
 using BookList.Service.UserService;
@@ -41,6 +43,9 @@ builder.Services.AddTransient<IBadgeService, BadgeService>();
 
 builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
 builder.Services.AddTransient<IAuthorService, AuthorService>();
+
+builder.Services.AddTransient<IInteractionRepository, InteractionRepository>();
+builder.Services.AddTransient<IInteractionService, InteractionService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
@@ -316,6 +321,30 @@ app.MapGet("/searchAuthors/{filter}/{page}", ([FromServices] IAuthorService serv
 
 app.MapGet("/searchUsers/{filter}/{page}", ([FromServices] IUserService service, string filter, int page) =>
     service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterUsers",
+    Summary = "Filtra usuários",
+    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+});
+#endregion
+
+#region Interaction
+app.MapGet("/follow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
+{
+    return service.Follow(entry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterUsers",
+    Summary = "Filtra usuários",
+    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+});
+
+app.MapPost("/unfollow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
+{
+    return service.Unfollow(entry);
+})
 .WithOpenApi(operation => new(operation)
 {
     OperationId = "FilterUsers",

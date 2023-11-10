@@ -30,7 +30,7 @@ namespace BookList
 
         public async Task<IEnumerable<Book>> FilterByName(string query, int page)
         {
-            return await context.Books.Find(x => x.Title.ToLower().Contains(query)).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
+            return await context.Books.Find(x => x.Title.ToLower().Contains(query) || x.Author.ToLower().Contains(query)).Skip((page - 1) * paginationSize).Limit(paginationSize).ToListAsync();
         }
 
         public async Task<Book> GetBookById(string id)

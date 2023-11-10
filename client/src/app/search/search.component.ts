@@ -72,6 +72,7 @@ export class SearchComponent implements OnInit {
     this.searchService.filterUsers(this.searchQuery, this.currentUserPage).subscribe(x => {
       this.users = x
       this.placeholderUserCards = new Array(5 - this.users.length).fill(null);
+      console.log(this.users)
     });
   }
 
