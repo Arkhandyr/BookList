@@ -5,13 +5,17 @@ body {
   
 .main-flex {
     display: flex;
-    align-items: stretch;
     flex-wrap: wrap;  
+    justify-content: center;
 }
 
 h2, h3, h4, p, button, span, svg, label, input, a {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
+}
+
+h2 {
+    color:#d98a24
 }
 
 .books, .authors, .users {
@@ -20,8 +24,7 @@ h2, h3, h4, p, button, span, svg, label, input, a {
     max-height: 400px;
     flex-wrap: wrap; 
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: center;
 }
 
 .card {
@@ -29,8 +32,21 @@ h2, h3, h4, p, button, span, svg, label, input, a {
     border: transparent;
     color: #d9d9d9;
     font-family: 'Overpass', sans-serif;
-    max-width: 180px;
+    width: 180px;
+    height: 290px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body:hover .card-text{
+    text-decoration: underline;/* Change cursor to a pointer on hover */
+}
+
+.card-body:hover .card-subtext{
+    text-decoration: underline;/* Change cursor to a pointer on hover */
+}
+
+.card img{
+    border: none;
 }
 
 .card:hover {
@@ -44,18 +60,39 @@ h2, h3, h4, p, button, span, svg, label, input, a {
     margin: 10px;
 }
 
+.person {
+    height: 210px !important; 
+}
+
+.card-img-person {
+    border-radius: 1%;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+}
+
 .card-body {
     padding: 0;
 }
 
 .card-text {
     overflow: hidden;
-    white-space:wrap;
+    white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 200px;
     font-weight: 700;
     padding-left: 1px;
-    font-size: 14px;
+    margin: 0px;
+  }
+
+.card-subtext {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    font-weight: 300;
+    padding-left: 1px;
+    margin: 0px;
 }
 
 .book-row {
@@ -76,4 +113,9 @@ h2, h3, h4, p, button, span, svg, label, input, a {
     background-color: transparent;
     color:#d98a24;
     max-height: 64px;
+}
+
+.placeholder {
+    background-color: transparent;
+    box-shadow: none !important;
 }

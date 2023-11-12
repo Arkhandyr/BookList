@@ -12,5 +12,8 @@ namespace BookList.Repository.UserRepository
         public User GetById(ObjectId id);
 
         public User GetByUsername(string username);
+
+        Task<IEnumerable<User>> FilterByName(string query, int page);
+
     }
 }

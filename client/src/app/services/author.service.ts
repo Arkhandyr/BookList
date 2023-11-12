@@ -14,8 +14,8 @@ import { Author } from '../interfaces/Author';
 export class AuthorService { 
   constructor(private client:HttpClient) { }
   
-  public getById(id: string): Observable<Author> {
-    let url = `${environment.api}/author/${id}`
+  public getByName(name: string): Observable<Author> {
+    let url = `${environment.api}/author/${name}`
 
     return this.client.get<Author>(url)
   }

@@ -13,6 +13,7 @@ h1, h2, h3, h4, p, button, span, svg, label, input {
 
 .form-control {
   background-color: transparent;
+  color: #1e1e1e;
 }
 
 .form-signin .form-floating:focus-within {
@@ -24,7 +25,7 @@ h1, h2, h3, h4, p, button, span, svg, label, input {
 }
 
 .form-control:focus + label {
-  background-color: #ff0000; /* Cor de fundo quando o input está em foco */
+  //background-color: #ff0000; /* Cor de fundo quando o input está em foco */
   border-radius: 5px; /* Borda arredondada quando o input está em foco */
   cursor: pointer; /* Muda o cursor quando o input está em foco */
 }

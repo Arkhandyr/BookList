@@ -4,12 +4,14 @@ using BookList.Helpers;
 using BookList.Model;
 using BookList.Repository.AuthorRepository;
 using BookList.Repository.BadgeRepository;
+using BookList.Repository.InteractionRepository;
 using BookList.Repository.ListRepository;
 using BookList.Repository.ReviewRepository;
 using BookList.Repository.UserRepository;
 using BookList.Service.AuthorService;
 using BookList.Service.BadgeService;
 using BookList.Service.BookService;
+using BookList.Service.InteractionService;
 using BookList.Service.ListService;
 using BookList.Service.ReviewService;
 using BookList.Service.UserService;
@@ -41,6 +43,9 @@ builder.Services.AddTransient<IBadgeService, BadgeService>();
 
 builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
 builder.Services.AddTransient<IAuthorService, AuthorService>();
+
+builder.Services.AddTransient<IInteractionRepository, InteractionRepository>();
+builder.Services.AddTransient<IInteractionService, InteractionService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
@@ -81,15 +86,6 @@ app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int pa
     OperationId = "Catalog",
     Summary = "Catálogo da página inicial",
     Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
-});
-
-app.MapGet("/search/{filter}", async ([FromServices] IBookService service, string filter) =>
-    await service.FilterByName(filter))
-.WithOpenApi(operation => new(operation)
-{
-    OperationId = "FilterBooks",
-    Summary = "Filtro da página inicial",
-    Description = "Endpoint responsável por filtrar os livros pelo nome"
 });
 
 app.MapGet("/booksByAuthor/{filter}", async ([FromServices] IBookService service, string filter) =>
@@ -250,6 +246,17 @@ app.MapPost("/logout", ([FromServices] IUserService service) =>
     Summary = "Logout",
     Description = "Endpoint responsável por deslogar o usuário da sessão"
 });
+
+app.MapPost("/token", ([FromServices] IUserService service) =>
+{
+    return service.GetToken();
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "GetToken",
+    Summary = "GetToken",
+    Description = "Endpoint responsável por retornar o token de autenticação"
+});
 #endregion
 
 #region Profile
@@ -282,15 +289,68 @@ app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string u
 #endregion
 
 #region Author
-app.MapGet("/author/{id}", ([FromServices] IAuthorService service, string id) =>
-    service.GetById(id))
+app.MapGet("/author/{name}", ([FromServices] IAuthorService service, string name) =>
+    service.GetByName(name))
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "GetAuthorById",
+    OperationId = "GetAuthorByName",
     Summary = "Seleciona autor",
     Description = "Endpoint responsável por trazer as informações do autor selecionado para a página de autor"
 });
-#endregion
+
 #endregion
 
+#region Search
+app.MapGet("/searchBooks/{filter}/{page}", async ([FromServices] IBookService service, string filter, int page) =>
+    await service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterBooks",
+    Summary = "Filtra livros",
+    Description = "Endpoint responsável por filtrar os livros pelo nome"
+});
+
+app.MapGet("/searchAuthors/{filter}/{page}", ([FromServices] IAuthorService service, string filter, int page) =>
+    service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterAuthor",
+    Summary = "Filtra autores",
+    Description = "Endpoint responsável por por filtrar os autores pelo nome"
+});
+
+app.MapGet("/searchUsers/{filter}/{page}", ([FromServices] IUserService service, string filter, int page) =>
+    service.FilterByName(filter, page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterUsers",
+    Summary = "Filtra usuários",
+    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+});
+#endregion
+
+#region Interaction
+app.MapGet("/follow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
+{
+    return service.Follow(entry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterUsers",
+    Summary = "Filtra usuários",
+    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+});
+
+app.MapPost("/unfollow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
+{
+    return service.Unfollow(entry);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FilterUsers",
+    Summary = "Filtra usuários",
+    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+});
+#endregion
+#endregion
 app.Run();

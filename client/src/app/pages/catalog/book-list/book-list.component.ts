@@ -30,7 +30,7 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser().subscribe({
       next: (res) => {
-        Emitters.authEmitter.emit(res.username);
+        Emitters.authEmitter.emit(res);
       },
       error: (err) => {
         console.log(err);
@@ -54,5 +54,9 @@ export class BookListComponent implements OnInit {
 
   goToBookPage(value: string) {
     this.router.navigate(['/book', value]);
+  }
+
+  adjustTextToURL(text: string) {
+    return text.replace(/\./g, '-').replace(/ /g, '_');
   }
 }

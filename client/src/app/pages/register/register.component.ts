@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   @Output() login = new EventEmitter<boolean>();
   form: FormGroup
+  profilePic : string | ArrayBuffer | null;
   
   constructor(
     private service:UserService,
@@ -30,21 +31,28 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  profilePic : string | ArrayBuffer | null;
+  public selectedPicture(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
 
-  public selectedPicture(imageInput: HTMLInputElement) {
+    if (inputElement.files) {
+      const file = inputElement.files[0];
+      if (file) {
+        const reader = new FileReader();
 
-    const reader = new FileReader();
-    const files = imageInput.files as FileList;
-
-    reader.addEventListener('load', (event: any) => {
-
-      var element = event.target as FileReader;
-
-      this.profilePic = element.result;
-    });
-
-    reader.readAsDataURL(files[0]);
+        reader.addEventListener('load', (event: any) => {
+  
+          var element = event.target as FileReader;
+    
+          this.profilePic = element.result;
+        });
+        
+        reader.readAsDataURL(inputElement.files[0]);
+      }
+      
+    } else {
+      this.profilePic = '';
+    }
+    
   }
 
   submit() {
@@ -54,8 +62,9 @@ export class RegisterComponent implements OnInit {
     this.service.register(user)
       .subscribe(() => {
         this.toastr.success('Usuário cadastrado!', 'Sucesso');
-        this.router.navigate(['/'])
       })
+
+    this.flipScreen();
   }
 
   flipScreen() {

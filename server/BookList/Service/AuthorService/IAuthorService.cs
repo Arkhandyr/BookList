@@ -1,8 +1,10 @@
-﻿namespace BookList.Service.AuthorService
+﻿using BookList.Model;
+
+namespace BookList.Service.AuthorService
 {
     public interface IAuthorService
     {
         public IResult GetByName(string name);
-        public IResult GetById(string id);
+        public Task<IEnumerable<Author>> FilterByName(string filter, int page);
     }
 }

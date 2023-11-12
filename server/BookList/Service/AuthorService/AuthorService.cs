@@ -1,17 +1,15 @@
-﻿using BookList.Helpers;
-using BookList.Model;
-using BookList.Repository.UserRepository;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http.Features;
-using MongoDB.Bson;
+﻿using BookList.Model;
 using BookList.Service.AuthorService;
 using BookList.Repository.AuthorRepository;
+using System.Web;
+using System.Net;
 
 namespace BookList.Service.UserService
 {
     public class AuthorService : IAuthorService
     {
         private readonly IAuthorRepository _authorRepo;
+
         public AuthorService(IAuthorRepository authorRepo)
         {
             _authorRepo = authorRepo;
@@ -19,22 +17,19 @@ namespace BookList.Service.UserService
 
         public IResult GetByName(string name)
         {
+            name = name.Replace('-', '.').Replace('_', ' ');
+
             Author author = _authorRepo.GetByName(name);
 
             if (author == null)
-                return Results.BadRequest();
+                return Results.NotFound();
 
             return Results.Ok(author);
         }
 
-        public IResult GetById(string id)
+        public Task<IEnumerable<Author>> FilterByName(string filter, int page)
         {
-            Author author = _authorRepo.GetById(id);
-
-            if (author == null)
-                return Results.BadRequest();
-
-            return Results.Ok(author);
+            return _authorRepo.FilterByName(filter, page);
         }
     }
 }

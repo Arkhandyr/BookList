@@ -9,17 +9,19 @@ import { BookComponent } from './pages/book/book.component';
 import { SearchComponent } from './search/search.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { AuthorComponent } from './pages/author/author.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path:'',
     children: [
+      
       {path:'', component:LandingPageComponent},
-      {path:'home', component:BookListComponent},
-      {path:'add', component:BookAddComponent},
-      {path:'book/:id', component:BookComponent},
-      {path:'profile/:username', component:UserProfileComponent},
-      {path:'author/:id', component:AuthorComponent},
-      {path:'search', component: SearchComponent },
+      {path:'home', component:BookListComponent, canActivate: [AuthGuard]},
+      {path:'add', component:BookAddComponent, canActivate: [AuthGuard]},
+      {path:'book/:id', component:BookComponent, canActivate: [AuthGuard]},
+      {path:'profile/:username', component:UserProfileComponent, canActivate: [AuthGuard]},
+      {path:'author/:name', component:AuthorComponent, canActivate: [AuthGuard]},
+      {path:'search', component: SearchComponent, canActivate: [AuthGuard]},
     ],
   }
 ];

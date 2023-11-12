@@ -4,6 +4,7 @@ using BookList.Repository.UserRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.Features;
 using MongoDB.Bson;
+using Azure.Core;
 
 namespace BookList.Service.UserService
 {
@@ -90,6 +91,23 @@ namespace BookList.Service.UserService
                 return Results.BadRequest();
 
             return Results.Ok(user);
+        }
+
+        public IResult GetToken()
+        {
+            string jwtToken = _contextAccessor.HttpContext.Request.Cookies["jwt"];
+
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return Results.NotFound();
+            }
+
+            return Results.Ok(jwtToken);
+        }
+
+        public Task<IEnumerable<User>> FilterByName(string filter, int page)
+        {
+            return _userRepo.FilterByName(filter, page);
         }
     }
 }
