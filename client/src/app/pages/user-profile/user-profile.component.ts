@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { Emitters } from 'src/app/emitters/emitters';
 import { Badge } from 'src/app/interfaces/Badge';
 import { Book } from 'src/app/interfaces/Book';
@@ -32,35 +33,19 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.username = params['username'];
-
-      this.userService.getByUsername(this.username).subscribe({
-        next: (res) => {
-          this.user = res;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    });
-
-    this.listService.getUserLists(this.username).subscribe({
+    forkJoin({
+      user: this.userService.getByUsername(this.username),
+      lists: this.listService.getUserLists(this.username),
+      badges: this.badgeService.getUserBadges(this.username)
+    }).subscribe({
       next: (res) => {
-        [this.books[0],this.books[1],this.books[2]] = res.slice(0,3);
+        this.user = res.user;
+        [this.books[0], this.books[1], this.books[2]] = res.lists.slice(0, 3);
+        this.badges = res.badges;
       },
       error: (err) => {
         console.log(err);
       }
     });
-
-    this.badgeService.getUserBadges(this.username).subscribe({
-      next: (res) => {
-        this.badges = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
+  };
 }
