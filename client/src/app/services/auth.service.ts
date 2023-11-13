@@ -12,8 +12,27 @@ import { Author } from '../interfaces/Author';
 })
 
 export class AuthService { 
+  user: Profile = {id: 0, username: '', realName: '', email:'', picture: '', bio: ''};
+
   constructor(private client:HttpClient) { }
   
+  setLoggedUser(value: Profile) {
+    this.user = value;
+  }
+
+  getLoggedUser() {
+    return this.user;
+  }
+
+  clearData() {
+    this.user.id = 0;
+    this.user.username = '';
+    this.user.realName = '';
+    this.user.email = '';
+    this.user.picture = '';
+    this.user.bio = '';
+  }
+
   public isAuthenticated(): boolean {
     let url = `${environment.api}/token`
 
@@ -24,10 +43,10 @@ export class AuthService {
     return token ? true : false;
   }
 
-  public login(user: any): Observable<string> {
+  public login(user: any): Observable<Profile> {
     let url = `${environment.api}/login`
 
-    return this.client.post<string>(url, user, {
+    return this.client.post<Profile>(url, user, {
       withCredentials: true
     })
   } 

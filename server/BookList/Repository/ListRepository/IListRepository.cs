@@ -8,7 +8,8 @@ namespace BookList.Repository.ListRepository
     {
         public void UpsertEntry(Users_Books users_Books);
         public DeleteResult RemoveEntry(Users_Books users_Books);
-        public List<List<Book>> GetUserLists(string username);
+        public List<Book> GetUserList(string username, string list, int page);
         public bool GetBookStatus(Users_Books users_Books);
+        public long[] CountBooks(string username);
     }
 }

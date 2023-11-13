@@ -61,6 +61,7 @@ import { BookGroupComponent } from './book-group/book-group.component';
 import { StarRatingStaticComponent } from './star-rating/star-rating-static/star-rating-static.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { AuthorComponent } from './pages/author/author.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -129,7 +130,8 @@ import { AuthorComponent } from './pages/author/author.component';
   ],
   providers: [
     FormsBookResolver,
-    NavComponent
+    NavComponent,
+    AuthService
   ],
   bootstrap: [NavComponent]
 })

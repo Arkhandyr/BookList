@@ -50,11 +50,11 @@ namespace BookList.Service.ListService
             return Results.Ok(response);
         }
 
-        public IResult GetUserLists(string username)
+        public IResult GetUserList(string username, string list, int page)
         {
-            List<List<Book>> userLists = _listRepo.GetUserLists(username);
+            List<Book> userList = _listRepo.GetUserList(username, list, page);
 
-            return Results.Ok(userLists);
+            return Results.Ok(userList);
         }
 
         public IResult GetBookStatus(string bookId, string username)
@@ -68,6 +68,13 @@ namespace BookList.Service.ListService
             var bookStatus = _listRepo.GetBookStatus(userBook);
 
             return Results.Ok(bookStatus);
+        }
+
+        public IResult CountBooks(string username)
+        {
+            var count = _listRepo.CountBooks(username);
+
+            return Results.Ok(count);
         }
     }
 }

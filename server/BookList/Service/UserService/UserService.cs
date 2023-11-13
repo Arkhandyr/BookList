@@ -48,10 +48,7 @@ namespace BookList.Service.UserService
                 HttpOnly = true
             });
 
-            return Results.Ok(new
-            {
-                message = "success"
-            });
+            return Results.Ok(user);
         }
 
         public IResult User()

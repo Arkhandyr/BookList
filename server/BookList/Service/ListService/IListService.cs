@@ -8,8 +8,10 @@ namespace BookList.Service.ListService
 
         public IResult RemoveFromList(ListEntry entry);
 
-        public IResult GetUserLists(string username);
+        public IResult GetUserList(string username, string list, int page);
 
         public IResult GetBookStatus(string bookId, string username);
+
+        public IResult CountBooks(string username);
     }
 }

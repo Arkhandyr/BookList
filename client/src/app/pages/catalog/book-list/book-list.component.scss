@@ -266,3 +266,20 @@ button.fab-btn:hover>div.label-container{ // mostra o tooltip
   color:#d98a24;
   max-height: 64px;
 }
+
+/* Exemplo de animação de loading */
+@keyframes loadingAnimation {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+.loading {
+  animation: loadingAnimation 1s infinite;
+}

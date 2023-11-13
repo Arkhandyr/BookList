@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private service:AuthService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
+    private authService: AuthService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -29,8 +29,9 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     this.service.login(this.form.getRawValue())
-      .subscribe(() => {
-        this.router.navigate(['/home'])
+      .subscribe(x => {
+        this.router.navigate(['/home']);
+        this.authService.setLoggedUser(x);
       })
   }
 

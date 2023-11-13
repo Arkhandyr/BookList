@@ -33,21 +33,14 @@ export class AuthorComponent implements OnInit {
       this.authorService.getByName(this.name).subscribe({
         next: (res) => {
           this.author = res;
-        },
-        error: (err) => {
-          console.log(err);
         }
-      });
     });
 
     this.bookService.getBookByAuthor(this.name).subscribe({
       next: (res) => {
         this.books = res;
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
-
+  });
   }
 }
