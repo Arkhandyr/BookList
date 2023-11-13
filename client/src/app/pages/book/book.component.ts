@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Emitters } from 'src/app/emitters/emitters';
 import { Book } from 'src/app/interfaces/Book';
 import { BookService } from 'src/app/services/books.service';
 import { ListService } from 'src/app/services/list.service';
@@ -19,13 +18,11 @@ import { Profile } from 'src/app/interfaces/Profile';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-  userr: string | undefined = this.navComponent.user?.username;
   username: string = 'Arkhandyr';
   bookId: string;
   bookStatus: string;
   public book: Book;
   public reviews: Review[];
-  private sub: any;
   public user: Profile;
   public userReview: Review[];
   public reviewText: string;
@@ -33,7 +30,6 @@ export class BookComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private navComponent: NavComponent,
     private bookService: BookService,
     private listService: ListService,
     private userService: UserService,
@@ -41,18 +37,18 @@ export class BookComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.bookId = params['id'];
+    this.route.params.subscribe(params => {
+      this.bookId = params['id'];
 
-       this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
+      this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
 
-       this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
+      this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
 
-       this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
+      this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
 
-       this.userService.getByUsername(this.username).subscribe(x => this.user = x)
+      this.userService.getByUsername(this.username).subscribe(x => this.user = x)
 
-       this.userReview = this.reviews.filter((review) => review.user.username === this.username)
+      this.userReview = this.reviews.filter((review) => review.user.username === this.username)
     });
   }
 
@@ -63,9 +59,6 @@ export class BookComponent implements OnInit {
       next: () => {
         this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
         this.toastr.success('Livro adicionado com sucesso à lista', 'Sucesso');
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
   }
@@ -77,9 +70,6 @@ export class BookComponent implements OnInit {
       next: () => {
         this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
         this.toastr.success('Livro removido com sucesso da lista', 'Sucesso');
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
   }
@@ -91,9 +81,6 @@ export class BookComponent implements OnInit {
       next: () => {
         this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
         this.toastr.success('Resenha publicada com sucesso!', 'Sucesso');
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
   }
@@ -105,9 +92,6 @@ export class BookComponent implements OnInit {
       next: () => {
         this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
         this.toastr.success('Resenha removida com sucesso!', 'Sucesso');
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
   }
@@ -119,9 +103,6 @@ export class BookComponent implements OnInit {
       this.reviewService.likeReview(likeEntry).subscribe({
         next: () => {
           this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
-        },
-        error: (err) => {
-          console.log(err);
         }
       });
     }
@@ -129,9 +110,6 @@ export class BookComponent implements OnInit {
       this.reviewService.dislikeReview(likeEntry).subscribe({
         next: () => {
           this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
-        },
-        error: (err) => {
-          console.log(err);
         }
       });
     }

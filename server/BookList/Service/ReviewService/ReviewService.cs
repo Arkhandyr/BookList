@@ -1,5 +1,6 @@
 ﻿using BookList.Helpers;
 using BookList.Model;
+using BookList.Repository.BadgeRepository;
 using BookList.Repository.ListRepository;
 using BookList.Repository.ReviewRepository;
 using BookList.Repository.UserRepository;
@@ -12,19 +13,23 @@ namespace BookList.Service.ReviewService
     {
         private readonly IReviewRepository _reviewRepo;
         private readonly IUserRepository _userRepo;
+        private readonly IBadgeRepository _badgeRepo;   
 
-        public ReviewService(IUserRepository userRepo, IReviewRepository reviewRepo, IHttpContextAccessor contextAccessor)
+        public ReviewService(IUserRepository userRepo, IReviewRepository reviewRepo, IBadgeRepository badgeRepo, IHttpContextAccessor contextAccessor)
         {
             _reviewRepo = reviewRepo;
             _userRepo = userRepo;
+            _badgeRepo = badgeRepo;
         }
 
         public IResult AddReview(ReviewEntry entry)
         {
+            ObjectId userId = _userRepo.GetByUsername(entry.Username)._id;
+
             Review review = new()
             {
                 Book_id = ObjectId.Parse(entry.BookId),
-                User_id = _userRepo.GetByUsername(entry.Username)._id,
+                User_id = userId,
                 Text = entry.Text,
                 Rating = entry.Rating,
                 Date = DateTime.Now,
@@ -33,8 +38,20 @@ namespace BookList.Service.ReviewService
 
             _reviewRepo.UpsertReview(review);
 
-            //if (user == null)
-            //    return Results.BadRequest();
+            switch (_badgeRepo.CountUserReviews(userId))
+            {
+                case 1:
+                    _badgeRepo.AssignBadgeToUser(userId, "REV1");
+                    break;
+                case 5:
+                    _badgeRepo.AssignBadgeToUser(userId, "REV2");
+                    break;
+                case 10:
+                    _badgeRepo.AssignBadgeToUser(userId, "REV3");
+                    break;
+                default:
+                    break;
+            }
 
             return Results.Ok(new { message = "success" });
         }

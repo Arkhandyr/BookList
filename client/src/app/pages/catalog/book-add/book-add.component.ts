@@ -51,7 +51,6 @@ export class BookAddComponent implements OnInit {
     this.service.addBook(book)
       .subscribe(response => {
         this.toastr.success('Livro adicionado com sucesso', 'Sucesso');
-        console.log(response)
       })
   }
 }

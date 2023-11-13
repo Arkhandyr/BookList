@@ -5,21 +5,24 @@
       <a class="profilePicture mb-2">
         <img [src]="user.picture" class="profilePicture"/>
       </a>
-      <div class="actions mb-2" style="clear: both; display: flex; padding: 10px 0px; width: 300px;">
-        <button class="btn btn-primary" type="button" routerLink="/" style="width: 100%; text-align: center; padding: 10px;">
+      <div class="actions mb-2" style="clear: both; display: flex; padding: 10px 0px; width: 300px;" *ngIf="this.loggedUser.username != user.username">
+        <button class="btn btn-primary" type="button" (click)="follow()" style="width: 100%; text-align: center; padding: 10px;" *ngIf="!followed">
           Seguir usuário
+        </button>
+        <button class="btn btn-primary" type="button" (click)="unfollow()" style="width: 100%; text-align: center; padding: 10px;" *ngIf="followed">
+          Deixar de seguir
         </button>
       </div>
 
       <h4>Leituras</h4>
       <div>
-        
-        <p>Lendo <span class="readingData">{{books[0].length}}</span></p>
-        <p>Quer ler <span class="readingData">{{books[1].length}}</span></p>
-        <p>Já leu <span class="readingData">{{books[2].length}}</span></p>
+        <p>Lendo <span class="readingData">{{listCount[0]}}</span></p>
+        <p>Quer ler <span class="readingData">{{listCount[1]}}</span></p>
+        <p>Já leu <span class="readingData">{{listCount[2]}}</span></p>
       </div>
-      <h4>Conquistas</h4>
-      <div class="image-container ">
+      
+      <h4 *ngIf="badges.length > 0">Conquistas</h4>
+      <div class="image-container">
         <div class="image-item" *ngFor="let badge of badges">
             <img [src]="badge.image" alt="{{badge.name}}" title="{{badge.name}}">
         </div>
@@ -32,47 +35,110 @@
       <h2>{{user.username}}</h2>
       <h4>{{user.realName}}</h4>
 
-      <div style="height: 20px;"></div>
+      <div class="mt-4" *ngIf="user.bio">
+        <h4>Bio</h4>
+        <expandable-paragraph class="synopsis" [text]="user.bio"></expandable-paragraph>
+      </div>
 
-      <h4>Bio</h4>
-
-      <expandable-paragraph class="synopsis" [text]="user.bio"></expandable-paragraph>
-
-      <h4 *ngIf="books[0].length > 0">Lendo</h4>
-      <div class="row row-cols-1 row-cols-md-5">
-        <div class="col" *ngFor="let book of books[0]">
-          <div class="card">
-            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
-            <div class="card-body">
-              <p class="card-title">{{book.title}}</p>
-            </div>
+      <div *ngIf="reading.length > 0">
+        <h4>Lendo</h4>
+        <div class="book-row" *ngIf="reading.length > 0">
+          <button mat-button class="paginator" (click)="loadReadingPage(-1)" [disabled]="currentReadingPage == 1" [ngStyle]="{'color': currentReadingPage == 1 ? 'grey' : '#d98a24'}">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+    
+          <div class="carousel">
+              <div class="book-column mb-4" *ngFor="let book of reading">
+                <div class="card mx-auto" [@fadeInOut]> 
+                  <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                  <div class="card-body px-2 pb-2">
+                    <p class="card-text">{{book.title}}</p>
+                    <p class="card-subtext" [routerLink]="['/author', adjustTextToURL(book.author)]">{{book.author}}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="book-column mb-4" *ngFor="let _ of placeholderReadingCards">
+                <div class="card placeholder mx-auto" >
+                  <div class="card-body px-2 pb-2">
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+              </div>
           </div>
+          
+          <button mat-button class="paginator" (click)="loadReadingPage(1)" [disabled]="placeholderReadingCards.length > 0" [ngStyle]="{'color': placeholderReadingCards.length > 0 ? 'grey' : '#d98a24'}">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </div>
 
-      <h4 *ngIf="books[1].length > 0">Quero ler</h4>
-      <div class="row row-cols-1 row-cols-md-5">
-        <div class="col" *ngFor="let book of books[1]">
-          <div class="card">
-            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
-            <div class="card-body">
-              <p class="card-title">{{book.title}}</p>
-            </div>
+      <div *ngIf="planning.length > 0">
+        <h4>Quero ler</h4>
+        <div class="book-row" *ngIf="planning.length > 0">
+          <button mat-button class="paginator" (click)="loadPlanningPage(-1)" [disabled]="currentPlanningPage == 1" [ngStyle]="{'color': currentPlanningPage == 1 ? 'grey' : '#d98a24'}">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+    
+          <div class="carousel">
+              <div class="book-column mb-4" *ngFor="let book of planning">
+                <div class="card mx-auto" [@fadeInOut]> 
+                  <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                  <div class="card-body px-2 pb-2">
+                    <p class="card-text">{{book.title}}</p>
+                    <p class="card-subtext" [routerLink]="['/author', adjustTextToURL(book.author)]">{{book.author}}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="book-column mb-4" *ngFor="let _ of placeholderPlanningCards">
+                <div class="card placeholder mx-auto" >
+                  <div class="card-body px-2 pb-2">
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+              </div>
           </div>
+          
+          <button mat-button class="paginator" (click)="loadReadingPage(1)" [disabled]="placeholderPlanningCards.length > 0" [ngStyle]="{'color': placeholderPlanningCards.length > 0 ? 'grey' : '#d98a24'}">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </div>
 
-      <h4 *ngIf="books[2].length > 0">Finalizado</h4>
-      <div class="row row-cols-1 row-cols-md-5">
-        <div class="col" *ngFor="let book of books[2]">
-          <div class="card">
-            <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id.toString()]"/>
-            <div class="card-body">
-              <p class="card-title">{{book.title}}</p>
-            </div>
+      <div *ngIf="read.length > 0">
+        <h4>Finalizado</h4>
+        <div class="book-row" *ngIf="read.length > 0">
+          <button mat-button class="paginator" (click)="loadReadPage(-1)" [disabled]="currentReadPage == 1" [ngStyle]="{'color': currentReadPage == 1 ? 'grey' : '#d98a24'}">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+    
+          <div class="carousel">
+              <div class="book-column mb-4" *ngFor="let book of read">
+                <div class="card mx-auto" [@fadeInOut]> 
+                  <img [src]="book.cover" class="card-img" [routerLink]="['/book', book._id]"/>
+                  <div class="card-body px-2 pb-2">
+                    <p class="card-text">{{book.title}}</p>
+                    <p class="card-subtext" [routerLink]="['/author', adjustTextToURL(book.author)]">{{book.author}}</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="book-column mb-4" *ngFor="let _ of placeholderReadCards">
+                <div class="card placeholder mx-auto" >
+                  <div class="card-body px-2 pb-2">
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+              </div>
           </div>
+          
+          <button mat-button class="paginator" (click)="loadReadPage(1)" [disabled]="placeholderReadCards.length > 0" [ngStyle]="{'color': placeholderReadCards.length > 0 ? 'grey' : '#d98a24'}">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </div>
+
     </div>
   </div>
 </body>

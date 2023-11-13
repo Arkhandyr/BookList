@@ -11,8 +11,14 @@ import { Book } from "../interfaces/Book";
 export class BookService { 
     constructor(private client:HttpClient) { }
     
-    public getBooks(page: number): Observable<Book[]> {
-        let url = `${environment.api}/catalog/${page}`
+    public getTrendingBooks(page: number): Observable<Book[]> {
+        let url = `${environment.api}/catalog/trending/${page}`
+
+        return this.client.get<Book[]>(url)
+    }
+
+    public getTopBooks(page: number): Observable<Book[]> {
+        let url = `${environment.api}/catalog/top/${page}`
 
         return this.client.get<Book[]>(url)
     }

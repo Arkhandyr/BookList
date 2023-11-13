@@ -79,13 +79,22 @@ var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpCo
 #region Endpoints
 #region Main page
 
-app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int page) => 
-    await service.GetAllBooks(page))
+app.MapGet("/catalog/trending/{page}", async ([FromServices] IBookService service, int page) => 
+    await service.GetTrendingBooks(page))
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "Catalog",
-    Summary = "Catálogo da página inicial",
-    Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
+    OperationId = "Trending",
+    Summary = "Catálogo 'em alta' da página inicial",
+    Description = "Endpoint responsável por trazer o catálogo 'em alta' para a página inicial"
+});
+
+app.MapGet("/catalog/top/{page}", async ([FromServices] IBookService service, int page) =>
+    await service.GetTopBooks(page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "Top 100",
+    Summary = "Catálogo 'top 100' da página inicial",
+    Description = "Endpoint responsável por trazer o catálogo 'top 100' para a página inicial"
 });
 
 app.MapGet("/booksByAuthor/{filter}", async ([FromServices] IBookService service, string filter) =>
@@ -269,13 +278,13 @@ app.MapGet("/profile/{username}", ([FromServices] IUserService service, string u
     Description = "Endpoint responsável por trazer as informações do usuário selecionado para a página de perfil de usuário"
 });
 
-app.MapGet("/lists/{username}", ([FromServices] IListService service, string username) =>
-    service.GetUserLists(username))
+app.MapGet("/{list}/{username}/{page}", ([FromServices] IListService service, string list, string username, int page) =>
+    service.GetUserList(username, list, page))
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "GetUserLists",
+    OperationId = "GetUserList",
     Summary = "Estante virtual do usuário",
-    Description = "Endpoint responsável por trazer as leituras do usuário selecionado para a página de perfil de usuário"
+    Description = "Endpoint responsável por trazer as listas do usuário selecionado para a página de perfil"
 });
 
 app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string username) =>
@@ -285,6 +294,15 @@ app.MapGet("/badges/{username}", ([FromServices] IBadgeService service, string u
     OperationId = "GetUserBadges",
     Summary = "Conquistas do usuário",
     Description = "Endpoint responsável por trazer as conquistas do usuário selecionado para a página de perfil de usuário"
+});
+
+app.MapGet("/bookCount/{username}", ([FromServices] IListService service, string username) =>
+    service.CountBooks(username))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "BookCount",
+    Summary = "Número de livros em cada lista",
+    Description = "Endpoint responsável por trazer o número de livros que o usuário possui em cada lista"
 });
 #endregion
 
@@ -316,7 +334,7 @@ app.MapGet("/searchAuthors/{filter}/{page}", ([FromServices] IAuthorService serv
 {
     OperationId = "FilterAuthor",
     Summary = "Filtra autores",
-    Description = "Endpoint responsável por por filtrar os autores pelo nome"
+    Description = "Endpoint responsável por filtrar os autores pelo nome"
 });
 
 app.MapGet("/searchUsers/{filter}/{page}", ([FromServices] IUserService service, string filter, int page) =>
@@ -325,20 +343,20 @@ app.MapGet("/searchUsers/{filter}/{page}", ([FromServices] IUserService service,
 {
     OperationId = "FilterUsers",
     Summary = "Filtra usuários",
-    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+    Description = "Endpoint responsável por filtrar os usuários pelo nome"
 });
 #endregion
 
 #region Interaction
-app.MapGet("/follow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
+app.MapPost("/follow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
 {
     return service.Follow(entry);
 })
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "FilterUsers",
-    Summary = "Filtra usuários",
-    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+    OperationId = "Follow",
+    Summary = "Segue um usuário",
+    Description = "Endpoint responsável por seguir um usuário"
 });
 
 app.MapPost("/unfollow", ([FromServices] IInteractionService service, [FromBody] FollowEntry entry) =>
@@ -347,9 +365,20 @@ app.MapPost("/unfollow", ([FromServices] IInteractionService service, [FromBody]
 })
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "FilterUsers",
-    Summary = "Filtra usuários",
-    Description = "Endpoint responsável por por filtrar os usuários pelo nome"
+    OperationId = "Unfollow",
+    Summary = "Deixa de seguir um usuário",
+    Description = "Endpoint responsável por deixar de seguir um usuário"
+});
+
+app.MapGet("/followStatus/{user}/{user2}", ([FromServices] IInteractionService service, string user, string user2) =>
+{
+    return service.GetFollowStatus(user, user2);
+})
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "FollowStatus",
+    Summary = "Verifica se um usuário segue outro usuário",
+    Description = "Endpoint responsável por verificar o status de interação entre os usuários"
 });
 #endregion
 #endregion

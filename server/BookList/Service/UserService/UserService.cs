@@ -29,6 +29,7 @@ namespace BookList.Service.UserService
                 Email = registerUser.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(registerUser.Password),
                 Picture = registerUser.Picture,
+                RegisterDate = DateTime.Now
             };
 
             return Results.Created("success", _userRepo.Register(user));
@@ -48,10 +49,7 @@ namespace BookList.Service.UserService
                 HttpOnly = true
             });
 
-            return Results.Ok(new
-            {
-                message = "success"
-            });
+            return Results.Ok(user);
         }
 
         public IResult User()

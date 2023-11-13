@@ -7,5 +7,6 @@ namespace BookList.Repository.InteractionRepository
     {
         public void UpsertEntry(Follow follow);
         public DeleteResult RemoveEntry(Follow follow);
+        public bool GetFollowStatus (Follow follow);
     }
 }

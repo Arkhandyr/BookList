@@ -45,10 +45,6 @@ export class SearchComponent implements OnInit {
     this.loadBookPage(1);
     this.loadAuthorPage(1);
     this.loadUserPage(1);
-
-    console.log(this.books.length)
-    console.log(this.authors.length)
-    console.log(this.users.length)
   }
 
   loadBookPage(page: number) {
@@ -72,7 +68,6 @@ export class SearchComponent implements OnInit {
     this.searchService.filterUsers(this.searchQuery, this.currentUserPage).subscribe(x => {
       this.users = x
       this.placeholderUserCards = new Array(5 - this.users.length).fill(null);
-      console.log(this.users)
     });
   }
 

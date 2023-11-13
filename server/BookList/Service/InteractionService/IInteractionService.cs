@@ -7,5 +7,7 @@ namespace BookList.Service.InteractionService
         public IResult Follow(FollowEntry entry);
 
         public IResult Unfollow(FollowEntry entry);
+
+        public IResult GetFollowStatus(string user, string user2);
     }
 }

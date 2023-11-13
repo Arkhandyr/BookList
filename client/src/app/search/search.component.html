@@ -84,7 +84,7 @@
                     <div class="carousel">
                         <div class="book-column mb-4" *ngFor="let user of users">
                           <div class="card person mx-auto" [@fadeInOut]> 
-                            <img [src]="user.picture" class="card-img-person" [routerLink]="['/user', user.username]"/>
+                            <img [src]="user.picture" class="card-img-person" [routerLink]="['/profile', user.username]"/>
                             <div class="card-body px-2 pb-2">
                               <p class="card-text">{{user.realName}}</p>
                             </div>

@@ -38,10 +38,26 @@ export class ListService {
     })
   } 
 
-  public getUserLists(username: string): Observable<Book[][]> {
-    let url = `${environment.api}/lists/${username}`
+  public getUserReading(username: string, page: number): Observable<Book[]> {
+    let url = `${environment.api}/reading/${username}/${page}`
     
-    return this.client.get<Book[][]>(url, {
+    return this.client.get<Book[]>(url, {
+        withCredentials: true
+    })
+  }
+
+  public getUserPlanning(username: string , page: number): Observable<Book[]> {
+    let url = `${environment.api}/planning/${username}/${page}`
+    
+    return this.client.get<Book[]>(url, {
+        withCredentials: true
+    })
+  }
+
+  public getUserRead(username: string, page: number): Observable<Book[]> {
+    let url = `${environment.api}/done/${username}/${page}`
+    
+    return this.client.get<Book[]>(url, {
         withCredentials: true
     })
   }
@@ -50,6 +66,14 @@ export class ListService {
     let url = `${environment.api}/books/${bookId}/${username}`
     
     return this.client.get<string>(url, {
+        withCredentials: true
+    })
+  }
+
+  public getListCount(username: string): Observable<number[]> {
+    let url = `${environment.api}/bookCount/${username}`
+    
+    return this.client.get<number[]>(url, {
         withCredentials: true
     })
   }

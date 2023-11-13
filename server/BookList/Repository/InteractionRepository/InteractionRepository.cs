@@ -29,5 +29,15 @@ namespace BookList.Repository.InteractionRepository
 
             return context.Follows.DeleteOne(filter);
         }
+
+        public bool GetFollowStatus(Follow follow)
+        {
+            var filter = Builders<Follow>.Filter.And(
+                Builders<Follow>.Filter.Where(u => u.User_id == follow.User_id),
+                Builders<Follow>.Filter.Where(u => u.User2_id == follow.User2_id));
+
+            return context.Follows.Find(filter).CountDocuments() > 0;
+
+        }
     }
 }

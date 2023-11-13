@@ -16,5 +16,6 @@ namespace BookList.Model
         public string Email { get; set; } = null!;
         public string Picture { get; set; }
         public string Bio { get; set; }
+        public DateTime RegisterDate { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace BookList.Repository.ListRepository
     public class ListRepository : IListRepository
     {
         private readonly MongoDbContext context;
+        private readonly int paginationSize = 5;
 
         public ListRepository(MongoDbContext context)
         {
@@ -20,10 +21,6 @@ namespace BookList.Repository.ListRepository
                 Builders<Users_Books>.Filter.Where(u => u.Book_id == users_Books.Book_id));
 
             context.Users_Books.ReplaceOne(filter, users_Books, new ReplaceOptions { IsUpsert = true });
-
-            //var filterBook = Builders<Book>.Filter.Where(u => u.User_id == users_Books.User_id);
-
-            //context.Books.ReplaceOne(filterBook, users_Books, new ReplaceOptions { IsUpsert = true });
         }
 
         public DeleteResult RemoveEntry(Users_Books users_Books)
@@ -35,38 +32,17 @@ namespace BookList.Repository.ListRepository
             return context.Users_Books.DeleteOne(filter);
         }
 
-        public List<List<Book>> GetUserLists(string username)
+        public List<Book> GetUserList(string username, string list, int page)
         {
             User user = context.Users.Find(u => u.Username == username).FirstOrDefault();
 
-            List<Users_Books> lists = context.Users_Books.Find(u => u.User_id == user._id).ToList();
+            List<Users_Books> booksInList = context.Users_Books.Find(u => u.User_id == user._id && u.List == list).Skip((page - 1) * paginationSize).Limit(paginationSize).ToList();
 
-            List<List<Book>> books = new()
+            List<Book> books = new();
+
+            foreach (var book in booksInList)
             {
-                new List<Book>(),
-                new List<Book>(),
-                new List<Book>()    
-            };
-
-            foreach (var item in lists)
-            {
-                switch (item.List)
-                {
-                    case "reading":
-                        books[0].Add(context.Books.Find(b => b._id == item.Book_id.ToString()).FirstOrDefault());
-                        break;
-
-                    case "planning":
-                        books[1].Add(context.Books.Find(b => b._id == item.Book_id.ToString()).FirstOrDefault());
-                        break;
-
-                    case "done":
-                        books[2].Add(context.Books.Find(b => b._id == item.Book_id.ToString()).FirstOrDefault());
-                        break;
-
-                    default:
-                        break;
-                }
+                books.Add(context.Books.Find(b => b._id == book.Book_id.ToString()).FirstOrDefault());
             }
 
             return books;
@@ -75,6 +51,19 @@ namespace BookList.Repository.ListRepository
         public bool GetBookStatus(Users_Books users_Books)
         {
             return context.Users_Books.CountDocuments(u => u.User_id == users_Books.User_id && u.Book_id == users_Books.Book_id) > 0;
+        }
+
+
+        public long[] CountBooks(string username)
+        {
+            User user = context.Users.Find(u => u.Username == username).FirstOrDefault();
+
+            return new long[3]
+            {
+                context.Users_Books.CountDocuments(u => u.User_id == user._id && u.List == "reading"),
+                context.Users_Books.CountDocuments(u => u.User_id == user._id && u.List == "planning"),
+                context.Users_Books.CountDocuments(u => u.User_id == user._id && u.List == "done")
+            };
         }
     }
 }

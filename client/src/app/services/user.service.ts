@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -10,7 +10,7 @@ import { Profile } from '../interfaces/Profile';
   providedIn: 'root'
 })
 
-export class UserService { 
+export class UserService {
   constructor(private client:HttpClient) { }
   
   public register(user: User): Observable<string> {
@@ -32,4 +32,36 @@ export class UserService {
 
     return this.client.get<Profile>(url)
   }
+
+  public follow(followEntry: string): Observable<any> {
+    let url = `${environment.api}/follow`
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    }); 
+    return this.client.post<string>(url, followEntry, {
+      headers: headers,
+      withCredentials: true
+    })
+  }
+
+  public unfollow(followEntry: string): Observable<any> {
+    let url = `${environment.api}/unfollow`
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    }); 
+    return this.client.post<string>(url, followEntry, {
+      headers: headers,
+      withCredentials: true
+    })
+  }
+
+  getFollowStatus(user: string, user2: string): Observable<boolean> {
+    let url = `${environment.api}/followStatus/${user}/${user2}`
+
+    return this.client.get<boolean>(url, {
+      withCredentials: true
+    })
+  } 
 }
