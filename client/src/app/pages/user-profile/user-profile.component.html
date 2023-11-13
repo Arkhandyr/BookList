@@ -20,7 +20,8 @@
         <p>Quer ler <span class="readingData">{{listCount[1]}}</span></p>
         <p>Já leu <span class="readingData">{{listCount[2]}}</span></p>
       </div>
-      <h4>Conquistas</h4>
+      
+      <h4 *ngIf="badges.length > 0">Conquistas</h4>
       <div class="image-container">
         <div class="image-item" *ngFor="let badge of badges">
             <img [src]="badge.image" alt="{{badge.name}}" title="{{badge.name}}">

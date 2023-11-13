@@ -27,20 +27,20 @@ export class BookListComponent implements OnInit {
     private toastr: ToastrService) { }
  
   ngOnInit(): void {
-    this.bookService.getBooks(this.currentTopPage).subscribe(x => {
+    this.bookService.getTopBooks(this.currentTopPage).subscribe(x => {
       this.topBooks = x; 
     });
-    this.bookService.getBooks(this.currentTrendingPage).subscribe(x => this.trendingBooks = x);
+    this.bookService.getTrendingBooks(this.currentTrendingPage).subscribe(x => this.trendingBooks = x);
   }
 
   loadTopPage(page: number) {
     this.currentTopPage += page;
-    this.bookService.getBooks(this.currentTopPage).subscribe(x => this.topBooks = x);
+    this.bookService.getTopBooks(this.currentTopPage).subscribe(x => this.topBooks = x);
   }
 
   loadTrendingPage(page: number) {
     this.currentTrendingPage += page;
-    this.bookService.getBooks(this.currentTrendingPage).subscribe(x => this.trendingBooks = x);
+    this.bookService.getTrendingBooks(this.currentTrendingPage).subscribe(x => this.trendingBooks = x);
   }
 
   goToBookPage(value: string) {

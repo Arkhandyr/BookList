@@ -79,13 +79,22 @@ var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpCo
 #region Endpoints
 #region Main page
 
-app.MapGet("/catalog/{page}", async ([FromServices] IBookService service, int page) => 
-    await service.GetAllBooks(page))
+app.MapGet("/catalog/trending/{page}", async ([FromServices] IBookService service, int page) => 
+    await service.GetTrendingBooks(page))
 .WithOpenApi(operation => new(operation)
 {
-    OperationId = "Catalog",
-    Summary = "Catálogo da página inicial",
-    Description = "Endpoint responsável por trazer o catálogo completo de livros para a página inicial"
+    OperationId = "Trending",
+    Summary = "Catálogo 'em alta' da página inicial",
+    Description = "Endpoint responsável por trazer o catálogo 'em alta' para a página inicial"
+});
+
+app.MapGet("/catalog/top/{page}", async ([FromServices] IBookService service, int page) =>
+    await service.GetTopBooks(page))
+.WithOpenApi(operation => new(operation)
+{
+    OperationId = "Top 100",
+    Summary = "Catálogo 'top 100' da página inicial",
+    Description = "Endpoint responsável por trazer o catálogo 'top 100' para a página inicial"
 });
 
 app.MapGet("/booksByAuthor/{filter}", async ([FromServices] IBookService service, string filter) =>

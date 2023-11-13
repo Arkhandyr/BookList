@@ -21,10 +21,6 @@ namespace BookList.Repository.ListRepository
                 Builders<Users_Books>.Filter.Where(u => u.Book_id == users_Books.Book_id));
 
             context.Users_Books.ReplaceOne(filter, users_Books, new ReplaceOptions { IsUpsert = true });
-
-            //var filterBook = Builders<Book>.Filter.Where(u => u.User_id == users_Books.User_id);
-
-            //context.Books.ReplaceOne(filterBook, users_Books, new ReplaceOptions { IsUpsert = true });
         }
 
         public DeleteResult RemoveEntry(Users_Books users_Books)
