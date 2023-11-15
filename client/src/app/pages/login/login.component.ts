@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private service:AuthService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private toastr: ToastrService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -29,9 +30,14 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     this.service.login(this.form.getRawValue())
-      .subscribe(x => {
-        this.router.navigate(['/home']);
-        this.authService.setLoggedUser(x);
+      .subscribe({
+        next: (res) => {
+          this.router.navigate(['/home']);
+          this.authService.setLoggedUser(res);
+        },
+        error: () => {
+          this.toastr.error('Credenciais inválidas', 'Erro');
+        }
       })
   }
 
