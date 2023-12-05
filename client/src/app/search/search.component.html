@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     
-                    <button mat-button class="paginator" (click)="loadUserPage(1)" [disabled]="currentUserPage == 2" [ngStyle]="{'color': currentBookPage == 2 ? 'grey' : '#d98a24'}">
+                    <button mat-button class="paginator" (click)="loadUserPage(1)" [disabled]="placeholderUserCards.length > 0" [ngStyle]="{'color': placeholderUserCards.length > 0 ? 'grey' : '#d98a24'}">
                       <mat-icon>chevron_right</mat-icon>
                     </button>
                 </div>

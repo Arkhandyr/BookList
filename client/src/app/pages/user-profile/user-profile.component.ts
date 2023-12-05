@@ -107,7 +107,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   follow() {
-    let followEntry : string = JSON.stringify({ User: this.userService.getByUsername(this.loggedUsername), User2: this.username })
+    var user1 = this.userService.getByUsername(this.loggedUsername);
+    let followEntry : string = JSON.stringify({ User: user1, User2: this.username })
 
     this.userService.follow(followEntry).subscribe({
       next: async () => {
