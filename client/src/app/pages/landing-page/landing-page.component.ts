@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,7 +8,6 @@ import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
 export class LandingPageComponent implements OnInit {
   login: boolean = true
 
-  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
