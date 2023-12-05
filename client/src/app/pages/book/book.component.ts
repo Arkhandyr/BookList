@@ -18,7 +18,7 @@ import { Profile } from 'src/app/interfaces/Profile';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-  username: string = 'Arkhandyr';
+  loggedUser: string = localStorage.getItem('loggedUser') ?? "";
   bookId: string;
   bookStatus: string;
   public book: Book;
@@ -42,40 +42,40 @@ export class BookComponent implements OnInit {
 
       this.bookService.getBookById(this.bookId).subscribe(x => this.book = x);
 
-      this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x);
+      this.listService.getBookStatus(this.bookId, this.loggedUser).subscribe(x => this.bookStatus = x);
 
       this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);
 
-      this.userService.getByUsername(this.username).subscribe(x => this.user = x)
+      this.userService.getByUsername(this.loggedUser).subscribe(x => this.user = x)
 
-      this.userReview = this.reviews.filter((review) => review.user.username === this.username)
+      this.userReview = this.reviews.filter((review) => review.user.username === this.loggedUser)
     });
   }
 
   addToList(listName: string): void {
-    let listEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId, ListName: listName })
+    let listEntry : string = JSON.stringify({ Username: this.loggedUser, BookId: this.bookId, ListName: listName })
 
     this.listService.addToList(listEntry).subscribe({
       next: () => {
-        this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
+        this.listService.getBookStatus(this.bookId, this.loggedUser).subscribe(x => this.bookStatus = x)
         this.toastr.success('Livro adicionado com sucesso à lista', 'Sucesso');
       }
     });
   }
 
   removeFromList(): void {
-    let listEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId, ListName: '' })
+    let listEntry : string = JSON.stringify({ Username: this.loggedUser, BookId: this.bookId, ListName: '' })
 
     this.listService.removeFromList(listEntry).subscribe({
       next: () => {
-        this.listService.getBookStatus(this.bookId, this.username).subscribe(x => this.bookStatus = x)
+        this.listService.getBookStatus(this.bookId, this.loggedUser).subscribe(x => this.bookStatus = x)
         this.toastr.success('Livro removido com sucesso da lista', 'Sucesso');
       }
     });
   }
 
   addReview(): void {
-    let reviewEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId, Text: this.reviewText, Rating: Number(this.selectedRating) })
+    let reviewEntry : string = JSON.stringify({ Username: this.loggedUser, BookId: this.bookId, Text: this.reviewText, Rating: Number(this.selectedRating) })
 
     this.reviewService.addReview(reviewEntry).subscribe({
       next: () => {
@@ -86,7 +86,7 @@ export class BookComponent implements OnInit {
   }
 
   deleteReview(): void {
-    let reviewEntry : string = JSON.stringify({ Username: this.username, BookId: this.bookId })
+    let reviewEntry : string = JSON.stringify({ Username: this.loggedUser, BookId: this.bookId })
 
     this.reviewService.deleteReview(reviewEntry).subscribe({
       next: () => {
@@ -97,9 +97,9 @@ export class BookComponent implements OnInit {
   }
 
   likeReview(review: Review): void {
-    let likeEntry : string = JSON.stringify({ Username: this.username, ReviewId: review._id})
+    let likeEntry : string = JSON.stringify({ Username: this.loggedUser, ReviewId: review._id})
 
-    if(!review.likes.includes(this.username)) {
+    if(!review.likes.includes(this.loggedUser)) {
       this.reviewService.likeReview(likeEntry).subscribe({
         next: () => {
           this.reviewService.getBookReviews(this.bookId).subscribe(x => this.reviews = x);

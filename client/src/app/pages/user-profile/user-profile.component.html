@@ -5,7 +5,7 @@
       <a class="profilePicture mb-2">
         <img [src]="user.picture" class="profilePicture"/>
       </a>
-      <div class="actions mb-2" style="clear: both; display: flex; padding: 10px 0px; width: 300px;" *ngIf="this.loggedUser.username != user.username">
+      <div class="actions mb-2" style="clear: both; display: flex; padding: 10px 0px; width: 300px;" *ngIf="this.loggedUsername != user.username">
         <button class="btn btn-primary" type="button" (click)="follow()" style="width: 100%; text-align: center; padding: 10px;" *ngIf="!followed">
           Seguir usuário
         </button>

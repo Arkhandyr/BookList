@@ -20,7 +20,8 @@ import { UserService } from 'src/app/services/user.service';
   animations: [FadeInOut(300, 300, false)]
 })
 export class UserProfileComponent implements OnInit {
-  loggedUser: Profile;
+  loggedUsername: string = localStorage.getItem('loggedUser') ?? "";
+  admin: boolean;
   user: Profile;
   username: string;
   followed: boolean;
@@ -46,16 +47,15 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private listService: ListService,
     private badgeService: BadgeService, 
-    private toastr: ToastrService) { 
-      this.loggedUser = this.authService.getLoggedUser()
-    }
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.username = params['username'];
+      this.userService.getByUsername(this.loggedUsername ?? "").subscribe(x => this.admin = x.admin),
       forkJoin({
         user: this.userService.getByUsername(this.username),
-        followed: this.userService.getFollowStatus(this.loggedUser.username, this.username),
+        followed: this.userService.getFollowStatus(this.loggedUsername, this.username),
         reading: this.listService.getUserReading(this.username, 1),
         planning: this.listService.getUserPlanning(this.username, 1),
         read: this.listService.getUserRead(this.username, 1),
@@ -107,22 +107,22 @@ export class UserProfileComponent implements OnInit {
   }
 
   follow() {
-    let followEntry : string = JSON.stringify({ User: this.authService.getLoggedUser().username, User2: this.username })
+    let followEntry : string = JSON.stringify({ User: this.userService.getByUsername(this.loggedUsername), User2: this.username })
 
     this.userService.follow(followEntry).subscribe({
-      next: () => {
-        this.userService.getFollowStatus(this.authService.getLoggedUser().username, this.username).subscribe(x => this.followed = x)
+      next: async () => {
+        this.userService.getFollowStatus(this.loggedUsername, this.username).subscribe(x => this.followed = x)
         this.toastr.success('Agora você está seguindo ' + this.user.realName, 'Sucesso');
       }
     });
   }
 
   unfollow() {
-    let followEntry : string = JSON.stringify({ User: this.authService.getLoggedUser().username, User2: this.username })
+    let followEntry : string = JSON.stringify({ User: this.userService.getByUsername(this.loggedUsername), User2: this.username })
 
     this.userService.unfollow(followEntry).subscribe({
-      next: () => {
-        this.userService.getFollowStatus(this.authService.getLoggedUser().username, this.username).subscribe(x => this.followed = x)
+      next: async () => {
+        this.userService.getFollowStatus(this.loggedUsername, this.username).subscribe(x => this.followed = x)
         this.toastr.success('Você deixou de seguir ' + this.user.realName, 'Sucesso');
       }
     });
