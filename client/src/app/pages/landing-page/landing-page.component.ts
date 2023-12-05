@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class LandingPageComponent implements OnInit {
   login: boolean = true
 
-  constructor() { }
 
   ngOnInit(): void {
   }

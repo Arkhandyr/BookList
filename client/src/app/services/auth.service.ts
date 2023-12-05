@@ -12,7 +12,7 @@ import { Author } from '../interfaces/Author';
 })
 
 export class AuthService { 
-  user: Profile = {id: 0, username: '', realName: '', email:'', picture: '', bio: ''};
+  user: Profile = {id: 0, username: '', realName: '', email:'', picture: '', bio: '', registerDate: ''};
 
   constructor(private client:HttpClient) { }
   

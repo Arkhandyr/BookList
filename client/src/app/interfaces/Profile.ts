@@ -5,4 +5,5 @@ export interface Profile {
     email: string
     picture: string
     bio: string
+    registerDate: string
   }
