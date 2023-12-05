@@ -1,36 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../interfaces/User';
 import { Profile } from '../interfaces/Profile';
-import { Author } from '../interfaces/Author';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthService { 
-  user: Profile = {id: 0, username: '', realName: '', email:'', picture: '', bio: '', registerDate: ''};
-
+export class AuthService {
   constructor(private client:HttpClient) { }
   
-  setLoggedUser(value: Profile) {
-    this.user = value;
+  loggedUser = localStorage.getItem('loggedUser');
+
+  setLoggedUser(loggedUser: string) {
+    localStorage.setItem('loggedUser', loggedUser);
   }
 
   getLoggedUser() {
-    return this.user;
-  }
-
-  clearData() {
-    this.user.id = 0;
-    this.user.username = '';
-    this.user.realName = '';
-    this.user.email = '';
-    this.user.picture = '';
-    this.user.bio = '';
+    return this.loggedUser;
   }
 
   public isAuthenticated(): boolean {

@@ -17,5 +17,6 @@ namespace BookList.Model
         public string Picture { get; set; }
         public string Bio { get; set; }
         public DateTime RegisterDate { get; set; }
+        public bool Admin { get; set; }
     }
 }

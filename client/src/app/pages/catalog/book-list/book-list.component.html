@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <button mat-button class="paginator" (click)="loadTopPage(1)" [disabled]="currentTopPage == 2" [ngStyle]="{'color': currentTopPage == 2 ? 'grey' : '#d98a24'}">
+        <button mat-button class="paginator" (click)="loadTopPage(1)" [disabled]="currentTopPage == 3" [ngStyle]="{'color': currentTopPage == 2 ? 'grey' : '#d98a24'}">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
@@ -49,7 +49,7 @@
         </button>
       </div>
   
-      <button class="float fab-btn" id="menu-share" routerLink="/add">
+      <button class="float fab-btn" id="menu-share" routerLink="/add" *ngIf="admin == true">
         <mat-icon style="vertical-align: middle">add</mat-icon>
         <div class="label-container"></div>
       </button>

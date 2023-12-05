@@ -29,7 +29,8 @@ namespace BookList.Service.UserService
                 Email = registerUser.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(registerUser.Password),
                 Picture = registerUser.Picture,
-                RegisterDate = DateTime.Now
+                RegisterDate = DateTime.Now,
+                Admin = false
             };
 
             return Results.Created("success", _userRepo.Register(user));

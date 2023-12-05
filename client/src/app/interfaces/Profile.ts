@@ -6,4 +6,5 @@ export interface Profile {
     picture: string
     bio: string
     registerDate: string
+    admin: boolean
   }

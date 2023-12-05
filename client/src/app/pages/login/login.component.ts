@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class LoginComponent implements OnInit {
   @Output() login = new EventEmitter<boolean>();
+  @Output() loggedUser = new EventEmitter<string>();
   form: FormGroup;
 
   constructor(
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.router.navigate(['/home']);
-          this.authService.setLoggedUser(res);
+          this.authService.setLoggedUser(res.username);
         },
         error: () => {
           this.toastr.error('Credenciais inválidas', 'Erro');
@@ -44,4 +45,6 @@ export class LoginComponent implements OnInit {
   flipScreen() {
     this.login.emit(false);
   }
+
 }
+

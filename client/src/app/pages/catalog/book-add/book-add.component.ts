@@ -23,7 +23,11 @@ export class BookAddComponent implements OnInit {
       "title": new FormControl(null, [Validators.required]),
       "author": new FormControl(null, [Validators.required]),
       "pages": new FormControl(null, [Validators.required]),
-      "cover": new FormControl(null, [Validators.required])
+      "cover": new FormControl(null, [Validators.required]),
+      "genre": new FormControl(null, [Validators.required]),
+      "publisher": new FormControl(null, [Validators.required]),
+      "year": new FormControl(null, [Validators.required]),
+      "synopsis": new FormControl(null),
     });
   }
 
